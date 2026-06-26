@@ -1,0 +1,2 @@
+# Ignore local and machine-specific Claude Code configurations
+.claude/

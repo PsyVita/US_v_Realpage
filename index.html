@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>United States v. RealPage — Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-legal:'Libre Baskerville',Georgia,serif;
+  --font-ui:'Inter',system-ui,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --court-ink:#202428; --court-ink-2:#272C33;
+  --court-paper:#F4F1EA; --court-paper-2:#E2DDD1;
+  --court-slate:#46525E; --court-slate-2:#64727E;
+  --court-sage:#5E7E63; --court-sage-lt:#8BA88F;
+  --doj-navy:#14213D; --doj-navy-2:#26406B; --doj-blue:#4E72B8; --doj-blue-lt:#7C9BD4;
+  --doj-gold:#C9A227; --doj-gold-lt:#EEAD0E; --doj-red:#9B2226;
+  --rp-coral:#FF4D6D; --rp-orange:#FF8A3D; --rp-grad:linear-gradient(120deg,#FF8A3D,#FF4D6D);
+  --rp-charcoal:#2B2D33; --rp-slateblue:#5B6B8C; --rp-mist:#F6F4F1;
+  --bg:#0C0E12; --line:#2C313B; --txt:#E9E5DC; --txt-dim:#A8A599;
+  --e-out:cubic-bezier(.16,1,.3,1);
+  --e-spring:cubic-bezier(.34,1.56,.64,1);
+  --slide-w:1280px; --slide-h:720px; --s:1;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#050609;overflow:hidden}
+body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialiased}
+
+/* ============================ STAGE ============================ */
+.deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050609}
+.stage{position:relative;width:var(--slide-w);height:var(--slide-h);transform:scale(var(--s));transform-origin:center;border-radius:8px;overflow:hidden;box-shadow:0 50px 140px rgba(0,0,0,.75)}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transform:translate(0,0);transition:transform .72s var(--e-out),visibility .72s;will-change:transform,opacity}
+.slide.active{opacity:1;visibility:visible;z-index:2}
+.slide.leaving{opacity:1;visibility:visible;z-index:1}
+.slide.notrans{transition:none!important}
+.pbar{position:absolute;top:0;left:0;right:0;height:6px;z-index:9;transform-origin:left}
+.slide.active .pbar{animation:barWipe .85s var(--e-out) both}
+.p-court .pbar{background:var(--court-sage)}
+@keyframes barWipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ===================== ANIMATION UTILITIES ===================== */
+.slide [data-anim]{opacity:0}
+.slide.active [data-anim]{animation-duration:.85s;animation-timing-function:var(--e-out);animation-fill-mode:both;animation-delay:var(--d,0s)}
+.slide.active [data-anim="rise"]{animation-name:riseY}
+.slide.active [data-anim="fade"]{animation-name:fadeIn}
+.slide.active [data-anim="pop"]{animation-name:pop;animation-timing-function:var(--e-spring);animation-duration:.7s}
+.slide.active [data-anim="left"]{animation-name:slideLeft}
+.slide.active [data-anim="zoom"]{animation-name:zoomIn}
+.slide.active [data-anim="seal"]{animation-name:sealIn;animation-duration:1.3s}
+@keyframes riseY{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:none}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.8) translateY(10px)}to{opacity:1;transform:none}}
+@keyframes sealIn{from{opacity:0;transform:scale(.4) rotate(-45deg)}to{opacity:.9;transform:scale(1) rotate(0)}}
+.reveal .ln{display:block;overflow:hidden;padding-bottom:.02em}
+.reveal .ln>i{display:block;font-style:normal;transform:translateY(118%)}
+.slide.active .reveal .ln>i{animation:lineUp 1s var(--e-out) both;animation-delay:calc(var(--d,0s) + var(--i,0)*.085s)}
+@keyframes lineUp{from{transform:translateY(118%)}to{transform:translateY(0)}}
+.slide [data-fragment]{opacity:0;transform:translateY(16px);transition:opacity .55s var(--e-out),transform .55s var(--e-out)}
+.slide [data-fragment].shown{opacity:1;transform:none}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);z-index:0;pointer-events:none}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.08)}}
+.kicker{font-family:var(--font-mono);font-size:14px;letter-spacing:.22em;text-transform:uppercase}
+.illus{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--court-slate-2);border:1px solid currentColor;border-radius:4px;padding:2px 6px;vertical-align:middle;opacity:.7}
+
+/* ===================== 1 · TITLE ===================== */
+.s-title{background:radial-gradient(900px 480px at 16% -12%,rgba(38,64,107,.55),transparent 60%),radial-gradient(820px 460px at 88% 112%,rgba(255,77,109,.20),transparent 55%),linear-gradient(180deg,#0A0C10,#101216);color:var(--txt)}
+.s-title .pad{position:absolute;inset:0;padding:0 84px;display:flex;flex-direction:column;justify-content:center;z-index:3}
+.s-title .glow{position:absolute;inset:0;z-index:0;background:radial-gradient(700px 360px at 20% -8%,rgba(78,114,184,.18),transparent 60%);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(40px,26px)}}
+.caption-block{position:relative;z-index:2;border:1px solid var(--line);border-left:3px solid var(--court-sage);background:rgba(255,255,255,.025);padding:26px 30px;max-width:560px;border-radius:5px;font-family:var(--font-legal)}
+.caption-block .court{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim);font-family:var(--font-mono)}
+.caption-block .v{font-size:30px;margin:12px 0;line-height:1.32}
+.caption-block .v em{font-style:italic;color:var(--court-sage-lt)}
+.caption-block .docket{font-size:13px;color:var(--txt-dim);font-family:var(--font-mono);border-top:1px dashed var(--line);margin-top:16px;padding-top:13px}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--court-sage-lt);margin-left:3px;vertical-align:-1px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.s-title h1{position:relative;z-index:2;font-family:var(--font-legal);font-size:62px;line-height:1.08;margin:34px 0 14px;font-weight:700;letter-spacing:-.01em;max-width:920px}
+.s-title .sub{position:relative;z-index:2;font-size:18px;color:var(--txt-dim);margin:0;font-family:var(--font-mono);letter-spacing:.04em}
+.tri{position:relative;z-index:2;display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+.tri .chip{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:9px 15px;border-radius:999px;border:1px solid transparent}
+.chip.court{background:rgba(140,122,75,.16);border-color:var(--court-sage);color:var(--court-sage-lt)}
+.chip.doj{background:rgba(20,33,61,.6);border-color:var(--doj-gold);color:var(--doj-gold-lt)}
+.chip.rp{background:var(--rp-mist);border-color:var(--rp-coral);color:var(--rp-charcoal);font-weight:600}
+.watermark{position:absolute;right:-90px;bottom:-120px;width:520px;height:520px;border-radius:50%;border:10px double rgba(94,126,99,.16);z-index:1}
+.watermark::after{content:"⚖";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:240px;color:rgba(94,126,99,.10)}
+
+/* ===================== TOC / AGENDA ===================== */
+.s-agenda{background:var(--court-paper);color:var(--court-ink)}
+.s-agenda .wm{position:absolute;right:-40px;top:-50px;font-size:340px;color:rgba(94,126,99,.06);font-family:var(--font-legal);z-index:0;line-height:1}
+.s-agenda .pad{position:absolute;inset:0;padding:60px 84px;z-index:2;display:flex;flex-direction:column;justify-content:center}
+.s-agenda .section-title{font-family:var(--font-mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--court-sage);margin:0 0 8px}
+.s-agenda h2{font-family:var(--font-legal);font-size:40px;margin:0 0 30px;font-weight:700;color:var(--court-ink)}
+.agenda{list-style:none;margin:0;padding:0}
+.agenda li{display:grid;grid-template-columns:54px 250px 1fr 132px;align-items:center;gap:24px;padding:17px 16px;border-top:1px solid var(--court-paper-2);position:relative}
+.agenda li:last-child{border-bottom:1px solid var(--court-paper-2)}
+.agenda .num{font-family:var(--font-mono);font-size:15px;color:var(--court-slate-2)}
+.agenda .name{font-family:var(--font-legal);font-size:26px;color:var(--court-ink)}
+.agenda .desc{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;color:var(--court-slate);line-height:1.4}
+.agenda .accent{position:absolute;left:-2px;top:50%;width:4px;height:0;background:var(--court-sage);transform:translateY(-50%);transition:height .5s var(--e-out) .3s}
+.agenda .tag{justify-self:end;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--court-sage);padding:6px 12px;border-radius:999px;white-space:nowrap;visibility:hidden}
+.agenda li.current,.agenda li.next{background:linear-gradient(90deg,rgba(94,126,99,.12),transparent 72%)}
+.agenda li.current .accent,.agenda li.next .accent{height:64%}
+.agenda li.current .name,.agenda li.next .name{color:var(--court-sage)}
+.agenda li.current .tag,.agenda li.next .tag,.agenda li.done .tag{visibility:visible}
+.agenda li.done .name{color:var(--court-slate-2)}
+.agenda li.done .num{color:var(--court-sage)}
+.agenda li.done .tag{background:transparent;color:var(--court-sage);padding-right:0}
+
+/* ===================== DIVIDER (case intro) ===================== */
+.s-divider{background:radial-gradient(900px 520px at 50% 125%,rgba(94,126,99,.10),transparent 60%),linear-gradient(160deg,#15181D,#0A0D11);color:var(--txt)}
+.s-divider .inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;text-align:center;padding:0 100px}
+.s-divider .dnum{font-family:var(--font-mono);font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--court-sage-lt);margin-bottom:22px}
+.s-divider h2{font-family:var(--font-legal);font-size:60px;font-weight:700;margin:0;line-height:1.1}
+.s-divider .dsub{font-family:var(--font-mono);font-size:14px;letter-spacing:.06em;color:var(--txt-dim);margin-top:22px}
+.s-divider .dline{width:0;height:2px;background:var(--court-sage);margin-top:6px}
+.s-divider.active .dline{animation:lineGrow 1s .5s var(--e-out) forwards}
+@keyframes lineGrow{to{width:170px}}
+
+/* ===================== SHARED HEADS ===================== */
+.vhead{position:absolute;left:84px;top:60px;z-index:5}
+.vhead.center{left:0;right:0;text-align:center}
+.vhead .kicker{color:var(--court-sage-lt);margin-bottom:14px}
+.vhead h2{font-family:var(--font-legal);font-size:44px;margin:0;font-weight:700;letter-spacing:-.01em}
+.vhead .vsub{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--txt-dim);margin-top:14px}
+.vcap{position:absolute;left:0;right:0;bottom:60px;text-align:center;z-index:5;font-family:var(--font-mono);font-size:14px;letter-spacing:.08em;color:var(--court-sage-lt)}
+
+/* 4 · What is RealPage — product cards */
+.s-prod{background:linear-gradient(180deg,#101318,#0C0E12);color:var(--txt)}
+.s-prod .orb.a{width:520px;height:520px;left:50%;top:-190px;transform:translateX(-50%);background:rgba(94,126,99,.15);animation:float1 18s ease-in-out infinite}
+.prodrow{position:absolute;left:0;right:0;top:60%;transform:translateY(-50%);display:flex;align-items:stretch;justify-content:center;gap:26px;z-index:3}
+.pcard{width:382px;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.pcard.ai{border-color:var(--court-sage);box-shadow:0 0 50px rgba(94,126,99,.18)}
+.pcard .ptop{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.pcard .pname{font-family:var(--font-legal);font-size:28px;font-weight:700}
+.pcard .pbadge{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--txt-dim)}
+.pcard .pbadge.ai{background:rgba(94,126,99,.18);color:var(--court-sage-lt)}
+.pcard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.pcard li{font-size:16px;color:var(--txt);padding-left:22px;position:relative;line-height:1.35}
+.pcard li::before{content:"›";position:absolute;left:0;color:var(--court-sage-lt);font-weight:700}
+.pevo{align-self:center;font-size:34px;color:var(--court-sage-lt)}
+
+/* 5 · How it works — flow diagram */
+.s-flow{background:linear-gradient(180deg,#0E1217,#0A0D11);color:var(--txt)}
+.s-flow .grid{position:absolute;inset:0;z-index:0;opacity:.5;background-image:linear-gradient(rgba(94,126,99,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(94,126,99,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at 50% 55%,#000,transparent 78%)}
+.s-flow .head{position:absolute;left:84px;top:60px;z-index:5}
+.s-flow .head .kicker{color:var(--court-sage-lt)}
+.s-flow .head h2{font-family:var(--font-legal);font-size:34px;margin:12px 0 0;font-weight:700}
+.wires{position:absolute;inset:0;z-index:1}
+.wires path{fill:none;stroke-linecap:round}
+.wire-base{stroke:rgba(139,168,143,.20);stroke-width:2}
+.wire-flow{stroke:var(--court-sage-lt);stroke-width:2.4;stroke-dasharray:2 12;opacity:.95}
+.s-flow.active .wire-flow{animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-14}}
+.lord{position:absolute;width:212px;z-index:4;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:12px;padding:13px 16px}
+.lord .nm{font-family:var(--font-ui);font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+.lord .nm .lk{font-size:12px;color:var(--court-sage-lt)}
+.lord .dt{font-family:var(--font-mono);font-size:11px;color:var(--txt-dim);margin-top:5px;line-height:1.4}
+.core{position:absolute;left:560px;top:300px;width:160px;height:130px;z-index:5;border-radius:16px;background:linear-gradient(160deg,#22303f,#15202c);border:1px solid var(--court-sage);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(94,126,99,.25)}
+.core .ring{position:absolute;inset:0;border-radius:16px;border:1px solid var(--court-sage-lt)}
+.slide.active .core .ring{animation:pulse 2.6s ease-out infinite}
+.slide.active .core .ring.d{animation-delay:1.3s}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.4);opacity:0}}
+.core .ttl{font-family:var(--font-ui);font-weight:800;font-size:20px;letter-spacing:.02em}
+.core .sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--court-sage-lt);margin-top:4px}
+.price{position:absolute;left:952px;top:312px;width:248px;z-index:5;background:linear-gradient(160deg,#1c2420,#141815);border:1px solid var(--court-sage);border-radius:12px;padding:16px 18px;box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.price .pl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--court-sage-lt)}
+.price .pv{font-family:var(--font-legal);font-size:38px;color:#fff;line-height:1;margin:8px 0}
+.price .pn{font-family:var(--font-mono);font-size:11px;color:var(--txt-dim);line-height:1.4}
+.flow-cap{position:absolute;left:84px;bottom:54px;z-index:5;font-family:var(--font-mono);font-size:14px;letter-spacing:.04em;color:var(--txt-dim)}
+.flow-cap b{color:var(--court-sage-lt);font-weight:500}
+
+/* 6 · The problem — lockstep */
+.s-lock{background:linear-gradient(180deg,#101318,#0C0E12);color:var(--txt)}
+.s-lock .txt{position:absolute;left:84px;top:0;bottom:0;width:500px;display:flex;flex-direction:column;justify-content:center;z-index:3}
+.s-lock .kicker{color:var(--court-sage-lt);margin-bottom:18px}
+.s-lock h2{font-family:var(--font-legal);font-size:46px;line-height:1.12;margin:0 0 18px;font-weight:700}
+.s-lock h2 .red{color:#d98a8c}
+.s-lock .lede{font-family:var(--font-mono);font-size:15px;letter-spacing:.04em;color:var(--court-sage-lt);margin-bottom:24px}
+.conseq{display:flex;flex-direction:column;gap:13px}
+.conseq .c{display:flex;align-items:center;gap:13px;font-size:18px;font-weight:600;color:var(--txt)}
+.conseq .c .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:16px;flex:none;background:rgba(155,34,38,.16);color:#e0908f}
+.conseq .c.up .ic{background:rgba(238,173,14,.15);color:var(--doj-gold-lt)}
+.cartel{margin-top:24px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cartel span{padding:6px 11px;border-radius:7px;background:rgba(255,255,255,.06);color:var(--txt-dim)}
+.cartel .hot{background:rgba(155,34,38,.18);color:#e0908f}
+.chart{position:absolute;right:90px;top:180px;width:540px;height:360px;z-index:3;background:linear-gradient(165deg,#151920,#0F1217);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.chart .ct{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-dim);display:flex;justify-content:space-between}
+.chart svg{position:absolute;left:0;top:34px;width:100%;height:300px}
+.ln-draw{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:640;stroke-dashoffset:640}
+.s-lock.active .ln-draw{animation:drawL 1.5s .5s var(--e-out) forwards}
+.s-lock.active .ln-draw.b{animation-delay:.75s}
+@keyframes drawL{to{stroke-dashoffset:0}}
+.dotp{opacity:0}
+.s-lock.active .dotp{animation:fadeIn .4s 1.8s forwards}
+
+/* 7 · Why it matters — DOJ vs RealPage */
+.s-why{background:linear-gradient(180deg,#0E1116,#0B0D11);color:var(--txt)}
+.s-why .frame{position:absolute;left:84px;top:150px;z-index:4;font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--txt-dim)}
+.s-why .frame b{color:var(--court-sage-lt);font-weight:500}
+.duel{position:absolute;left:84px;right:84px;top:196px;height:330px;display:flex;border:1px solid var(--line);border-radius:16px;overflow:hidden;z-index:3;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.duel .side{flex:1;padding:34px 38px;display:flex;flex-direction:column;justify-content:center}
+.duel .L{background:linear-gradient(160deg,var(--doj-navy),var(--doj-navy-2));color:#EFE9DA}
+.duel .R{background:linear-gradient(160deg,#fff,var(--rp-mist));color:var(--rp-charcoal)}
+.duel .seam{width:2px;background:var(--court-sage)}
+.duel .who{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.duel .L .who{color:var(--doj-gold-lt)}
+.duel .R .who{color:var(--rp-coral)}
+.duel .quote{font-family:var(--font-legal);font-size:23px;line-height:1.34}
+.duel .R .quote{font-style:italic}
+.landmark{position:absolute;left:84px;right:84px;bottom:48px;text-align:center;z-index:3;font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;color:var(--court-sage-lt)}
+.landmark b{color:#fff;font-weight:500}
+
+/* 8 · Timeline (incomplete) */
+.s-time{background:var(--court-paper);color:var(--court-ink)}
+.s-time .head{position:absolute;left:84px;top:54px;z-index:5}
+.s-time .head .kicker{color:var(--court-sage)}
+.s-time .head h2{font-family:var(--font-legal);font-size:36px;margin:12px 0 0;font-weight:700;color:var(--court-ink)}
+.s-time .note{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:var(--court-slate-2);margin-top:10px}
+.axis{position:absolute;left:110px;top:372px;width:760px;height:3px;background:var(--court-paper-2);z-index:2;transform-origin:left}
+.s-time.active .axis{animation:barWipe 1.2s var(--e-out) both}
+.axis-dash{position:absolute;left:870px;top:372px;width:240px;height:0;border-top:3px dashed var(--court-paper-2);z-index:2;opacity:.7}
+.axis-end{position:absolute;left:1058px;top:352px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--court-slate-2);z-index:3}
+.node{position:absolute;top:372px;z-index:3;width:0}
+.node .pt{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--court-sage);border:3px solid var(--court-paper);box-shadow:0 0 0 1px var(--court-sage)}
+.node .stem{position:absolute;left:-1px;width:2px;background:var(--court-paper-2)}
+.node.up .stem{bottom:7px;height:52px}
+.node.dn .stem{top:7px;height:52px}
+.node .card{position:absolute;width:172px;left:-86px;text-align:center}
+.node.up .card{bottom:66px}
+.node.dn .card{top:66px}
+.node .yr{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--court-sage)}
+.node .lb{font-family:var(--font-ui);font-size:13.5px;color:var(--court-ink);line-height:1.35;margin-top:4px}
+.node .lb b{font-weight:700}
+
+/* ============================ CHROME ============================ */
+.chrome{position:fixed;inset:0;pointer-events:none;z-index:70;font-family:var(--font-mono)}
+.chrome .part{position:absolute;left:26px;bottom:22px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim)}
+.chrome .part b{color:var(--court-sage-lt);font-weight:500}
+.chrome .count{position:absolute;right:26px;bottom:22px;font-size:12px;letter-spacing:.1em;color:var(--txt-dim)}
+.chrome .progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.06)}
+.chrome .progress span{display:block;height:100%;width:0;background:var(--court-sage);transition:width .65s var(--e-out)}
+.rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;gap:15px}
+.rail button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;justify-content:flex-end;opacity:.45;transition:opacity .3s}
+.rail button:hover,.rail button.on{opacity:1}
+.rail .lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-dim);opacity:0;transform:translateX(6px);transition:.3s}
+.rail button:hover .lbl{opacity:1;transform:none}
+.rail .tick{width:22px;height:3px;border-radius:2px;background:var(--txt-dim);transition:.3s}
+.rail button.on .tick{width:32px;background:var(--court-sage)}
+.nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:70;display:flex;gap:8px}
+.nav button{all:unset;cursor:pointer;width:34px;height:30px;display:grid;place-items:center;border-radius:7px;border:1px solid var(--line);color:var(--txt-dim);font-size:15px;background:rgba(20,22,28,.6);transition:.2s}
+.nav button:hover{color:var(--txt);border-color:var(--court-sage)}
+.hint{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);z-index:70;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--txt-dim);background:rgba(8,10,14,.7);padding:7px 14px;border-radius:999px;border:1px solid var(--line);transition:opacity .6s;pointer-events:none}
+.hint.hide{opacity:0}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:opacity .2s linear!important}
+  .slide [data-anim],.slide [data-fragment],.reveal .ln>i{opacity:1!important;transform:none!important;filter:none!important}
+  .ln-draw{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+
+<div class="deck">
+ <div class="stage" id="stage">
+
+  <!-- 1 · OPENING -->
+  <section class="slide p-court s-title" data-part="intro">
+    <div class="pbar"></div>
+    <div class="glow"></div>
+    <div class="watermark" data-anim="seal" style="--d:.2s"></div>
+    <div class="pad">
+      <div class="caption-block" data-anim="rise" style="--d:.15s">
+        <div class="court">In the United States District Court · M.D.N.C.</div>
+        <div class="v">United States of America<br><em>v.</em><br>RealPage, Inc.</div>
+        <div class="docket">No. 1:24-cv-00710 · Sherman Act §§ 1 &amp; 2<span class="cursor"></span></div>
+      </div>
+      <h1 data-anim="rise" style="--d:.4s">When an algorithm sets the rent.</h1>
+      <p class="sub" data-anim="rise" style="--d:.6s">Algorithmic price-fixing · the first major test</p>
+      <div class="tri">
+        <span class="chip court" data-anim="rise" style="--d:.8s">◆ Neutral · The Court</span>
+        <span class="chip doj" data-anim="rise" style="--d:.92s">◆ Prosecution · DOJ</span>
+        <span class="chip rp" data-anim="rise" style="--d:1.04s">◆ Defense · RealPage</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · TABLE OF CONTENTS -->
+  <section class="slide p-court s-agenda" data-part="intro">
+    <div class="pbar"></div>
+    <div class="wm">⚖</div>
+    <div class="pad">
+      <div class="section-title" data-anim="left" style="--d:.1s">Contents</div>
+      <h2 data-anim="rise" style="--d:.2s">Four parts</h2>
+      <ul class="agenda">
+        <li class="current" data-anim="left" style="--d:.35s"><span class="accent"></span><span class="num">01</span><span class="name">Introduction</span><span class="desc">What &amp; why</span><span class="tag">You are here</span></li>
+        <li data-anim="left" style="--d:.48s"><span class="accent"></span><span class="num">02</span><span class="name">The United States</span><span class="desc">The case</span><span class="tag"></span></li>
+        <li data-anim="left" style="--d:.61s"><span class="accent"></span><span class="num">03</span><span class="name">RealPage</span><span class="desc">The defense</span><span class="tag"></span></li>
+        <li data-anim="left" style="--d:.74s"><span class="accent"></span><span class="num">04</span><span class="name">Conclusion</span><span class="desc">Outcome · timeline</span><span class="tag"></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 · CASE INTRODUCTION (divider) -->
+  <section class="slide p-court s-divider" data-part="intro">
+    <div class="pbar"></div>
+    <div class="inner">
+      <div class="dnum" data-anim="fade" style="--d:.2s">Part 1</div>
+      <h2 class="reveal"><span class="ln" style="--i:0"><i>Case introduction</i></span></h2>
+      <p class="dsub" data-anim="rise" style="--d:.5s">the company · the software · the problem</p>
+      <div class="dline"></div>
+    </div>
+  </section>
+
+  <!-- 4 · WHAT IS REALPAGE -->
+  <section class="slide p-court s-prod" data-part="intro">
+    <div class="pbar"></div><div class="orb a"></div>
+    <div class="vhead center">
+      <div class="kicker" data-anim="fade" style="--d:.1s">01 · What is RealPage?</div>
+      <h2 data-anim="rise" style="--d:.25s;font-size:36px">A multinational real-estate technology company</h2>
+      <div class="vsub" data-anim="rise" style="--d:.4s">provides software &amp; data analytics — for property owners &amp; managers</div>
+    </div>
+    <div class="prodrow">
+      <div class="pcard" data-anim="pop" style="--d:.55s">
+        <div class="ptop"><span class="pname">YieldStar</span><span class="pbadge">legacy</span></div>
+        <ul>
+          <li>rival shared data</li>
+          <li>daily floor-plan pricing</li>
+          <li>unit-level recommendations</li>
+        </ul>
+      </div>
+      <div class="pevo" data-anim="fade" style="--d:.8s">→</div>
+      <div class="pcard ai" data-anim="pop" style="--d:.7s">
+        <div class="ptop"><span class="pname">AIRM</span><span class="pbadge ai">AI upgrade</span></div>
+        <ul>
+          <li>same codebase + machine learning</li>
+          <li>trains on competitor data</li>
+          <li>automated predictive pricing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · HOW IT WORKS -->
+  <section class="slide p-court s-flow" data-part="intro">
+    <div class="pbar"></div>
+    <div class="grid"></div>
+    <div class="head">
+      <div class="kicker" data-anim="left" style="--d:.1s">02 · How it works?</div>
+      <h2 data-anim="rise" style="--d:.25s">Secrets in. One price out.</h2>
+    </div>
+    <svg class="wires" viewBox="0 0 1280 720" preserveAspectRatio="none">
+      <path class="wire-base" d="M320,255 C440,255 470,340 560,355"/>
+      <path class="wire-base" d="M320,365 L560,365"/>
+      <path class="wire-base" d="M320,475 C440,475 470,390 560,375"/>
+      <path class="wire-base" d="M720,365 C820,365 870,365 952,365"/>
+      <path class="wire-flow" d="M320,255 C440,255 470,340 560,355"/>
+      <path class="wire-flow" d="M320,365 L560,365"/>
+      <path class="wire-flow" d="M320,475 C440,475 470,390 560,375"/>
+      <path class="wire-flow" d="M720,365 C820,365 870,365 952,365"/>
+    </svg>
+    <div class="lord" style="left:84px;top:222px;--d:.4s" data-anim="left"><div class="nm"><span class="lk">🔒</span> Landlord A</div><div class="dt">what they charge</div></div>
+    <div class="lord" style="left:84px;top:332px;--d:.5s" data-anim="left"><div class="nm"><span class="lk">🔒</span> Landlord B</div><div class="dt">how full they are</div></div>
+    <div class="lord" style="left:84px;top:442px;--d:.6s" data-anim="left"><div class="nm"><span class="lk">🔒</span> Landlord C</div><div class="dt">what deals they offer</div></div>
+    <div class="core" data-anim="pop" style="--d:.7s"><div class="ring"></div><div class="ring d"></div><div class="ttl">RealPage</div><div class="sub">mixes the secret info</div></div>
+    <div class="price" data-anim="pop" style="--d:1s"><div class="pl">Tells each landlord →</div><div class="pv">what price to set</div><div class="pn">one shared price</div></div>
+    <div class="flow-cap" data-anim="fade" style="--d:1.3s">private numbers in → <b>one price out</b></div>
+  </section>
+
+  <!-- 6 · THE PROBLEM -->
+  <section class="slide p-court s-lock" data-part="intro">
+    <div class="pbar"></div>
+    <div class="txt">
+      <div class="kicker" data-anim="left" style="--d:.1s">03 · What's the problem?</div>
+      <h2 class="reveal"><span class="ln" style="--i:0"><i>From rivals</i></span><span class="ln" style="--i:1"><i>to <span class="red">lockstep.</span></i></span></h2>
+      <p class="lede" data-anim="rise" style="--d:.5s">compete ✕ → coordinate ✓</p>
+      <div class="conseq">
+        <div class="c up" data-anim="left" style="--d:.6s"><span class="ic">▲</span> Rents up</div>
+        <div class="c" data-anim="left" style="--d:.72s"><span class="ic">✕</span> Perks cut · free month of rent</div>
+      </div>
+      <div class="cartel" data-anim="rise" style="--d:.9s"><span>collusion</span> → <span>price-fixing</span> → <span class="hot">hardcore cartel</span></div>
+    </div>
+    <div class="chart" data-anim="pop" style="--d:.4s">
+      <div class="ct"><span>Two competitors' rents</span><span>→ over time</span></div>
+      <svg viewBox="0 0 492 300" preserveAspectRatio="none">
+        <path class="ln-draw a" stroke="#8BA88F" d="M10,250 C130,238 250,150 480,46"/>
+        <path class="ln-draw b" stroke="#EEAD0E" d="M10,266 C130,256 250,166 480,62"/>
+        <circle class="dotp" cx="480" cy="46" r="6" fill="#8BA88F"/>
+        <circle class="dotp" cx="480" cy="62" r="6" fill="#EEAD0E"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 7 · WHY IT MATTERS -->
+  <section class="slide p-court s-why" data-part="intro">
+    <div class="pbar"></div>
+    <div class="vhead">
+      <div class="kicker" data-anim="left" style="--d:.1s">04 · Why this case matters</div>
+      <h2 data-anim="rise" style="--d:.25s">A landmark case.</h2>
+    </div>
+    <div class="frame" data-anim="fade" style="--d:.5s">Past: <b>competitors meet to agree on prices</b> &nbsp;→&nbsp; Here: <b>an algorithm did the coordinating</b></div>
+    <div class="duel">
+      <div class="side L" data-anim="fade" style="--d:.6s">
+        <div class="who">◆ The United States</div>
+        <div class="quote">"Training a machine to break the law is still breaking the law."</div>
+      </div>
+      <div class="seam"></div>
+      <div class="side R" data-anim="fade" style="--d:.75s">
+        <div class="who">◆ RealPage</div>
+        <div class="quote">"Our AI simply gives recommendations; the landlords make their decisions."</div>
+      </div>
+    </div>
+    <div class="landmark" data-anim="fade" style="--d:1s">first landmark case · <b>does an algorithm coordinating prices = illegal collusion?</b> · shapes pricing software across industries</div>
+  </section>
+
+  <!-- 8 · THE INCOMPLETE TIMELINE -->
+  <section class="slide p-court s-time" data-part="intro">
+    <div class="pbar"></div>
+    <div class="head">
+      <div class="kicker" data-anim="left" style="--d:.1s">The timeline</div>
+      <h2 data-anim="rise" style="--d:.25s">How it reached court</h2>
+      <div class="note" data-anim="fade" style="--d:.4s">↳ incomplete — full version in the Conclusion</div>
+    </div>
+    <div class="axis"></div>
+    <div class="axis-dash"></div>
+    <div class="axis-end" data-anim="fade" style="--d:1.5s">continued · Part 4 →</div>
+    <div class="node up" style="left:150px;--d:.5s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">2020</div><div class="lb"><b>AIRM</b> launches</div></div></div>
+    <div class="node dn" style="left:300px;--d:.65s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Oct 2022</div><div class="lb"><b>ProPublica</b> exposé</div></div></div>
+    <div class="node up" style="left:450px;--d:.8s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Nov 2022</div><div class="lb"><b>DOJ investigation</b> opens</div></div></div>
+    <div class="node dn" style="left:600px;--d:.95s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Aug 2024</div><div class="lb"><b>Complaint filed</b> · DOJ + 8 states</div></div></div>
+    <div class="node up" style="left:750px;--d:1.1s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Fall 2024</div><div class="lb"><b>Motion to dismiss</b></div></div></div>
+    <div class="node dn" style="left:900px;--d:1.25s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jan 2025</div><div class="lb"><b>Amended</b> · 6 landlords added</div></div></div>
+  </section>
+
+  <!-- 9 · TABLE OF CONTENTS (closing) -->
+  <section class="slide p-court s-agenda" data-part="intro">
+    <div class="pbar"></div>
+    <div class="wm">⚖</div>
+    <div class="pad">
+      <div class="section-title" data-anim="left" style="--d:.1s">Contents</div>
+      <h2 data-anim="rise" style="--d:.2s">Up next</h2>
+      <ul class="agenda">
+        <li class="done" data-anim="left" style="--d:.35s"><span class="accent"></span><span class="num">01</span><span class="name">Introduction</span><span class="desc">What &amp; why</span><span class="tag">✓ done</span></li>
+        <li class="next" data-anim="left" style="--d:.48s"><span class="accent"></span><span class="num">02</span><span class="name">The United States</span><span class="desc">The case</span><span class="tag">Up next →</span></li>
+        <li data-anim="left" style="--d:.61s"><span class="accent"></span><span class="num">03</span><span class="name">RealPage</span><span class="desc">The defense</span><span class="tag"></span></li>
+        <li data-anim="left" style="--d:.74s"><span class="accent"></span><span class="num">04</span><span class="name">Conclusion</span><span class="desc">Outcome · timeline</span><span class="tag"></span></li>
+      </ul>
+    </div>
+  </section>
+
+ </div>
+</div>
+
+<div class="grain"></div>
+
+<div class="chrome">
+  <div class="part">PART <b id="partName">I · INTRODUCTION</b></div>
+  <div class="count"><span id="cur">01</span> / <span id="tot">09</span></div>
+  <div class="progress"><span id="progBar"></span></div>
+</div>
+
+<div class="rail" id="rail">
+  <button data-go="intro" title="Introduction"><span class="lbl">Intro</span><span class="tick"></span></button>
+  <button data-go="us" title="The United States"><span class="lbl">U.S.</span><span class="tick"></span></button>
+  <button data-go="realpage" title="RealPage"><span class="lbl">RealPage</span><span class="tick"></span></button>
+  <button data-go="conclusion" title="Conclusion"><span class="lbl">Conclusion</span><span class="tick"></span></button>
+</div>
+
+<div class="hint" id="hint">← → navigate · F fullscreen</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur=0,step=0,leaving=null,leftTimer=null;
+  const PART={intro:'I · INTRODUCTION',us:'II · THE UNITED STATES',realpage:'III · REALPAGE',conclusion:'IV · CONCLUSION'};
+  const RAIL={intro:0,us:1,realpage:2,conclusion:3};
+  const $=id=>document.getElementById(id);
+
+  let sec=0; const SEC=slides.map((s,i)=>{
+    if(i>0 && (s.classList.contains('s-divider')||s.classList.contains('s-time')||s.dataset.part!==slides[i-1].dataset.part)) sec++;
+    return sec;
+  });
+
+  function fit(){document.documentElement.style.setProperty('--s',Math.min(innerWidth/1280,innerHeight/720));}
+  addEventListener('resize',fit);fit();
+  function frags(){return [...slides[cur].querySelectorAll('[data-fragment]')];}
+
+  function countUp(el){
+    const t=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),dur=+(el.dataset.dur||1300),start=performance.now();
+    const fmt=v=>v.toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec});
+    if(reduce){el.textContent=fmt(t);return;}
+    requestAnimationFrame(function tick(now){
+      const p=Math.min(1,(now-start)/dur),e=1-Math.pow(1-p,3);
+      el.textContent=fmt(t*e);
+      if(p<1)requestAnimationFrame(tick);else el.textContent=fmt(t);
+    });
+  }
+  function updateChrome(){
+    const part=slides[cur].dataset.part||'intro';
+    $('partName').textContent=PART[part]||'';
+    $('cur').textContent=String(cur+1).padStart(2,'0');
+    $('tot').textContent=String(slides.length).padStart(2,'0');
+    $('progBar').style.width=((cur+1)/slides.length*100)+'%';
+    document.querySelectorAll('#rail button').forEach((b,i)=>b.classList.toggle('on',i===RAIL[part]));
+    slides[cur].querySelectorAll('[data-count]').forEach(el=>{el.textContent='0';countUp(el);});
+  }
+
+  // sweep LEFT within a topic; sweep DOWN when the topic changes (mirror on the way back)
+  const OFFSETS={
+    right:{enter:'translate(-110%,0)',exit:'translate(110%,0)'},
+    left :{enter:'translate(110%,0)', exit:'translate(-110%,0)'},
+    down :{enter:'translate(0,-110%)',exit:'translate(0,110%)'},
+    up   :{enter:'translate(0,110%)', exit:'translate(0,-110%)'}
+  };
+  function dirFor(from,to){
+    if(from===to)return null;
+    const fwd=to>from, change=SEC[from]!==SEC[to];
+    return change?(fwd?'down':'up'):(fwd?'left':'right');
+  }
+  function finalize(){
+    if(leftTimer){clearTimeout(leftTimer);leftTimer=null;}
+    if(leaving){const s=leaving;leaving=null;
+      s.classList.add('notrans');s.classList.remove('leaving');s.style.transform='';
+      void s.offsetWidth;s.classList.remove('notrans');}
+  }
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    if(n===cur)return;
+    const from=cur, dir=dirFor(from,n), old=slides[from], neu=slides[n];
+    finalize();
+    cur=n;
+    const f=[...neu.querySelectorAll('[data-fragment]')];
+    f.forEach(x=>x.classList.remove('shown'));
+    if(n<from||reduce){f.forEach(x=>x.classList.add('shown'));step=f.length;}else step=0;
+    if(reduce||!dir||!OFFSETS[dir]){
+      old.classList.remove('active','leaving');neu.classList.add('active');updateChrome();return;
+    }
+    const off=OFFSETS[dir];
+    neu.classList.add('notrans');neu.classList.remove('leaving');
+    neu.style.transform=off.enter;
+    neu.classList.add('active');
+    void neu.offsetWidth;
+    neu.classList.remove('notrans');
+    neu.style.transform='translate(0,0)';
+    old.classList.remove('active');old.classList.add('leaving');
+    old.style.transform=off.exit;
+    leaving=old;leftTimer=setTimeout(finalize,780);
+    updateChrome();
+  }
+
+  function next(){const f=frags();if(step<f.length){f[step].classList.add('shown');step++;return;}if(cur<slides.length-1)go(cur+1);}
+  function prev(){if(step>0){step--;frags()[step].classList.remove('shown');return;}if(cur>0)go(cur-1);}
+  function goPart(key){const idx=slides.findIndex(s=>s.dataset.part===key);if(idx>=0)go(idx);}
+
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();next();}
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev();}
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(slides.length-1);
+    else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+  });
+  document.querySelector('.deck').addEventListener('click',e=>{
+    if(e.target.closest('.rail,.chrome'))return;
+    (e.clientX<innerWidth*0.32)?prev():next();
+  });
+  document.querySelectorAll('#rail button').forEach(b=>b.onclick=e=>{e.stopPropagation();goPart(b.dataset.go);});
+  let tx=0;
+  addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
+  addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)dx<0?next():prev();},{passive:true});
+  setTimeout(()=>$('hint').classList.add('hide'),4500);
+
+  slides[0].classList.add('active');
+  updateChrome();
+})();
+</script>
+</body>
+</html>
