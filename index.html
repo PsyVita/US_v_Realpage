@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <style>
 :root{
   --font-legal:'Libre Baskerville',Georgia,serif;
@@ -63,8 +64,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .s-title{background:radial-gradient(900px 480px at 16% -12%,rgba(38,64,107,.55),transparent 60%),radial-gradient(820px 460px at 88% 112%,rgba(255,77,109,.2),transparent 55%),linear-gradient(180deg,#0A0C10,#101216);color:var(--txt)}
 .s-title .glow{position:absolute;inset:0;z-index:0;background:radial-gradient(700px 360px at 20% -8%,rgba(78,114,184,.18),transparent 60%);animation:drift 14s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(40px,26px)}}
-.s-title .bg-icon{position:absolute;right:72px;top:50%;transform:translateY(-50%);width:360px;height:360px;color:rgba(139,168,143,.16);z-index:1}
-.s-title .bg-icon svg{width:100%;height:100%}
 .s-title .pad{position:absolute;inset:0;padding:0 84px;display:flex;flex-direction:column;justify-content:center;z-index:3}
 .caption-block{border:1px solid var(--line);border-left:3px solid var(--court-sage);background:rgba(255,255,255,.025);padding:24px 28px;max-width:540px;border-radius:5px;font-family:var(--font-legal)}
 .caption-block .court{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim);font-family:var(--font-mono)}
@@ -187,7 +186,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 /* 6 · Why it matters — image split + quotes */
 .s-why{background:linear-gradient(180deg,#0E1116,#0B0D11);color:var(--txt)}
 .s-why .vhead h2{font-size:38px}
-.imgsplit{position:absolute;left:84px;right:84px;top:140px;height:248px;display:flex;align-items:stretch;gap:0;z-index:3}
+.imgsplit{position:absolute;left:84px;right:84px;top:180px;height:248px;display:flex;align-items:stretch;gap:0;z-index:3}
 .imgcell{flex:1;position:relative;border:1px solid var(--line);overflow:hidden;background:#15181d}
 .imgcell:first-child{border-radius:14px 0 0 14px}
 .imgcell:last-child{border-radius:0 14px 14px 0;border-color:var(--court-sage)}
@@ -197,8 +196,8 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .imgcell .lab{position:absolute;left:20px;bottom:16px;right:20px}
 .imgcell .tg{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--court-sage-lt)}
 .imgcell .tx{font-family:var(--font-legal);font-size:19px;margin-top:5px;color:#fff}
-.imgeq{position:absolute;left:calc(50% - 26px);top:238px;z-index:5;width:52px;height:52px;border-radius:50%;background:#0B0D11;border:1px solid var(--court-sage);display:grid;place-items:center;font-family:var(--font-legal);font-size:26px;color:var(--court-sage-lt)}
-.qbar{position:absolute;left:84px;right:84px;top:410px;display:flex;gap:20px;z-index:3}
+.imgeq{position:absolute;left:calc(50% - 26px);top:278px;z-index:5;width:52px;height:52px;border-radius:50%;background:#0B0D11;border:1px solid var(--court-sage);display:grid;place-items:center;font-family:var(--font-legal);font-size:26px;color:var(--court-sage-lt)}
+.qbar{position:absolute;left:84px;right:84px;top:450px;display:flex;gap:20px;z-index:3}
 .qcell{flex:1;border-radius:14px;padding:18px 22px}
 .qcell.doj{background:linear-gradient(160deg,var(--doj-navy),var(--doj-navy-2));color:#EFE9DA}
 .qcell.rp{background:linear-gradient(160deg,#fff,var(--rp-mist));color:var(--rp-charcoal)}
@@ -375,8 +374,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .node.key.outcome .pt::after{border-color:var(--doj-gold)}
 .s-time.active .node.key .pt::after{animation:ping 2.6s ease-out infinite;animation-delay:var(--d,.6s)}
 @keyframes ping{0%{transform:scale(.5);opacity:.65}100%{transform:scale(3);opacity:0}}
-/* title icon gentle float */
-.s-title.active .bg-icon{animation:iconFloat 11s ease-in-out infinite alternate}
 @keyframes iconFloat{from{transform:translateY(-52%)}to{transform:translateY(-48%)}}
 /* "=" pulse ring */
 .imgeq::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1px solid var(--court-sage-lt);opacity:0;pointer-events:none}
@@ -445,10 +442,10 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .nr-eq{font-family:var(--font-mono);font-size:13px;color:var(--rp-slateblue);padding:0 6px}
 .nr-r{background:rgba(155,34,38,.08);border:1px solid rgba(155,34,38,.28);border-radius:9px;padding:8px 16px;font-family:var(--font-mono);font-size:11px;color:#e08080}
 
-/* === Photo icon adjustments === */
-.s-title .bg-icon{overflow:hidden;border-radius:50%}
-.s-title .bg-icon img{width:100%;height:100%;object-fit:cover;opacity:.22;filter:grayscale(.3) contrast(1.1)}
-.s-title.active .bg-icon img{animation:ken 20s ease-in-out infinite alternate}
+/* S1 law icon circles */
+.law-ic{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(139,168,143,.22);background:rgba(10,12,16,.75);box-shadow:0 0 28px rgba(139,168,143,.1),0 10px 32px rgba(0,0,0,.5),inset 0 1px 0 rgba(139,168,143,.12);z-index:2;animation:lawFloat var(--lf-dur,8s) ease-in-out var(--lf-del,0s) infinite alternate}
+.law-ic i{color:rgba(139,168,143,.72);font-size:var(--fi-sz,26px)}
+@keyframes lawFloat{from{transform:translateY(0px) scale(1)}to{transform:translateY(var(--lf-y,-22px)) scale(1.04)}}
 .rp-bg-icon img{width:100%;height:100%;object-fit:cover;border-radius:22px;opacity:.2;filter:saturate(.6)}
 .slide.active .rp-bg-icon{animation:iconFloat 13s ease-in-out infinite alternate}
 .slide.active .rp-bg-icon img{animation:ken 22s ease-in-out infinite alternate}
@@ -509,6 +506,14 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 @keyframes spin-rim{to{stroke-dashoffset:-102}}
 @keyframes pulse-hub{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.75;transform:scale(1.12)}}
 @keyframes node-pulse{0%,100%{opacity:.65}50%{opacity:1}}
+/* S1 background particles */
+.title-particles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.title-particles span{position:absolute;border-radius:50%;animation:tpFloat var(--dur,10s) ease-in-out var(--del,0s) infinite alternate}
+@keyframes tpFloat{0%{transform:translate(0,0);opacity:0}18%{opacity:var(--op,.3)}82%{opacity:var(--op,.3)}100%{transform:translate(var(--tx,20px),var(--ty,-20px));opacity:0}}
+/* S1 background glyphs */
+.title-glyphs{position:absolute;inset:0;z-index:1;pointer-events:none}
+.title-glyphs span{position:absolute;font-family:var(--font-legal);font-size:80px;color:rgba(139,168,143,.032);line-height:1;animation:glyphDrift var(--ds,18s) ease-in-out var(--dd,0s) infinite alternate;user-select:none}
+@keyframes glyphDrift{from{transform:translate(0,0) rotate(-4deg)}to{transform:translate(14px,-18px) rotate(4deg)}}
 </style>
 </head>
 <body>
@@ -520,11 +525,37 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <section class="slide s-title" data-part="intro">
     <div class="pbar"></div>
     <div class="glow"></div>
-    <div class="bg-icon" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="title-glyphs" aria-hidden="true">
+      <span style="left:8%;top:18%;--ds:17s;--dd:-3s">§</span>
+      <span style="left:38%;top:78%;--ds:22s;--dd:-9s">§</span>
+      <span style="left:62%;top:8%;--ds:19s;--dd:-6s">¶</span>
+      <span style="left:88%;top:66%;--ds:24s;--dd:-12s">§</span>
     </div>
+    <div class="title-particles" aria-hidden="true">
+      <span style="left:5%;top:14%;width:3px;height:3px;background:rgba(139,168,143,.9);--dur:8.2s;--del:-1s;--op:.38;--tx:28px;--ty:-18px"></span>
+      <span style="left:13%;top:73%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:11.5s;--del:-4s;--op:.24;--tx:18px;--ty:-32px"></span>
+      <span style="left:23%;top:40%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:9.3s;--del:-7s;--op:.2;--tx:-14px;--ty:-22px"></span>
+      <span style="left:36%;top:87%;width:3px;height:3px;background:rgba(255,77,109,.9);--dur:12.8s;--del:-2s;--op:.28;--tx:22px;--ty:-16px"></span>
+      <span style="left:50%;top:21%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:7.6s;--del:-5s;--op:.2;--tx:16px;--ty:24px"></span>
+      <span style="left:57%;top:62%;width:3px;height:3px;background:rgba(139,168,143,.9);--dur:10.4s;--del:-3s;--op:.32;--tx:-18px;--ty:-26px"></span>
+      <span style="left:66%;top:44%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:13.1s;--del:-6s;--op:.18;--tx:20px;--ty:-20px"></span>
+      <span style="left:71%;top:79%;width:3px;height:3px;background:rgba(255,77,109,.9);--dur:8.7s;--del:-8s;--op:.22;--tx:-22px;--ty:-14px"></span>
+      <span style="left:79%;top:17%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:9.8s;--del:-2s;--op:.18;--tx:14px;--ty:18px"></span>
+      <span style="left:83%;top:54%;width:3px;height:3px;background:rgba(139,168,143,.9);--dur:11.2s;--del:-5s;--op:.28;--tx:-16px;--ty:-24px"></span>
+      <span style="left:19%;top:53%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:14.3s;--del:-9s;--op:.14;--tx:24px;--ty:-10px"></span>
+      <span style="left:44%;top:48%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:7.4s;--del:-4s;--op:.18;--tx:-20px;--ty:16px"></span>
+      <span style="left:61%;top:91%;width:2px;height:2px;background:rgba(255,77,109,.9);--dur:10.6s;--del:-7s;--op:.26;--tx:14px;--ty:-18px"></span>
+      <span style="left:89%;top:36%;width:2px;height:2px;background:rgba(139,168,143,.9);--dur:12.4s;--del:-2s;--op:.18;--tx:-18px;--ty:-14px"></span>
+    </div>
+    <!-- law icon circles — centre scales + pentagon of 5 -->
+    <div class="law-ic" style="right:273px;top:263px;width:155px;height:155px;--fi-sz:50px;--lf-dur:6s;--lf-del:0s;--lf-y:-28px;border-color:rgba(139,168,143,.35);box-shadow:0 0 42px rgba(139,168,143,.18),0 12px 36px rgba(0,0,0,.55),inset 0 1px 0 rgba(139,168,143,.2)" aria-hidden="true"><i class="fa-solid fa-scale-balanced"></i></div>
+    <div class="law-ic" style="right:310px;top:125px;width:80px;height:80px;--fi-sz:22px;--lf-dur:5s;--lf-del:-1.8s;--lf-y:-22px" aria-hidden="true"><i class="fa-solid fa-gavel"></i></div>
+    <div class="law-ic" style="right:144px;top:246px;width:80px;height:80px;--fi-sz:22px;--lf-dur:7s;--lf-del:-3.2s;--lf-y:-24px" aria-hidden="true"><i class="fa-solid fa-book-open"></i></div>
+    <div class="law-ic" style="right:207px;top:442px;width:80px;height:80px;--fi-sz:22px;--lf-dur:5.5s;--lf-del:-5s;--lf-y:-22px" aria-hidden="true"><i class="fa-solid fa-landmark"></i></div>
+    <div class="law-ic" style="right:413px;top:442px;width:80px;height:80px;--fi-sz:22px;--lf-dur:7.5s;--lf-del:-2.5s;--lf-y:-20px" aria-hidden="true"><i class="fa-solid fa-scroll"></i></div>
+    <div class="law-ic" style="right:476px;top:246px;width:80px;height:80px;--fi-sz:22px;--lf-dur:6.5s;--lf-del:-4.2s;--lf-y:-23px" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
     <div class="pad">
-      <div class="kicker" data-anim="rise" style="--d:.15s;color:var(--court-sage-lt);font-size:13px;letter-spacing:.2em;border:1px solid var(--court-sage);border-left:3px solid var(--court-sage);padding:10px 18px;display:inline-block;border-radius:4px;background:rgba(94,126,99,.08)">United States v. RealPage, Inc. · Antitrust</div>
+      <div class="kicker" data-anim="rise" style="--d:.15s;color:var(--court-sage-lt);font-size:11px;letter-spacing:.18em;border:1px solid var(--court-sage);border-left:3px solid var(--court-sage);padding:6px 12px;display:inline-block;align-self:flex-start;width:fit-content;border-radius:4px;background:rgba(94,126,99,.08)">competition law: antitrust</div>
       <h1 data-anim="rise" style="--d:.35s">United States<br><em style="font-style:italic;color:var(--court-sage-lt)">v.</em><br>RealPage, Inc.</h1>
       <div class="lockup" data-anim="rise" style="--d:.6s">
         <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="Department of Justice" referrerpolicy="no-referrer" onerror="this.style.display='none'">
@@ -763,13 +794,9 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
       <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     </div>
     <div class="rp-open">
-      <div class="rp-wm big" data-anim="rise" style="--d:.2s">RealPage</div>
-      <div class="ln2" data-anim="rise" style="--d:.4s">The defense.</div>
-      <div class="rp-stat-row" data-anim="rise" style="--d:.65s">
-        <div class="rs"><span class="rv">10M+</span><span class="rl">units managed</span></div>
-        <div class="rs"><span class="rv">~80%</span><span class="rl">market share</span></div>
-        <div class="rs"><span class="rv">30+</span><span class="rl">states</span></div>
-      </div>
+      <div class="hi" data-anim="rise" style="--d:.1s">Part III</div>
+      <div class="rp-wm big" data-anim="rise" style="--d:.25s">RealPage</div>
+      <div class="ln2" data-anim="rise" style="--d:.45s">The defense.</div>
     </div>
   </section>
 
@@ -1014,14 +1041,28 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
     <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">Hand-off</div><h2 data-anim="rise" style="--d:.2s">No agreement. No monopoly.</h2></div>
-    <div class="rp-toc" style="right:504px">
-      <div class="col off" data-anim="rise" style="--d:.4s"><div class="ph">Part 1 · Structural &amp; Liability</div><ul><li>1.1 · §1 — No Agreement ✓</li><li>1.2 · §2 — No Monopolization ✓</li></ul></div>
-      <div class="col on" data-anim="rise" style="--d:.55s"><div class="ph">Part 2 · Market &amp; Framing<span class="pt">up next</span></div><ul><li>2.1 · Lawful Exchange</li><li>2.2 · Rule of Reason — No Effects</li><li>2.3 · Framing &amp; Precedent</li></ul></div>
-    </div>
-    <div class="rp-aside-tall" data-anim="rise" style="--d:.48s;width:380px">
-      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-      <div class="ov"></div>
-      <div class="lab"><div class="tg">hand-off</div><div class="tx">Passing to<br>Part 2</div></div>
+    <div class="def-stack">
+      <div class="def-card off" data-anim="rise" style="--d:.38s">
+        <div class="dc-num">1</div>
+        <div class="dc-body">
+          <div class="dc-head">Structural &amp; Liability <span class="dc-tag" style="background:rgba(94,126,99,.25)">done ✓</span></div>
+          <div class="dc-items">
+            <span class="dc-item">1.1 · §1 — No Agreement ✓</span>
+            <span class="dc-item">1.2 · §2 — No Monopolization ✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="def-card on" data-anim="rise" style="--d:.54s">
+        <div class="dc-num">2</div>
+        <div class="dc-body">
+          <div class="dc-head">Market &amp; Framing <span class="dc-tag">up next</span></div>
+          <div class="dc-items">
+            <span class="dc-item">2.1 · Lawful Exchange</span>
+            <span class="dc-item">2.2 · Rule of Reason — No Effects</span>
+            <span class="dc-item">2.3 · Framing &amp; Precedent</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
