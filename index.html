@@ -12,37 +12,31 @@
   --font-legal:'Libre Baskerville',Georgia,serif;
   --font-ui:'Inter',system-ui,-apple-system,sans-serif;
   --font-mono:'IBM Plex Mono',ui-monospace,monospace;
-  --court-ink:#202428; --court-ink-2:#272C33;
-  --court-paper:#F4F1EA; --court-paper-2:#E2DDD1;
-  --court-slate:#46525E; --court-slate-2:#64727E;
-  --court-sage:#5E7E63; --court-sage-lt:#8BA88F;
+  --court-ink:#202428; --court-paper:#F4F1EA; --court-paper-2:#E2DDD1;
+  --court-slate:#46525E; --court-slate-2:#64727E; --court-sage:#5E7E63; --court-sage-lt:#8BA88F;
   --doj-navy:#14213D; --doj-navy-2:#26406B; --doj-blue:#4E72B8; --doj-blue-lt:#7C9BD4;
-  --doj-gold:#C9A227; --doj-gold-lt:#EEAD0E; --doj-red:#9B2226;
+  --doj-gold:#C9A227; --doj-gold-lt:#EEAD0E; --doj-red:#9B2226; --doj-paper:#F5F3EE;
   --rp-coral:#FF4D6D; --rp-orange:#FF8A3D; --rp-grad:linear-gradient(120deg,#FF8A3D,#FF4D6D);
-  --rp-charcoal:#2B2D33; --rp-slateblue:#5B6B8C; --rp-mist:#F6F4F1;
-  --bg:#0C0E12; --line:#2C313B; --txt:#E9E5DC; --txt-dim:#A8A599;
-  --e-out:cubic-bezier(.16,1,.3,1);
-  --e-spring:cubic-bezier(.34,1.56,.64,1);
+  --rp-charcoal:#2B2D33; --rp-charcoal-2:#3A3D45; --rp-slateblue:#5B6B8C; --rp-mist:#F6F4F1;
+  --bg:#101216; --panel:#181B21; --panel-2:#1F232B; --line:#2C313B; --txt:#E9E5DC; --txt-dim:#A8A599;
+  --e-out:cubic-bezier(.16,1,.3,1); --e-spring:cubic-bezier(.34,1.56,.64,1);
   --slide-w:1280px; --slide-h:720px; --s:1;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:#050609;overflow:hidden}
 body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialiased}
 
-/* ============================ STAGE ============================ */
 .deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#050609}
 .stage{position:relative;width:var(--slide-w);height:var(--slide-h);transform:scale(var(--s));transform-origin:center;border-radius:8px;overflow:hidden;box-shadow:0 50px 140px rgba(0,0,0,.75)}
 .slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transform:translate(0,0);transition:transform .72s var(--e-out),visibility .72s;will-change:transform,opacity}
 .slide.active{opacity:1;visibility:visible;z-index:2}
 .slide.leaving{opacity:1;visibility:visible;z-index:1}
 .slide.notrans{transition:none!important}
-.pbar{position:absolute;top:0;left:0;right:0;height:6px;z-index:9;transform-origin:left}
+.pbar{position:absolute;top:0;left:0;right:0;height:6px;z-index:9;transform-origin:left;background:var(--court-sage)}
 .slide.active .pbar{animation:barWipe .85s var(--e-out) both}
-.p-court .pbar{background:var(--court-sage)}
 @keyframes barWipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-/* ===================== ANIMATION UTILITIES ===================== */
 .slide [data-anim]{opacity:0}
 .slide.active [data-anim]{animation-duration:.85s;animation-timing-function:var(--e-out);animation-fill-mode:both;animation-delay:var(--d,0s)}
 .slide.active [data-anim="rise"]{animation-name:riseY}
@@ -50,45 +44,39 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .slide.active [data-anim="pop"]{animation-name:pop;animation-timing-function:var(--e-spring);animation-duration:.7s}
 .slide.active [data-anim="left"]{animation-name:slideLeft}
 .slide.active [data-anim="zoom"]{animation-name:zoomIn}
-.slide.active [data-anim="seal"]{animation-name:sealIn;animation-duration:1.3s}
 @keyframes riseY{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideLeft{from{opacity:0;transform:translateX(-34px)}to{opacity:1;transform:none}}
 @keyframes zoomIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:scale(.8) translateY(10px)}to{opacity:1;transform:none}}
-@keyframes sealIn{from{opacity:0;transform:scale(.4) rotate(-45deg)}to{opacity:.9;transform:scale(1) rotate(0)}}
 .reveal .ln{display:block;overflow:hidden;padding-bottom:.02em}
 .reveal .ln>i{display:block;font-style:normal;transform:translateY(118%)}
 .slide.active .reveal .ln>i{animation:lineUp 1s var(--e-out) both;animation-delay:calc(var(--d,0s) + var(--i,0)*.085s)}
 @keyframes lineUp{from{transform:translateY(118%)}to{transform:translateY(0)}}
-.slide [data-fragment]{opacity:0;transform:translateY(16px);transition:opacity .55s var(--e-out),transform .55s var(--e-out)}
-.slide [data-fragment].shown{opacity:1;transform:none}
 .orb{position:absolute;border-radius:50%;filter:blur(60px);z-index:0;pointer-events:none}
 @keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.08)}}
 .kicker{font-family:var(--font-mono);font-size:14px;letter-spacing:.22em;text-transform:uppercase}
-.illus{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--court-slate-2);border:1px solid currentColor;border-radius:4px;padding:2px 6px;vertical-align:middle;opacity:.7}
+.rp-wm{font-family:var(--font-ui);font-weight:800;letter-spacing:-.01em;background:var(--rp-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bg-photo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;opacity:.1;filter:grayscale(1) contrast(1.05)}
 
 /* ===================== 1 · TITLE ===================== */
-.s-title{background:radial-gradient(900px 480px at 16% -12%,rgba(38,64,107,.55),transparent 60%),radial-gradient(820px 460px at 88% 112%,rgba(255,77,109,.20),transparent 55%),linear-gradient(180deg,#0A0C10,#101216);color:var(--txt)}
-.s-title .pad{position:absolute;inset:0;padding:0 84px;display:flex;flex-direction:column;justify-content:center;z-index:3}
+.s-title{background:radial-gradient(900px 480px at 16% -12%,rgba(38,64,107,.55),transparent 60%),radial-gradient(820px 460px at 88% 112%,rgba(255,77,109,.2),transparent 55%),linear-gradient(180deg,#0A0C10,#101216);color:var(--txt)}
 .s-title .glow{position:absolute;inset:0;z-index:0;background:radial-gradient(700px 360px at 20% -8%,rgba(78,114,184,.18),transparent 60%);animation:drift 14s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(40px,26px)}}
-.caption-block{position:relative;z-index:2;border:1px solid var(--line);border-left:3px solid var(--court-sage);background:rgba(255,255,255,.025);padding:26px 30px;max-width:560px;border-radius:5px;font-family:var(--font-legal)}
-.caption-block .court{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim);font-family:var(--font-mono)}
-.caption-block .v{font-size:30px;margin:12px 0;line-height:1.32}
+.s-title .bg-icon{position:absolute;right:72px;top:50%;transform:translateY(-50%);width:360px;height:360px;color:rgba(139,168,143,.16);z-index:1}
+.s-title .bg-icon svg{width:100%;height:100%}
+.s-title .pad{position:absolute;inset:0;padding:0 84px;display:flex;flex-direction:column;justify-content:center;z-index:3}
+.caption-block{border:1px solid var(--line);border-left:3px solid var(--court-sage);background:rgba(255,255,255,.025);padding:24px 28px;max-width:540px;border-radius:5px;font-family:var(--font-legal)}
+.caption-block .court{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim);font-family:var(--font-mono)}
+.caption-block .v{font-size:28px;margin:11px 0;line-height:1.32}
 .caption-block .v em{font-style:italic;color:var(--court-sage-lt)}
-.caption-block .docket{font-size:13px;color:var(--txt-dim);font-family:var(--font-mono);border-top:1px dashed var(--line);margin-top:16px;padding-top:13px}
-.cursor{display:inline-block;width:8px;height:14px;background:var(--court-sage-lt);margin-left:3px;vertical-align:-1px;animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.s-title h1{position:relative;z-index:2;font-family:var(--font-legal);font-size:62px;line-height:1.08;margin:34px 0 14px;font-weight:700;letter-spacing:-.01em;max-width:920px}
-.s-title .sub{position:relative;z-index:2;font-size:18px;color:var(--txt-dim);margin:0;font-family:var(--font-mono);letter-spacing:.04em}
-.tri{position:relative;z-index:2;display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
-.tri .chip{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:9px 15px;border-radius:999px;border:1px solid transparent}
-.chip.court{background:rgba(140,122,75,.16);border-color:var(--court-sage);color:var(--court-sage-lt)}
-.chip.doj{background:rgba(20,33,61,.6);border-color:var(--doj-gold);color:var(--doj-gold-lt)}
-.chip.rp{background:var(--rp-mist);border-color:var(--rp-coral);color:var(--rp-charcoal);font-weight:600}
-.watermark{position:absolute;right:-90px;bottom:-120px;width:520px;height:520px;border-radius:50%;border:10px double rgba(94,126,99,.16);z-index:1}
-.watermark::after{content:"⚖";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:240px;color:rgba(94,126,99,.10)}
+.caption-block .docket{font-size:12px;color:var(--txt-dim);font-family:var(--font-mono);border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.s-title h1{font-family:var(--font-legal);font-size:58px;line-height:1.08;margin:30px 0 12px;font-weight:700;letter-spacing:-.01em;max-width:860px}
+.s-title .sub{font-size:17px;color:var(--court-sage-lt);margin:0 0 30px;font-family:var(--font-mono);letter-spacing:.06em}
+.lockup{display:flex;align-items:center;gap:22px}
+.lockup img{height:50px;width:auto}
+.lockup .vs{font-family:var(--font-legal);font-style:italic;font-size:22px;color:var(--txt-dim)}
+.lockup .rp-wm{font-size:34px}
 
 /* ===================== TOC / AGENDA ===================== */
 .s-agenda{background:var(--court-paper);color:var(--court-ink)}
@@ -97,10 +85,10 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .s-agenda .section-title{font-family:var(--font-mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--court-sage);margin:0 0 8px}
 .s-agenda h2{font-family:var(--font-legal);font-size:40px;margin:0 0 30px;font-weight:700;color:var(--court-ink)}
 .agenda{list-style:none;margin:0;padding:0}
-.agenda li{display:grid;grid-template-columns:54px 250px 1fr 132px;align-items:center;gap:24px;padding:17px 16px;border-top:1px solid var(--court-paper-2);position:relative}
+.agenda li{display:grid;grid-template-columns:54px 1fr 132px;align-items:center;gap:24px;padding:17px 16px;border-top:1px solid var(--court-paper-2);position:relative}
 .agenda li:last-child{border-bottom:1px solid var(--court-paper-2)}
 .agenda .num{font-family:var(--font-mono);font-size:15px;color:var(--court-slate-2)}
-.agenda .name{font-family:var(--font-legal);font-size:26px;color:var(--court-ink)}
+.agenda .name{font-family:var(--font-legal);font-size:25px;color:var(--court-ink)}
 .agenda .desc{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;color:var(--court-slate);line-height:1.4}
 .agenda .accent{position:absolute;left:-2px;top:50%;width:4px;height:0;background:var(--court-sage);transform:translateY(-50%);transition:height .5s var(--e-out) .3s}
 .agenda .tag{justify-self:end;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--court-sage);padding:6px 12px;border-radius:999px;white-space:nowrap;visibility:hidden}
@@ -112,111 +100,117 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .agenda li.done .num{color:var(--court-sage)}
 .agenda li.done .tag{background:transparent;color:var(--court-sage);padding-right:0}
 
-/* ===================== DIVIDER (case intro) ===================== */
-.s-divider{background:radial-gradient(900px 520px at 50% 125%,rgba(94,126,99,.10),transparent 60%),linear-gradient(160deg,#15181D,#0A0D11);color:var(--txt)}
-.s-divider .inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;text-align:center;padding:0 100px}
-.s-divider .dnum{font-family:var(--font-mono);font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--court-sage-lt);margin-bottom:22px}
-.s-divider h2{font-family:var(--font-legal);font-size:60px;font-weight:700;margin:0;line-height:1.1}
-.s-divider .dsub{font-family:var(--font-mono);font-size:14px;letter-spacing:.06em;color:var(--txt-dim);margin-top:22px}
-.s-divider .dline{width:0;height:2px;background:var(--court-sage);margin-top:6px}
-.s-divider.active .dline{animation:lineGrow 1s .5s var(--e-out) forwards}
-@keyframes lineGrow{to{width:170px}}
-
 /* ===================== SHARED HEADS ===================== */
-.vhead{position:absolute;left:84px;top:60px;z-index:5}
+.vhead{position:absolute;left:84px;top:56px;z-index:5}
 .vhead.center{left:0;right:0;text-align:center}
 .vhead .kicker{color:var(--court-sage-lt);margin-bottom:14px}
-.vhead h2{font-family:var(--font-legal);font-size:44px;margin:0;font-weight:700;letter-spacing:-.01em}
+.vhead h2{font-family:var(--font-legal);font-size:42px;margin:0;font-weight:700;letter-spacing:-.01em}
 .vhead .vsub{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--txt-dim);margin-top:14px}
-.vcap{position:absolute;left:0;right:0;bottom:60px;text-align:center;z-index:5;font-family:var(--font-mono);font-size:14px;letter-spacing:.08em;color:var(--court-sage-lt)}
 
-/* 4 · What is RealPage — product cards */
+/* 3 · What is RealPage — product cards */
 .s-prod{background:linear-gradient(180deg,#101318,#0C0E12);color:var(--txt)}
-.s-prod .orb.a{width:520px;height:520px;left:50%;top:-190px;transform:translateX(-50%);background:rgba(94,126,99,.15);animation:float1 18s ease-in-out infinite}
+.s-prod .vhead .logo-line{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:12px}
+.s-prod .vhead .logo-line .rp-wm{font-size:30px}
 .prodrow{position:absolute;left:0;right:0;top:60%;transform:translateY(-50%);display:flex;align-items:stretch;justify-content:center;gap:26px;z-index:3}
-.pcard{width:382px;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.pcard{width:392px;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
 .pcard.ai{border-color:var(--court-sage);box-shadow:0 0 50px rgba(94,126,99,.18)}
 .pcard .ptop{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.pcard .pname{font-family:var(--font-legal);font-size:28px;font-weight:700}
+.pcard .pname{font-family:var(--font-legal);font-size:27px;font-weight:700}
 .pcard .pbadge{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--txt-dim)}
 .pcard .pbadge.ai{background:rgba(94,126,99,.18);color:var(--court-sage-lt)}
 .pcard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-.pcard li{font-size:16px;color:var(--txt);padding-left:22px;position:relative;line-height:1.35}
+.pcard li{font-size:15.5px;color:var(--txt);padding-left:22px;position:relative;line-height:1.35}
 .pcard li::before{content:"›";position:absolute;left:0;color:var(--court-sage-lt);font-weight:700}
 .pevo{align-self:center;font-size:34px;color:var(--court-sage-lt)}
 
-/* 5 · How it works — flow diagram */
+/* 4 · How it works — the cycle */
 .s-flow{background:linear-gradient(180deg,#0E1217,#0A0D11);color:var(--txt)}
 .s-flow .grid{position:absolute;inset:0;z-index:0;opacity:.5;background-image:linear-gradient(rgba(94,126,99,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(94,126,99,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at 50% 55%,#000,transparent 78%)}
-.s-flow .head{position:absolute;left:84px;top:60px;z-index:5}
-.s-flow .head .kicker{color:var(--court-sage-lt)}
-.s-flow .head h2{font-family:var(--font-legal);font-size:34px;margin:12px 0 0;font-weight:700}
-.wires{position:absolute;inset:0;z-index:1}
-.wires path{fill:none;stroke-linecap:round}
-.wire-base{stroke:rgba(139,168,143,.20);stroke-width:2}
-.wire-flow{stroke:var(--court-sage-lt);stroke-width:2.4;stroke-dasharray:2 12;opacity:.95}
-.s-flow.active .wire-flow{animation:dash 1s linear infinite}
+.cyc{position:absolute;inset:0;z-index:1}
+.cyc path{fill:none;stroke:var(--court-sage-lt);stroke-width:2.6;stroke-dasharray:3 11}
+.s-flow.active .cyc path{animation:dash 1s linear infinite}
 @keyframes dash{to{stroke-dashoffset:-14}}
-.lord{position:absolute;width:212px;z-index:4;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:12px;padding:13px 16px}
-.lord .nm{font-family:var(--font-ui);font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
-.lord .nm .lk{font-size:12px;color:var(--court-sage-lt)}
-.lord .dt{font-family:var(--font-mono);font-size:11px;color:var(--txt-dim);margin-top:5px;line-height:1.4}
-.core{position:absolute;left:560px;top:300px;width:160px;height:130px;z-index:5;border-radius:16px;background:linear-gradient(160deg,#22303f,#15202c);border:1px solid var(--court-sage);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 50px rgba(94,126,99,.25)}
-.core .ring{position:absolute;inset:0;border-radius:16px;border:1px solid var(--court-sage-lt)}
-.slide.active .core .ring{animation:pulse 2.6s ease-out infinite}
-.slide.active .core .ring.d{animation-delay:1.3s}
-@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.4);opacity:0}}
-.core .ttl{font-family:var(--font-ui);font-weight:800;font-size:20px;letter-spacing:.02em}
-.core .sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--court-sage-lt);margin-top:4px}
-.price{position:absolute;left:952px;top:312px;width:248px;z-index:5;background:linear-gradient(160deg,#1c2420,#141815);border:1px solid var(--court-sage);border-radius:12px;padding:16px 18px;box-shadow:0 22px 50px rgba(0,0,0,.5)}
-.price .pl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--court-sage-lt)}
-.price .pv{font-family:var(--font-legal);font-size:38px;color:#fff;line-height:1;margin:8px 0}
-.price .pn{font-family:var(--font-mono);font-size:11px;color:var(--txt-dim);line-height:1.4}
-.flow-cap{position:absolute;left:84px;bottom:54px;z-index:5;font-family:var(--font-mono);font-size:14px;letter-spacing:.04em;color:var(--txt-dim)}
+.cnode{position:absolute;top:280px;width:250px;z-index:4;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:16px;padding:22px 24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.cnode.rp{border-color:var(--court-sage);box-shadow:0 0 50px rgba(94,126,99,.2)}
+.cnode .ci{font-size:40px;line-height:1}
+.cnode .ct{font-family:var(--font-ui);font-weight:800;font-size:19px;margin-top:10px}
+.cnode .ct .rp-wm{font-size:21px}
+.cnode .cs{font-family:var(--font-mono);font-size:11px;color:var(--txt-dim);margin-top:8px;line-height:1.45}
+.cyc-lab{position:absolute;z-index:4;font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;text-align:center;color:var(--court-sage-lt)}
+.cyc-lab.top{top:138px;left:0;right:0}
+.cyc-lab.bot{bottom:150px;left:0;right:0;color:var(--txt-dim)}
+.flow-cap{position:absolute;left:0;right:0;bottom:54px;text-align:center;z-index:5;font-family:var(--font-mono);font-size:14px;letter-spacing:.04em;color:var(--txt-dim)}
 .flow-cap b{color:var(--court-sage-lt);font-weight:500}
+/* linear flow (inputs → algorithm → recommendations) */
+.s-lflow{background:linear-gradient(180deg,#0E1217,#0A0D11);color:var(--txt)}
+.s-lflow .grid{position:absolute;inset:0;z-index:0;opacity:.5;background-image:linear-gradient(rgba(94,126,99,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(94,126,99,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at 50% 55%,#000,transparent 78%)}
+.lflow{position:absolute;left:0;right:0;top:55%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;gap:22px;z-index:3}
+.lstack{position:relative;width:262px;height:176px}
+.lcard{position:absolute;inset:0;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.lcard.c3{transform:translate(-30px,-26px);opacity:.32}
+.lcard.c2{transform:translate(-15px,-13px);opacity:.6}
+.lcard.c1{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 22px}
+.lstack .li{font-size:42px;line-height:1}
+.lstack .lt{font-family:var(--font-ui);font-weight:800;font-size:18px;margin-top:12px;color:#fff}
+.lstack .ls{font-family:var(--font-mono);font-size:11.5px;color:var(--txt-dim);margin-top:8px;line-height:1.5}
+.lstack-tag{position:absolute;bottom:-30px;left:-30px;right:0;text-align:center;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--court-sage-lt)}
+.lnode{width:262px;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:18px;padding:26px 22px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.lnode.hub{border-color:var(--court-sage);box-shadow:0 0 50px rgba(94,126,99,.2)}
+.lnode .li{font-size:42px;line-height:1}
+.lnode .lt{font-family:var(--font-ui);font-weight:800;font-size:18px;margin-top:12px;color:#fff}
+.lnode .ls{font-family:var(--font-mono);font-size:11.5px;color:var(--txt-dim);margin-top:8px;line-height:1.5}
+.larrow{align-self:center;font-size:32px;color:var(--court-sage-lt)}
 
-/* 6 · The problem — lockstep */
+/* 5 · The problem — lockstep */
 .s-lock{background:linear-gradient(180deg,#101318,#0C0E12);color:var(--txt)}
 .s-lock .txt{position:absolute;left:84px;top:0;bottom:0;width:500px;display:flex;flex-direction:column;justify-content:center;z-index:3}
 .s-lock .kicker{color:var(--court-sage-lt);margin-bottom:18px}
 .s-lock h2{font-family:var(--font-legal);font-size:46px;line-height:1.12;margin:0 0 18px;font-weight:700}
 .s-lock h2 .red{color:#d98a8c}
-.s-lock .lede{font-family:var(--font-mono);font-size:15px;letter-spacing:.04em;color:var(--court-sage-lt);margin-bottom:24px}
-.conseq{display:flex;flex-direction:column;gap:13px}
-.conseq .c{display:flex;align-items:center;gap:13px;font-size:18px;font-weight:600;color:var(--txt)}
-.conseq .c .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:16px;flex:none;background:rgba(155,34,38,.16);color:#e0908f}
+.s-lock .lede{font-family:var(--font-mono);font-size:14px;letter-spacing:.03em;color:var(--court-sage-lt);margin-bottom:22px;line-height:1.6}
+.conseq{display:flex;flex-direction:column;gap:12px}
+.conseq .c{display:flex;align-items:center;gap:13px;font-size:17px;font-weight:600;color:var(--txt)}
+.conseq .c .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:15px;flex:none;background:rgba(155,34,38,.16);color:#e0908f}
 .conseq .c.up .ic{background:rgba(238,173,14,.15);color:var(--doj-gold-lt)}
-.cartel{margin-top:24px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.cartel span{padding:6px 11px;border-radius:7px;background:rgba(255,255,255,.06);color:var(--txt-dim)}
-.cartel .hot{background:rgba(155,34,38,.18);color:#e0908f}
-.chart{position:absolute;right:90px;top:180px;width:540px;height:360px;z-index:3;background:linear-gradient(165deg,#151920,#0F1217);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.frame-note{margin-top:22px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.03em;color:var(--court-slate-2);line-height:1.6;max-width:440px}
+.frame-note b{color:var(--court-sage-lt);font-weight:500}
+.chart{position:absolute;right:84px;top:150px;width:540px;height:420px;z-index:3;background:linear-gradient(165deg,#151920,#0F1217);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.chart .cimg{width:100%;height:170px;object-fit:cover;opacity:.5;filter:grayscale(.5)}
+.chart .cbody{padding:18px 24px;position:relative}
 .chart .ct{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-dim);display:flex;justify-content:space-between}
-.chart svg{position:absolute;left:0;top:34px;width:100%;height:300px}
+.chart svg{width:100%;height:180px;margin-top:8px;display:block}
 .ln-draw{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:640;stroke-dashoffset:640}
 .s-lock.active .ln-draw{animation:drawL 1.5s .5s var(--e-out) forwards}
 .s-lock.active .ln-draw.b{animation-delay:.75s}
 @keyframes drawL{to{stroke-dashoffset:0}}
-.dotp{opacity:0}
-.s-lock.active .dotp{animation:fadeIn .4s 1.8s forwards}
 
-/* 7 · Why it matters — DOJ vs RealPage */
+/* 6 · Why it matters — image split + quotes */
 .s-why{background:linear-gradient(180deg,#0E1116,#0B0D11);color:var(--txt)}
-.s-why .frame{position:absolute;left:84px;top:150px;z-index:4;font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--txt-dim)}
-.s-why .frame b{color:var(--court-sage-lt);font-weight:500}
-.duel{position:absolute;left:84px;right:84px;top:196px;height:330px;display:flex;border:1px solid var(--line);border-radius:16px;overflow:hidden;z-index:3;box-shadow:0 30px 70px rgba(0,0,0,.45)}
-.duel .side{flex:1;padding:34px 38px;display:flex;flex-direction:column;justify-content:center}
-.duel .L{background:linear-gradient(160deg,var(--doj-navy),var(--doj-navy-2));color:#EFE9DA}
-.duel .R{background:linear-gradient(160deg,#fff,var(--rp-mist));color:var(--rp-charcoal)}
-.duel .seam{width:2px;background:var(--court-sage)}
-.duel .who{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
-.duel .L .who{color:var(--doj-gold-lt)}
-.duel .R .who{color:var(--rp-coral)}
-.duel .quote{font-family:var(--font-legal);font-size:23px;line-height:1.34}
-.duel .R .quote{font-style:italic}
-.landmark{position:absolute;left:84px;right:84px;bottom:48px;text-align:center;z-index:3;font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;color:var(--court-sage-lt)}
+.s-why .vhead h2{font-size:38px}
+.imgsplit{position:absolute;left:84px;right:84px;top:140px;height:248px;display:flex;align-items:stretch;gap:0;z-index:3}
+.imgcell{flex:1;position:relative;border:1px solid var(--line);overflow:hidden;background:#15181d}
+.imgcell:first-child{border-radius:14px 0 0 14px}
+.imgcell:last-child{border-radius:0 14px 14px 0;border-color:var(--court-sage)}
+.imgcell img{width:100%;height:100%;object-fit:cover;filter:grayscale(.6) contrast(1.05);opacity:.85}
+.imgcell:last-child img{filter:none}
+.imgcell .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,14,.92),rgba(8,10,14,.15) 60%)}
+.imgcell .lab{position:absolute;left:20px;bottom:16px;right:20px}
+.imgcell .tg{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--court-sage-lt)}
+.imgcell .tx{font-family:var(--font-legal);font-size:19px;margin-top:5px;color:#fff}
+.imgeq{position:absolute;left:calc(50% - 26px);top:238px;z-index:5;width:52px;height:52px;border-radius:50%;background:#0B0D11;border:1px solid var(--court-sage);display:grid;place-items:center;font-family:var(--font-legal);font-size:26px;color:var(--court-sage-lt)}
+.qbar{position:absolute;left:84px;right:84px;top:410px;display:flex;gap:20px;z-index:3}
+.qcell{flex:1;border-radius:14px;padding:18px 22px}
+.qcell.doj{background:linear-gradient(160deg,var(--doj-navy),var(--doj-navy-2));color:#EFE9DA}
+.qcell.rp{background:linear-gradient(160deg,#fff,var(--rp-mist));color:var(--rp-charcoal)}
+.qcell .who{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.qcell.doj .who{color:var(--doj-gold-lt)}
+.qcell.rp .who{color:var(--rp-coral)}
+.qcell .qt{font-family:var(--font-legal);font-size:18px;line-height:1.32}
+.qcell.rp .qt{font-style:italic}
+.landmark{position:absolute;left:84px;right:84px;bottom:42px;text-align:center;z-index:3;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.05em;color:var(--court-sage-lt)}
 .landmark b{color:#fff;font-weight:500}
 
-/* 8 · Timeline (incomplete) */
+/* 7 · Timeline (incomplete) */
 .s-time{background:var(--court-paper);color:var(--court-ink)}
 .s-time .head{position:absolute;left:84px;top:54px;z-index:5}
 .s-time .head .kicker{color:var(--court-sage)}
@@ -231,14 +225,15 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .node .stem{position:absolute;left:-1px;width:2px;background:var(--court-paper-2)}
 .node.up .stem{bottom:7px;height:52px}
 .node.dn .stem{top:7px;height:52px}
-.node .card{position:absolute;width:172px;left:-86px;text-align:center}
+.node .card{position:absolute;width:176px;left:-88px;text-align:center}
 .node.up .card{bottom:66px}
 .node.dn .card{top:66px}
 .node .yr{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--court-sage)}
-.node .lb{font-family:var(--font-ui);font-size:13.5px;color:var(--court-ink);line-height:1.35;margin-top:4px}
+.node .lb{font-family:var(--font-ui);font-size:13px;color:var(--court-ink);line-height:1.32;margin-top:4px}
 .node .lb b{font-weight:700}
+.node .plogo{height:15px;margin-top:6px;opacity:.85}
 
-/* ============================ CHROME ============================ */
+/* ===================== CHROME ===================== */
 .chrome{position:fixed;inset:0;pointer-events:none;z-index:70;font-family:var(--font-mono)}
 .chrome .part{position:absolute;left:26px;bottom:22px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-dim)}
 .chrome .part b{color:var(--court-sage-lt);font-weight:500}
@@ -259,11 +254,261 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .fs-btn.hidden{opacity:0;pointer-events:none;transform:scale(.9)}
 .hint{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);z-index:70;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--txt-dim);background:rgba(8,10,14,.7);padding:7px 14px;border-radius:999px;border:1px solid var(--line);transition:opacity .6s;pointer-events:none}
 .hint.hide{opacity:0}
+/* ===================== PART BARS (by section) ===================== */
+[data-part="us"] .pbar{background:var(--doj-gold)}
+[data-part="realpage"] .pbar{background:var(--rp-grad)}
+
+/* ===================== PART II · DOJ placeholder divider ===================== */
+.s-doj{background:linear-gradient(160deg,var(--doj-navy),var(--doj-navy-2));color:#EFE9DA}
+.s-doj .inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2;padding:0 100px}
+.s-doj .dnum{font-family:var(--font-mono);font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--doj-gold-lt);margin-bottom:20px}
+.s-doj h2{font-family:var(--font-legal);font-size:52px;font-weight:700;margin:0;line-height:1.12;color:#fff}
+.s-doj .dsub{font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;color:var(--doj-blue-lt);margin-top:22px;line-height:1.7}
+.s-doj .seal2{position:absolute;right:-70px;bottom:-90px;width:380px;opacity:.09;z-index:1}
+
+/* ===================== PART III · RealPage (light / defense) ===================== */
+.rp-bg{
+  background:
+    radial-gradient(700px 460px at 98% -10%,rgba(255,138,61,.09),transparent 56%),
+    radial-gradient(560px 380px at -5% 108%,rgba(255,77,109,.07),transparent 55%),
+    linear-gradient(165deg,#FFFFFF,var(--rp-mist));
+  color:var(--rp-charcoal)
+}
+.rp-bg .blob{position:absolute;right:-80px;top:-80px;width:520px;height:520px;border-radius:50%;background:var(--rp-grad);opacity:.13;filter:blur(12px);z-index:0}
+.rp-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(255,77,109,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,77,109,.04) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 65% 42%,rgba(0,0,0,.6),transparent 70%)}
+.rp-bg-icon{position:absolute;right:80px;top:50%;transform:translateY(-52%);width:300px;height:300px;color:rgba(255,77,109,.11);z-index:1;pointer-events:none}
+.rp-bg-icon svg{width:100%;height:100%}
+.rphead{position:absolute;left:84px;top:54px;z-index:5;max-width:760px}
+.rphead .rk{font-family:var(--font-mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--rp-coral);margin-bottom:12px}
+.rphead h2{font-family:var(--font-ui);font-weight:800;font-size:44px;letter-spacing:-.014em;color:var(--rp-charcoal);margin:0;line-height:1.08}
+.rp-foot{position:absolute;left:84px;right:84px;bottom:54px;text-align:center;font-family:var(--font-mono);font-size:13px;letter-spacing:.02em;color:var(--rp-slateblue);z-index:4}
+.rp-open{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 90px;z-index:3}
+.rp-open .hi{font-family:var(--font-mono);font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--rp-slateblue);margin-bottom:18px}
+.rp-open .big{font-size:80px;line-height:1;margin-bottom:20px}
+.rp-open .ln2{font-family:var(--font-ui);font-size:23px;font-weight:600;color:var(--rp-charcoal);max-width:780px;line-height:1.35}
+.rp-open .tag{font-family:var(--font-legal);font-style:italic;font-size:18px;color:var(--rp-slateblue);margin-top:22px}
+.statute{border:1px solid rgba(43,45,51,.16);border-left:4px solid var(--rp-coral);background:rgba(255,255,255,.72);border-radius:10px;padding:22px 26px;box-shadow:0 16px 44px rgba(43,45,51,.08)}
+.statute .sn{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rp-coral)}
+.statute .sq{font-family:var(--font-legal);font-style:italic;font-size:21px;line-height:1.4;margin-top:10px}
+.rp-point{position:absolute;left:84px;z-index:4}
+.rp-li{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;line-height:1.42;color:var(--rp-charcoal);margin-top:14px}
+.rp-li .b{width:22px;height:22px;border-radius:6px;flex:none;display:grid;place-items:center;background:rgba(255,77,109,.14);color:var(--rp-coral);font-size:12px;font-weight:700;margin-top:1px}
+.rp-li b{font-weight:700}
+.bubbles{position:absolute;z-index:4;display:flex;flex-direction:column;gap:16px}
+.bubble{align-self:flex-start;background:#fff;border:1px solid rgba(43,45,51,.12);border-radius:16px 16px 16px 5px;padding:14px 20px;box-shadow:0 14px 34px rgba(43,45,51,.1);font-family:var(--font-legal);font-style:italic;font-size:19px;color:var(--rp-charcoal);max-width:560px}
+.bubble.two{align-self:flex-start;margin-left:40px}
+.rp-cards{position:absolute;left:84px;right:84px;display:flex;gap:18px;z-index:4}
+.rp-c{flex:1;background:#fff;border:1px solid rgba(43,45,51,.1);border-radius:14px;padding:20px 22px;box-shadow:0 20px 52px rgba(43,45,51,.11)}
+.rp-c .cn{font-family:var(--font-mono);font-size:11px;color:var(--rp-coral);letter-spacing:.1em;text-transform:uppercase}
+.rp-c .ct{font-family:var(--font-ui);font-weight:800;font-size:16.5px;color:var(--rp-charcoal);margin:8px 0 6px}
+.rp-c .cd{font-size:13.5px;color:#555;line-height:1.45}
+.paths{position:absolute;left:84px;right:84px;top:236px;display:flex;flex-direction:column;gap:18px;z-index:3}
+.path{border-radius:14px;padding:22px 28px;font-family:var(--font-ui);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:space-between}
+.path.bad{background:rgba(43,45,51,.05);border:1px dashed rgba(43,45,51,.3);color:var(--rp-slateblue)}
+.path.bad span{text-decoration:line-through}
+.path.good{background:var(--rp-grad);color:#fff;box-shadow:0 18px 44px rgba(255,77,109,.22)}
+.rp-toc{position:absolute;left:84px;right:84px;top:158px;display:flex;gap:26px;z-index:3}
+.rp-toc .col{flex:1;background:#fff;border:1px solid rgba(43,45,51,.1);border-radius:16px;padding:26px 28px;box-shadow:0 18px 44px rgba(43,45,51,.07)}
+.rp-toc .col.on{border-color:var(--rp-coral);box-shadow:0 0 0 1px var(--rp-coral),0 18px 44px rgba(255,77,109,.12)}
+.rp-toc .ph{font-family:var(--font-ui);font-weight:800;font-size:19px;color:var(--rp-charcoal);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rp-toc .ph .pt{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--rp-coral);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.rp-toc .col.off .ph{color:var(--rp-slateblue)}
+.rp-toc ul{list-style:none;margin:16px 0 0;padding:0}
+.rp-toc li{font-size:15px;color:#444;padding:7px 0 7px 20px;position:relative}
+.rp-toc li::before{content:"";position:absolute;left:0;top:14px;width:8px;height:8px;border-radius:50%;background:var(--rp-coral)}
+.rp-toc .col.off li::before{background:var(--rp-slateblue);opacity:.5}
+.wheel text{dominant-baseline:middle}
+
+/* ===================== PART IV · Conclusion ===================== */
+.tl-legend{position:absolute;right:84px;top:60px;z-index:5;display:flex;gap:18px;font-family:var(--font-mono);font-size:11px;color:var(--court-slate)}
+.tl-legend span{display:flex;align-items:center;gap:6px}
+.tl-legend i{width:10px;height:10px;border-radius:50%}
+.node.parallel .pt{background:var(--rp-coral);box-shadow:0 0 0 1px var(--rp-coral)}
+.node.outcome .pt{background:var(--doj-gold);box-shadow:0 0 0 1px var(--doj-gold)}
+.node.parallel .yr{color:var(--rp-coral)}
+.node.outcome .yr{color:#a9791a}
+.s-time.full .axis{left:100px;width:1080px}
+.s-time.full .node .card{width:120px;left:-60px}
+.s-time.full .node .lb{font-size:10.5px;margin-top:3px;line-height:1.3}
+.s-time.full .node .yr{font-size:11px}
+.s-sum{background:var(--court-paper);color:var(--court-ink)}
+.s-sum .head{position:absolute;left:84px;top:46px;z-index:5}
+.s-sum .head .kicker{font-family:var(--font-mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--court-sage)}
+.s-sum .head h2{font-family:var(--font-legal);font-size:32px;margin:10px 0 0;font-weight:700;color:var(--court-ink)}
+.sumrow{position:absolute;left:84px;right:84px;top:120px;display:flex;border-radius:16px;overflow:hidden;border:1px solid var(--court-paper-2);box-shadow:0 24px 60px rgba(0,0,0,.12);z-index:3}
+.sumcol{flex:1;padding:26px 30px}
+.sumcol.doj{background:linear-gradient(160deg,var(--doj-navy),var(--doj-navy-2));color:#EFE9DA}
+.sumcol.rp{background:linear-gradient(160deg,#fff,var(--rp-mist));color:var(--rp-charcoal)}
+.sumcol .sh{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.sumcol.doj .sh{color:var(--doj-gold-lt)}
+.sumcol.rp .sh{color:var(--rp-coral)}
+.sumcol .row{margin-bottom:13px;font-size:14px;line-height:1.45}
+.sumcol .row b{font-weight:700}
+.sumcol.doj .row b{color:#fff}
+.seam2{width:2px;background:var(--court-sage)}
+.outcome-banner{position:absolute;left:84px;right:84px;bottom:44px;z-index:3;background:var(--court-ink);color:var(--court-paper);border-radius:12px;padding:16px 26px;display:flex;align-items:center;gap:18px;font-family:var(--font-mono);font-size:12.5px;line-height:1.5}
+.outcome-banner .ob-t{font-family:var(--font-legal);font-style:italic;color:var(--court-sage-lt);font-size:15px;white-space:nowrap}
+.s-thanks{background:radial-gradient(900px 520px at 50% 120%,rgba(94,126,99,.12),transparent 60%),linear-gradient(160deg,#15181D,#0A0D11);color:var(--txt)}
+.s-thanks .inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2}
+.s-thanks h2{font-family:var(--font-legal);font-size:64px;font-weight:700;margin:0}
+.s-thanks p{font-family:var(--font-mono);font-size:15px;letter-spacing:.06em;color:var(--txt-dim);margin-top:22px}
+.s-thanks .lock2{display:flex;align-items:center;gap:18px;margin-top:36px}
+.s-thanks .lock2 img{height:42px;opacity:.85}
+.s-thanks .lock2 .rp-wm{font-size:26px}
+.s-thanks .lock2 .vs{font-family:var(--font-legal);font-style:italic;font-size:18px;color:var(--txt-dim)}
+
+/* ===================== EXTRA AMBIENT DETAIL ===================== */
+/* cycle data packets (offset-path) */
+.pkt{position:absolute;left:0;top:0;width:9px;height:9px;border-radius:50%;z-index:3;opacity:.95;will-change:offset-distance}
+.pkt.top{background:#8BA88F;box-shadow:0 0 7px rgba(139,168,143,.9);offset-path:path("M340 322 C540 206 740 206 940 322")}
+.pkt.bot{background:#cdbf9a;box-shadow:0 0 7px rgba(205,191,154,.8);offset-path:path("M940 398 C740 514 540 514 340 398")}
+.s-flow.active .pkt{animation:travel 2.6s linear infinite}
+.pkt.d2{animation-delay:-.87s}.pkt.d3{animation-delay:-1.73s}
+@keyframes travel{from{offset-distance:0%}to{offset-distance:100%}}
+/* lockstep convergence band + end dots */
+.lock-band{opacity:0}
+.s-lock.active .lock-band{animation:fadeIn .8s 1.7s forwards}
+.enddot{opacity:0}
+.s-lock.active .enddot{animation:fadeIn .45s 1.9s forwards}
+/* timeline node ping — key events only */
+.node.key .pt::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--court-sage);opacity:0;pointer-events:none}
+.node.key.outcome .pt::after{border-color:var(--doj-gold)}
+.s-time.active .node.key .pt::after{animation:ping 2.6s ease-out infinite;animation-delay:var(--d,.6s)}
+@keyframes ping{0%{transform:scale(.5);opacity:.65}100%{transform:scale(3);opacity:0}}
+/* title icon gentle float */
+.s-title.active .bg-icon{animation:iconFloat 11s ease-in-out infinite alternate}
+@keyframes iconFloat{from{transform:translateY(-52%)}to{transform:translateY(-48%)}}
+/* "=" pulse ring */
+.imgeq::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1px solid var(--court-sage-lt);opacity:0;pointer-events:none}
+.s-why.active .imgeq::after{animation:ping 3s ease-out infinite 1s}
+/* Ken Burns on photos */
+@keyframes ken{from{transform:scale(1.03)}to{transform:scale(1.12)}}
+.imgcell img{animation:ken 16s ease-in-out infinite alternate}
+.imgcell:last-child img{animation-duration:19s}
+.bg-photo{animation:ken 26s ease-in-out infinite alternate}
+.chart .cimg{animation:ken 20s ease-in-out infinite alternate}
+/* hover micro-interactions */
+.pcard{transition:box-shadow .25s,border-color .25s}
+.pcard:hover{border-color:var(--court-sage);box-shadow:0 0 44px rgba(94,126,99,.22),0 24px 60px rgba(0,0,0,.5)}
+.cnode{transition:box-shadow .25s,border-color .25s}
+.cnode:hover{border-color:var(--court-sage-lt)}
+.qcell{transition:filter .25s}
+.qcell:hover{filter:brightness(1.05)}
+
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:opacity .2s linear!important}
-  .slide [data-anim],.slide [data-fragment],.reveal .ln>i{opacity:1!important;transform:none!important;filter:none!important}
+  .slide [data-anim],.reveal .ln>i{opacity:1!important;transform:none!important}
   .ln-draw{stroke-dashoffset:0!important}
+  .lock-band,.enddot{opacity:1!important}
+  .pkt,.bpkt{display:none!important}
 }
+
+/* === S4 · Branched input flow === */
+.bsvg{position:absolute;inset:0;z-index:2;pointer-events:none}
+.bnode{position:absolute;background:linear-gradient(160deg,#181C22,#12151A);border:1px solid var(--line);border-radius:14px;padding:16px 20px;text-align:center;box-shadow:0 16px 40px rgba(0,0,0,.4);z-index:4}
+.bnode .bi{font-size:28px;line-height:1}
+.bnode .bt{font-family:var(--font-ui);font-weight:800;font-size:14px;margin-top:9px;color:#fff;line-height:1.25}
+.bnode .bs{font-family:var(--font-mono);font-size:10.5px;color:var(--txt-dim);margin-top:5px;line-height:1.4}
+.bnode.hub{border-color:var(--court-sage);box-shadow:0 0 50px rgba(94,126,99,.22);padding:22px 24px}
+.bnode.out{border-color:rgba(201,162,39,.45)}
+.bpkt{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:50%;z-index:5;opacity:.95;will-change:offset-distance}
+.bpkt.b1{background:#8BA88F;box-shadow:0 0 7px rgba(139,168,143,.85);offset-path:path("M 264 273 C 390 273 440 408 530 408")}
+.bpkt.b2{background:#8BA88F;box-shadow:0 0 7px rgba(139,168,143,.85);offset-path:path("M 264 408 L 530 408")}
+.bpkt.b3{background:#8BA88F;box-shadow:0 0 7px rgba(139,168,143,.85);offset-path:path("M 264 543 C 390 543 440 408 530 408")}
+.bpkt.b4a{background:#EEAD0E;box-shadow:0 0 7px rgba(238,173,14,.75);offset-path:path("M 700 408 C 840 408 880 273 1026 273")}
+.bpkt.b4b{background:#EEAD0E;box-shadow:0 0 7px rgba(238,173,14,.75);offset-path:path("M 700 408 L 1026 408")}
+.bpkt.b4c{background:#EEAD0E;box-shadow:0 0 7px rgba(238,173,14,.75);offset-path:path("M 700 408 C 840 408 880 543 1026 543")}
+.s-lflow.active .bpkt{animation:travel 1.6s linear infinite}
+.bpkt.bd2{animation-delay:-.53s}.bpkt.bd3{animation-delay:-1.07s}
+.s-lflow .bpath{fill:none;stroke:#8BA88F;stroke-width:2;stroke-dasharray:5 9;opacity:.45}
+.s-lflow .bpath-out{fill:none;stroke:var(--doj-gold);stroke-width:2.5;stroke-dasharray:5 9;opacity:.55}
+.s-lflow.active .bpath{animation:dash 1.2s linear infinite}
+.s-lflow.active .bpath-out{animation:dash .9s linear infinite}
+
+/* === S13 · Civil vs Criminal images === */
+.civil-imgs{position:absolute;left:84px;right:84px;top:148px;height:248px;display:flex;gap:14px;z-index:3}
+.civil-cell{flex:1;position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.civil-cell img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) contrast(1.05);opacity:.8;animation:ken 18s ease-in-out infinite alternate}
+.civil-cell .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,6,10,.9),rgba(4,6,10,.15) 65%)}
+.civil-cell .lab{position:absolute;left:16px;bottom:14px}
+.civil-cell .tg{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--txt-dim);text-transform:uppercase}
+.civil-cell .tx{font-family:var(--font-legal);font-size:17px;margin-top:5px;color:#fff}
+.civil-cell.bad img{filter:grayscale(.25) sepia(.2) contrast(1.08);opacity:.78}
+.civil-cell.good{border-color:var(--court-sage);box-shadow:0 0 28px rgba(94,126,99,.22)}
+.civil-next{position:absolute;left:84px;right:84px;bottom:52px;z-index:4;font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--court-sage-lt);display:flex;align-items:center;gap:10px}
+.civil-next b{color:var(--txt);font-weight:500}
+
+/* === S16 · No-rim diagram === */
+.no-rim{position:absolute;left:84px;right:84px;bottom:54px;z-index:4;display:flex;align-items:center;justify-content:center;gap:10px}
+.nr-n{background:rgba(255,255,255,.06);border:1px solid rgba(91,107,140,.38);border-radius:9px;padding:8px 14px;font-family:var(--font-mono);font-size:11px;color:var(--rp-slateblue);white-space:nowrap}
+.nr-x{font-size:20px;color:#9B2226;opacity:.7;padding:0 3px}
+.nr-eq{font-family:var(--font-mono);font-size:13px;color:var(--rp-slateblue);padding:0 6px}
+.nr-r{background:rgba(155,34,38,.08);border:1px solid rgba(155,34,38,.28);border-radius:9px;padding:8px 16px;font-family:var(--font-mono);font-size:11px;color:#e08080}
+
+/* === Photo icon adjustments === */
+.s-title .bg-icon{overflow:hidden;border-radius:50%}
+.s-title .bg-icon img{width:100%;height:100%;object-fit:cover;opacity:.22;filter:grayscale(.3) contrast(1.1)}
+.s-title.active .bg-icon img{animation:ken 20s ease-in-out infinite alternate}
+.rp-bg-icon img{width:100%;height:100%;object-fit:cover;border-radius:22px;opacity:.2;filter:saturate(.6)}
+.slide.active .rp-bg-icon{animation:iconFloat 13s ease-in-out infinite alternate}
+.slide.active .rp-bg-icon img{animation:ken 22s ease-in-out infinite alternate}
+
+/* === Part III — full-slide layout === */
+.rp-toc{top:152px;bottom:70px;align-items:stretch}
+.rp-toc .col{display:flex;flex-direction:column}
+.rp-toc ul{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.rp-toc li{border-top:1px solid rgba(43,45,51,.07);padding:10px 0 10px 20px}
+.rp-c{padding:22px 24px}
+/* Tall aside: spans header-to-footer on right side */
+.rp-aside-tall{position:absolute;right:84px;top:148px;bottom:68px;width:420px;z-index:3;border-radius:14px;overflow:hidden;border:1px solid rgba(43,45,51,.1);box-shadow:0 20px 52px rgba(43,45,51,.1)}
+.rp-aside-tall img{width:100%;height:100%;object-fit:cover;filter:saturate(.65) contrast(1.05);opacity:.9;animation:ken 20s ease-in-out infinite alternate}
+.rp-aside-tall .ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(246,244,241,.96) 32%,rgba(246,244,241,.1) 70%)}
+.rp-aside-tall .lab{position:absolute;left:18px;top:50%;transform:translateY(-50%)}
+.rp-aside-tall .tg{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:var(--rp-slateblue);text-transform:uppercase}
+.rp-aside-tall .tx{font-family:var(--font-ui);font-weight:800;font-size:22px;color:var(--rp-charcoal);margin-top:8px;line-height:1.2}
+/* S11 opening stats */
+.rp-stat-row{display:flex;gap:52px;margin-top:52px}
+.rs{display:flex;flex-direction:column;gap:5px}
+.rv{font-family:var(--font-ui);font-weight:800;font-size:54px;background:var(--rp-grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.rl{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--rp-slateblue);text-transform:uppercase}
+/* Left-column variant for statute/point */
+.left-col{left:84px!important;right:auto!important;width:580px!important}
+/* Fill-bar: visual accent between sections */
+.rp-fill-bar{position:absolute;left:84px;right:84px;z-index:3;border-radius:12px;padding:16px 22px;background:rgba(255,77,109,.06);border:1px solid rgba(255,77,109,.14);display:flex;align-items:center;gap:16px;font-family:var(--font-mono);font-size:12.5px;color:var(--rp-slateblue)}
+.rp-fill-bar b{color:var(--rp-coral);font-weight:500}
+.rp-fill-bar .fi{font-size:20px;flex:none}
+
+/* === Part III aside photo panel (fills empty bottom-right) === */
+.rp-aside{position:absolute;right:84px;bottom:68px;width:360px;height:210px;z-index:3;border-radius:14px;overflow:hidden;border:1px solid rgba(43,45,51,.1);box-shadow:0 20px 52px rgba(43,45,51,.1)}
+.rp-aside img{width:100%;height:100%;object-fit:cover;filter:saturate(.65) contrast(1.05);opacity:.9;animation:ken 20s ease-in-out infinite alternate}
+.rp-aside .ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(246,244,241,.96) 30%,rgba(246,244,241,.1) 70%)}
+.rp-aside .lab{position:absolute;left:18px;top:50%;transform:translateY(-50%)}
+.rp-aside .tg{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:var(--rp-slateblue);text-transform:uppercase}
+.rp-aside .tx{font-family:var(--font-ui);font-weight:800;font-size:19px;color:var(--rp-charcoal);margin-top:7px;line-height:1.22}
+/* S12 defense horizontal cards */
+.def-stack{position:absolute;left:84px;right:84px;top:160px;bottom:88px;display:flex;flex-direction:column;gap:22px}
+.def-card{flex:1;border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:32px;border:1px solid rgba(43,45,51,.1)}
+.def-card.on{background:linear-gradient(135deg,rgba(94,126,99,.12) 0%,rgba(94,126,99,.04) 100%);border-color:rgba(94,126,99,.35)}
+.def-card.off{background:rgba(246,244,241,.55);border-color:rgba(43,45,51,.08)}
+.def-card .dc-num{font-family:var(--font-ui);font-weight:900;font-size:56px;line-height:1;min-width:60px;color:var(--rp-coral);opacity:.28}
+.def-card .dc-body{flex:1}
+.def-card .dc-head{font-family:var(--font-ui);font-weight:700;font-size:18px;color:var(--rp-charcoal);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.def-card.on .dc-head{color:var(--rp-charcoal)}
+.def-card .dc-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:rgba(94,126,99,.18);color:#5E7E63;padding:3px 9px;border-radius:20px}
+.def-card .dc-items{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--font-mono);font-size:12.5px;color:var(--rp-slateblue)}
+.def-card .dc-item{display:flex;align-items:center;gap:6px}
+.def-card .dc-item::before{content:'›';color:var(--rp-coral);font-weight:700}
+/* S22 conclusion sumcol photo gradient */
+.sumcol{position:relative;overflow:hidden}
+.sum-bg{position:absolute;left:0;right:0;bottom:0;height:52%;width:100%;object-fit:cover;object-position:center top;opacity:.28;filter:saturate(.55) contrast(1.05);pointer-events:none}
+.sum-fade{position:absolute;left:0;right:0;top:0;height:65%;pointer-events:none;z-index:1}
+.sumcol.doj .sum-fade{background:linear-gradient(to bottom,#1a2744 45%,transparent)}
+.sumcol.rp .sum-fade{background:linear-gradient(to bottom,#fff 45%,transparent)}
+.sumcol>.sh,.sumcol>.row{position:relative;z-index:2}
+/* Hub-and-spoke SVG animations */
+@keyframes spin-rim{to{stroke-dashoffset:-102}}
+@keyframes pulse-hub{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.75;transform:scale(1.12)}}
+@keyframes node-pulse{0%,100%{opacity:.65}50%{opacity:1}}
 </style>
 </head>
 <body>
@@ -271,187 +516,581 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 <div class="deck">
  <div class="stage" id="stage">
 
-  <!-- 1 · OPENING -->
-  <section class="slide p-court s-title" data-part="intro">
+  <!-- 1 · TITLE -->
+  <section class="slide s-title" data-part="intro">
     <div class="pbar"></div>
     <div class="glow"></div>
-    <div class="watermark" data-anim="seal" style="--d:.2s"></div>
+    <div class="bg-icon" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    </div>
     <div class="pad">
-      <div class="caption-block" data-anim="rise" style="--d:.15s">
-        <div class="court">In the United States District Court · M.D.N.C.</div>
-        <div class="v">United States of America<br><em>v.</em><br>RealPage, Inc.</div>
-        <div class="docket">No. 1:24-cv-00710 · Sherman Act §§ 1 &amp; 2<span class="cursor"></span></div>
-      </div>
-      <h1 data-anim="rise" style="--d:.4s">When an algorithm sets the rent.</h1>
-      <p class="sub" data-anim="rise" style="--d:.6s">Algorithmic price-fixing · the first major test</p>
-      <div class="tri">
-        <span class="chip court" data-anim="rise" style="--d:.8s">◆ Neutral · The Court</span>
-        <span class="chip doj" data-anim="rise" style="--d:.92s">◆ Prosecution · DOJ</span>
-        <span class="chip rp" data-anim="rise" style="--d:1.04s">◆ Defense · RealPage</span>
+      <div class="kicker" data-anim="rise" style="--d:.15s;color:var(--court-sage-lt);font-size:13px;letter-spacing:.2em;border:1px solid var(--court-sage);border-left:3px solid var(--court-sage);padding:10px 18px;display:inline-block;border-radius:4px;background:rgba(94,126,99,.08)">United States v. RealPage, Inc. · Antitrust</div>
+      <h1 data-anim="rise" style="--d:.35s">United States<br><em style="font-style:italic;color:var(--court-sage-lt)">v.</em><br>RealPage, Inc.</h1>
+      <div class="lockup" data-anim="rise" style="--d:.6s">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="Department of Justice" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <span class="vs">v.</span>
+        <span class="rp-wm">RealPage</span>
       </div>
     </div>
   </section>
 
   <!-- 2 · TABLE OF CONTENTS -->
-  <section class="slide p-court s-agenda" data-part="intro">
+  <section class="slide s-agenda" data-part="intro">
     <div class="pbar"></div>
     <div class="wm">⚖</div>
     <div class="pad">
       <div class="section-title" data-anim="left" style="--d:.1s">Contents</div>
       <h2 data-anim="rise" style="--d:.2s">Four parts</h2>
       <ul class="agenda">
-        <li class="current" data-anim="left" style="--d:.35s"><span class="accent"></span><span class="num">01</span><span class="name">Introduction</span><span class="desc">What &amp; why</span><span class="tag">You are here</span></li>
-        <li data-anim="left" style="--d:.48s"><span class="accent"></span><span class="num">02</span><span class="name">The United States</span><span class="desc">The case</span><span class="tag"></span></li>
-        <li data-anim="left" style="--d:.61s"><span class="accent"></span><span class="num">03</span><span class="name">RealPage</span><span class="desc">The defense</span><span class="tag"></span></li>
-        <li data-anim="left" style="--d:.74s"><span class="accent"></span><span class="num">04</span><span class="name">Conclusion</span><span class="desc">Outcome · timeline</span><span class="tag"></span></li>
+        <li class="current" data-anim="left" style="--d:.35s"><span class="accent"></span><span class="num">01</span><span class="name">Introduction</span><span class="tag">You are here</span></li>
+        <li data-anim="left" style="--d:.48s"><span class="accent"></span><span class="num">02</span><span class="name">Plaintiff's Case — DOJ</span><span class="tag"></span></li>
+        <li data-anim="left" style="--d:.61s"><span class="accent"></span><span class="num">03</span><span class="name">Defense — RealPage</span><span class="tag"></span></li>
+        <li data-anim="left" style="--d:.74s"><span class="accent"></span><span class="num">04</span><span class="name">Conclusion</span><span class="tag"></span></li>
       </ul>
     </div>
   </section>
 
-  <!-- 3 · CASE INTRODUCTION (divider) -->
-  <section class="slide p-court s-divider" data-part="intro">
+  <!-- 3 · WHAT IS REALPAGE -->
+  <section class="slide s-prod" data-part="intro">
     <div class="pbar"></div>
-    <div class="inner">
-      <div class="dnum" data-anim="fade" style="--d:.2s">Part 1</div>
-      <h2 class="reveal"><span class="ln" style="--i:0"><i>Case introduction</i></span></h2>
-      <p class="dsub" data-anim="rise" style="--d:.5s">the company · the software · the problem</p>
-      <div class="dline"></div>
-    </div>
-  </section>
-
-  <!-- 4 · WHAT IS REALPAGE -->
-  <section class="slide p-court s-prod" data-part="intro">
-    <div class="pbar"></div><div class="orb a"></div>
+    <img class="bg-photo" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="vhead center">
       <div class="kicker" data-anim="fade" style="--d:.1s">01 · What is RealPage?</div>
-      <h2 data-anim="rise" style="--d:.25s;font-size:36px">A multinational real-estate technology company</h2>
-      <div class="vsub" data-anim="rise" style="--d:.4s">provides software &amp; data analytics — for property owners &amp; managers</div>
+      <div class="logo-line" data-anim="rise" style="--d:.2s"><span class="rp-wm">RealPage</span></div>
+      <h2 data-anim="rise" style="--d:.3s;font-size:34px">A multinational real estate technology company</h2>
     </div>
     <div class="prodrow">
       <div class="pcard" data-anim="pop" style="--d:.55s">
         <div class="ptop"><span class="pname">YieldStar</span><span class="pbadge">legacy</span></div>
         <ul>
-          <li>rival shared data</li>
-          <li>daily floor-plan pricing</li>
-          <li>unit-level recommendations</li>
+          <li>rival data</li>
+          <li>daily pricing</li>
         </ul>
       </div>
       <div class="pevo" data-anim="fade" style="--d:.8s">→</div>
       <div class="pcard ai" data-anim="pop" style="--d:.7s">
-        <div class="ptop"><span class="pname">AIRM</span><span class="pbadge ai">AI upgrade</span></div>
+        <div class="ptop"><span class="pname">AIRM</span><span class="pbadge ai">AI-powered</span></div>
         <ul>
-          <li>same codebase + machine learning</li>
-          <li>trains on competitor data</li>
-          <li>automated predictive pricing</li>
+          <li>machine learning</li>
+          <li>predictive pricing</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 5 · HOW IT WORKS -->
-  <section class="slide p-court s-flow" data-part="intro">
+  <!-- 4 · HOW IT WORKS (the engine) -->
+  <section class="slide s-lflow" data-part="intro">
     <div class="pbar"></div>
     <div class="grid"></div>
-    <div class="head">
-      <div class="kicker" data-anim="left" style="--d:.1s">02 · How it works?</div>
-      <h2 data-anim="rise" style="--d:.25s">Secrets in. One price out.</h2>
+    <div class="vhead center">
+      <div class="kicker" data-anim="fade" style="--d:.1s">02 · How it works</div>
+      <h2 data-anim="rise" style="--d:.25s">Data in, price out</h2>
     </div>
-    <svg class="wires" viewBox="0 0 1280 720" preserveAspectRatio="none">
-      <path class="wire-base" d="M320,255 C440,255 470,340 560,355"/>
-      <path class="wire-base" d="M320,365 L560,365"/>
-      <path class="wire-base" d="M320,475 C440,475 470,390 560,375"/>
-      <path class="wire-base" d="M720,365 C820,365 870,365 952,365"/>
-      <path class="wire-flow" d="M320,255 C440,255 470,340 560,355"/>
-      <path class="wire-flow" d="M320,365 L560,365"/>
-      <path class="wire-flow" d="M320,475 C440,475 470,390 560,375"/>
-      <path class="wire-flow" d="M720,365 C820,365 870,365 952,365"/>
+    <!-- Animated branch paths -->
+    <svg class="bsvg" viewBox="0 0 1280 720" preserveAspectRatio="none" data-anim="fade" style="--d:.3s">
+      <defs>
+        <marker id="bah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8BA88F" stroke="none"/></marker>
+        <marker id="bah2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#EEAD0E" stroke="none"/></marker>
+      </defs>
+      <path class="bpath" d="M 264 273 C 390 273 440 408 530 408" marker-end="url(#bah)"/>
+      <path class="bpath" d="M 264 408 L 530 408" marker-end="url(#bah)"/>
+      <path class="bpath" d="M 264 543 C 390 543 440 408 530 408" marker-end="url(#bah)"/>
+      <path class="bpath-out" d="M 700 408 C 840 408 880 273 1026 273" marker-end="url(#bah2)"/>
+      <path class="bpath-out" d="M 700 408 L 1026 408" marker-end="url(#bah2)"/>
+      <path class="bpath-out" d="M 700 408 C 840 408 880 543 1026 543" marker-end="url(#bah2)"/>
+      <text x="44" y="408" text-anchor="middle" fill="#8BA88F" font-family="IBM Plex Mono,monospace" font-size="11" opacity=".55" letter-spacing=".05em" transform="rotate(-90 44 408)">rival landlords</text>
+      <text x="1222" y="408" text-anchor="middle" fill="#EEAD0E" font-family="IBM Plex Mono,monospace" font-size="11" opacity=".55" letter-spacing=".05em" transform="rotate(90 1222 408)">price outputs</text>
     </svg>
-    <div class="lord" style="left:84px;top:222px;--d:.4s" data-anim="left"><div class="nm"><span class="lk">🔒</span> Landlord A</div><div class="dt">what they charge</div></div>
-    <div class="lord" style="left:84px;top:332px;--d:.5s" data-anim="left"><div class="nm"><span class="lk">🔒</span> Landlord B</div><div class="dt">how full they are</div></div>
-    <div class="lord" style="left:84px;top:442px;--d:.6s" data-anim="left"><div class="nm"><span class="lk">🔒</span> Landlord C</div><div class="dt">what deals they offer</div></div>
-    <div class="core" data-anim="pop" style="--d:.7s"><div class="ring"></div><div class="ring d"></div><div class="ttl">RealPage</div><div class="sub">mixes the secret info</div></div>
-    <div class="price" data-anim="pop" style="--d:1s"><div class="pl">Tells each landlord →</div><div class="pv">what price to set</div><div class="pn">one shared price</div></div>
-    <div class="flow-cap" data-anim="fade" style="--d:1.3s">private numbers in → <b>one price out</b></div>
+    <!-- Input nodes -->
+    <div class="bnode" style="left:84px;top:223px;width:176px;--d:.38s" data-anim="pop">
+      <div class="bi">🏢</div><div class="bt">Landlord A</div><div class="bs">private lease data</div>
+    </div>
+    <div class="bnode" style="left:84px;top:358px;width:176px;--d:.5s" data-anim="pop">
+      <div class="bi">🏢</div><div class="bt">Landlord B</div><div class="bs">nonpublic rates</div>
+    </div>
+    <div class="bnode" style="left:84px;top:493px;width:176px;--d:.62s" data-anim="pop">
+      <div class="bi">🏢</div><div class="bt">Landlord C</div><div class="bs">occupancy data</div>
+    </div>
+    <!-- Algorithm hub -->
+    <div class="bnode hub" style="left:530px;top:348px;width:170px;--d:.76s" data-anim="pop">
+      <div class="bi">▦</div><div class="bt">RealPage<br>algorithm</div><div class="bs">YieldStar · AIRM</div>
+    </div>
+    <!-- 3 Output nodes -->
+    <div class="bnode out" style="left:1026px;top:223px;width:170px;--d:.88s" data-anim="pop">
+      <div class="bi">🏷️</div><div class="bt">Landlord A</div><div class="bs" style="color:#EEAD0E">+2.4% rate</div>
+    </div>
+    <div class="bnode out" style="left:1026px;top:358px;width:170px;--d:.96s" data-anim="pop">
+      <div class="bi">🏷️</div><div class="bt">Landlord B</div><div class="bs" style="color:#EEAD0E">+1.8% rate</div>
+    </div>
+    <div class="bnode out" style="left:1026px;top:493px;width:170px;--d:1.04s" data-anim="pop">
+      <div class="bi">🏷️</div><div class="bt">Landlord C</div><div class="bs" style="color:#EEAD0E">+3.1% rate</div>
+    </div>
+    <!-- Animated data packets -->
+    <div class="bpkt b1"></div><div class="bpkt b1 bd2"></div><div class="bpkt b1 bd3"></div>
+    <div class="bpkt b2"></div><div class="bpkt b2 bd2"></div>
+    <div class="bpkt b3"></div><div class="bpkt b3 bd2"></div><div class="bpkt b3 bd3"></div>
+    <div class="bpkt b4a"></div><div class="bpkt b4a bd2"></div>
+    <div class="bpkt b4b"></div>
+    <div class="bpkt b4c"></div><div class="bpkt b4c bd2"></div>
+    <div class="flow-cap" data-anim="fade" style="--d:1.1s">pooled nonpublic data · <b>feedback loop</b></div>
   </section>
 
-  <!-- 6 · THE PROBLEM -->
-  <section class="slide p-court s-lock" data-part="intro">
+  <!-- 5 · HOW IT WORKS (the cycle) -->
+  <section class="slide s-flow" data-part="intro">
+    <div class="pbar"></div>
+    <div class="grid"></div>
+    <div class="vhead center">
+      <div class="kicker" data-anim="fade" style="--d:.1s">02 · How it works</div>
+      <h2 data-anim="rise" style="--d:.25s">A closed loop</h2>
+    </div>
+    <svg class="cyc" viewBox="0 0 1280 720" preserveAspectRatio="none">
+      <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8BA88F" stroke="none"/></marker></defs>
+      <path d="M340,322 C540,206 740,206 940,322" marker-end="url(#ah)"/>
+      <path d="M940,398 C740,514 540,514 340,398" marker-end="url(#ah)"/>
+    </svg>
+    <div class="pkt top d1"></div><div class="pkt top d2"></div><div class="pkt top d3"></div>
+    <div class="pkt bot d1"></div><div class="pkt bot d2"></div><div class="pkt bot d3"></div>
+    <div class="cyc-lab top" data-anim="fade" style="--d:.9s">nonpublic lease data</div>
+    <div class="cnode" style="left:84px;--d:.45s" data-anim="pop"><div class="ci">🏢</div><div class="ct">Competing Landlords</div><div class="cs">private data</div></div>
+    <div class="cnode rp" style="right:84px;--d:.6s" data-anim="pop"><div class="ci">▦</div><div class="ct"><span class="rp-wm">RealPage</span></div><div class="cs">pooled data</div></div>
+    <div class="cyc-lab bot" data-anim="fade" style="--d:1.05s">← price recommendations</div>
+  </section>
+
+  <!-- 5 · THE PROBLEM -->
+  <section class="slide s-lock" data-part="intro">
     <div class="pbar"></div>
     <div class="txt">
       <div class="kicker" data-anim="left" style="--d:.1s">03 · What's the problem?</div>
-      <h2 class="reveal"><span class="ln" style="--i:0"><i>From rivals</i></span><span class="ln" style="--i:1"><i>to <span class="red">lockstep.</span></i></span></h2>
-      <p class="lede" data-anim="rise" style="--d:.5s">compete ✕ → coordinate ✓</p>
+      <h2 class="reveal"><span class="ln" style="--i:0"><i>Rivals moving</i></span><span class="ln" style="--i:1"><i>in <span class="red">lockstep.</span></i></span></h2>
       <div class="conseq">
-        <div class="c up" data-anim="left" style="--d:.6s"><span class="ic">▲</span> Rents up</div>
-        <div class="c" data-anim="left" style="--d:.72s"><span class="ic">✕</span> Perks cut · free month of rent</div>
+        <div class="c up" data-anim="left" style="--d:.5s"><span class="ic">▲</span> Rents up</div>
+        <div class="c" data-anim="left" style="--d:.6s"><span class="ic">✕</span> Concessions cut</div>
       </div>
-      <div class="cartel" data-anim="rise" style="--d:.9s"><span>collusion</span> → <span>price-fixing</span> → <span class="hot">hardcore cartel</span></div>
+      <div class="frame-note" data-anim="fade" style="--d:.8s"><b>civil · rule of reason</b></div>
     </div>
     <div class="chart" data-anim="pop" style="--d:.4s">
-      <div class="ct"><span>Two competitors' rents</span><span>→ over time</span></div>
-      <svg viewBox="0 0 492 300" preserveAspectRatio="none">
-        <path class="ln-draw a" stroke="#8BA88F" d="M10,250 C130,238 250,150 480,46"/>
-        <path class="ln-draw b" stroke="#EEAD0E" d="M10,266 C130,256 250,166 480,62"/>
-        <circle class="dotp" cx="480" cy="46" r="6" fill="#8BA88F"/>
-        <circle class="dotp" cx="480" cy="62" r="6" fill="#EEAD0E"/>
-      </svg>
+      <img class="cimg" src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=900&q=80&auto=format&fit=crop" alt="apartment buildings" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="cbody">
+        <div class="ct"><span>Competitors' rents</span><span>→ over time</span></div>
+        <svg viewBox="0 0 492 180" preserveAspectRatio="none">
+          <defs><linearGradient id="bandg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8BA88F" stop-opacity="0"/><stop offset="1" stop-color="#8BA88F" stop-opacity=".24"/></linearGradient></defs>
+          <path class="lock-band" d="M10,150 C130,140 250,86 480,26 L480,40 C250,100 130,154 10,162 Z" fill="url(#bandg)"/>
+          <path class="ln-draw a" stroke="#8BA88F" d="M10,150 C130,140 250,86 480,26"/>
+          <path class="ln-draw b" stroke="#EEAD0E" d="M10,162 C130,154 250,100 480,40"/>
+          <circle class="enddot" cx="480" cy="26" r="5" fill="#8BA88F"/>
+          <circle class="enddot" cx="480" cy="40" r="5" fill="#EEAD0E"/>
+        </svg>
+      </div>
     </div>
   </section>
 
-  <!-- 7 · WHY IT MATTERS -->
-  <section class="slide p-court s-why" data-part="intro">
+  <!-- 6 · WHY IT MATTERS -->
+  <section class="slide s-why" data-part="intro">
     <div class="pbar"></div>
-    <div class="vhead">
-      <div class="kicker" data-anim="left" style="--d:.1s">04 · Why this case matters</div>
+    <div class="vhead center">
+      <div class="kicker" data-anim="fade" style="--d:.1s">04 · Why this case matters</div>
       <h2 data-anim="rise" style="--d:.25s">A landmark case.</h2>
     </div>
-    <div class="frame" data-anim="fade" style="--d:.5s">Past: <b>competitors meet to agree on prices</b> &nbsp;→&nbsp; Here: <b>an algorithm did the coordinating</b></div>
-    <div class="duel">
-      <div class="side L" data-anim="fade" style="--d:.6s">
-        <div class="who">◆ The United States</div>
-        <div class="quote">"Training a machine to break the law is still breaking the law."</div>
+    <div class="imgsplit">
+      <div class="imgcell" data-anim="left" style="--d:.4s">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&auto=format&fit=crop" alt="handshake" referrerpolicy="no-referrer">
+        <div class="ov"></div><div class="lab"><div class="tg">THEN</div><div class="tx">price-fixing</div></div>
       </div>
-      <div class="seam"></div>
-      <div class="side R" data-anim="fade" style="--d:.75s">
-        <div class="who">◆ RealPage</div>
-        <div class="quote">"Our AI simply gives recommendations; the landlords make their decisions."</div>
+      <div class="imgcell" data-anim="left" style="--d:.55s">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80&auto=format&fit=crop" alt="algorithm chip" referrerpolicy="no-referrer">
+        <div class="ov"></div><div class="lab"><div class="tg">NOW</div><div class="tx">algorithmic coordination</div></div>
       </div>
     </div>
-    <div class="landmark" data-anim="fade" style="--d:1s">first landmark case · <b>does an algorithm coordinating prices = illegal collusion?</b> · shapes pricing software across industries</div>
+    <div class="imgeq" data-anim="zoom" style="--d:.8s">=</div>
+    <div class="qbar">
+      <div class="qcell doj" data-anim="fade" style="--d:.7s"><div class="who">◆ The United States</div><div class="qt">"Training a machine to break the law is still breaking the law."</div></div>
+      <div class="qcell rp" data-anim="fade" style="--d:.82s"><div class="who">◆ RealPage</div><div class="qt">"Our AI simply gives recommendations; the landlords make their decisions."</div></div>
+    </div>
+    <div class="landmark" data-anim="fade" style="--d:1s">first AI price-coordination case · <b>no binding precedent</b></div>
   </section>
 
-  <!-- 8 · THE INCOMPLETE TIMELINE -->
-  <section class="slide p-court s-time" data-part="intro">
+  <!-- 7 · TIMELINE (incomplete) -->
+  <section class="slide s-time" data-part="intro">
     <div class="pbar"></div>
     <div class="head">
-      <div class="kicker" data-anim="left" style="--d:.1s">The timeline</div>
-      <h2 data-anim="rise" style="--d:.25s">How it reached court</h2>
-      <div class="note" data-anim="fade" style="--d:.4s">↳ incomplete — full version in the Conclusion</div>
+      <div class="kicker" data-anim="left" style="--d:.1s">The incomplete timeline</div>
+      <h2 data-anim="rise" style="--d:.25s">How the case arose</h2>
+      <div class="note" data-anim="fade" style="--d:.4s">→ see Conclusion</div>
     </div>
     <div class="axis"></div>
     <div class="axis-dash"></div>
-    <div class="axis-end" data-anim="fade" style="--d:1.5s">continued · Part 4 →</div>
-    <div class="node up" style="left:150px;--d:.5s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">2020</div><div class="lb"><b>AIRM</b> launches</div></div></div>
-    <div class="node dn" style="left:300px;--d:.65s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Oct 2022</div><div class="lb"><b>ProPublica</b> exposé</div></div></div>
-    <div class="node up" style="left:450px;--d:.8s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Nov 2022</div><div class="lb"><b>DOJ investigation</b> opens</div></div></div>
-    <div class="node dn" style="left:600px;--d:.95s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Aug 2024</div><div class="lb"><b>Complaint filed</b> · DOJ + 8 states</div></div></div>
+    <div class="axis-end" data-anim="fade" style="--d:1.5s">continued →</div>
+    <div class="node up key" style="left:150px;--d:.5s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">2020</div><div class="lb"><b>AIRM</b> launches</div></div></div>
+    <div class="node dn" style="left:300px;--d:.65s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Oct 2022</div><div class="lb">ProPublica</div><img class="plogo" src="https://commons.wikimedia.org/wiki/Special:FilePath/ProPublica_logo.svg" alt="ProPublica" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div></div>
+    <div class="node up" style="left:450px;--d:.8s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Nov 2022</div><div class="lb"><b>DOJ</b> opens</div></div></div>
+    <div class="node dn key" style="left:600px;--d:.95s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Aug 2024</div><div class="lb"><b>Complaint</b> · §§1&amp;2 · 8 states</div></div></div>
     <div class="node up" style="left:750px;--d:1.1s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Fall 2024</div><div class="lb"><b>Motion to dismiss</b></div></div></div>
-    <div class="node dn" style="left:900px;--d:1.25s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jan 2025</div><div class="lb"><b>Amended</b> · 6 landlords added</div></div></div>
+    <div class="node dn" style="left:900px;--d:1.25s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jan 2025</div><div class="lb"><b>Amended</b> · +6 landlords</div></div></div>
   </section>
 
-  <!-- 9 · TABLE OF CONTENTS (closing) -->
-  <section class="slide p-court s-agenda" data-part="intro">
+  <!-- 8 · TABLE OF CONTENTS (closing) -->
+  <section class="slide s-agenda" data-part="intro">
     <div class="pbar"></div>
     <div class="wm">⚖</div>
     <div class="pad">
       <div class="section-title" data-anim="left" style="--d:.1s">Contents</div>
       <h2 data-anim="rise" style="--d:.2s">Up next</h2>
       <ul class="agenda">
-        <li class="done" data-anim="left" style="--d:.35s"><span class="accent"></span><span class="num">01</span><span class="name">Introduction</span><span class="desc">What &amp; why</span><span class="tag">✓ done</span></li>
-        <li class="next" data-anim="left" style="--d:.48s"><span class="accent"></span><span class="num">02</span><span class="name">The United States</span><span class="desc">The case</span><span class="tag">Up next →</span></li>
-        <li data-anim="left" style="--d:.61s"><span class="accent"></span><span class="num">03</span><span class="name">RealPage</span><span class="desc">The defense</span><span class="tag"></span></li>
-        <li data-anim="left" style="--d:.74s"><span class="accent"></span><span class="num">04</span><span class="name">Conclusion</span><span class="desc">Outcome · timeline</span><span class="tag"></span></li>
+        <li class="done" data-anim="left" style="--d:.35s"><span class="accent"></span><span class="num">01</span><span class="name">Introduction</span><span class="tag">✓ done</span></li>
+        <li class="next" data-anim="left" style="--d:.48s"><span class="accent"></span><span class="num">02</span><span class="name">Plaintiff's Case — DOJ</span><span class="tag">Up next →</span></li>
+        <li data-anim="left" style="--d:.61s"><span class="accent"></span><span class="num">03</span><span class="name">Defense — RealPage</span><span class="tag"></span></li>
+        <li data-anim="left" style="--d:.74s"><span class="accent"></span><span class="num">04</span><span class="name">Conclusion</span><span class="tag"></span></li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============ PART II · THE PLAINTIFF'S CASE (placeholder) ============ -->
+  <section class="slide s-doj" data-part="us">
+    <div class="pbar"></div>
+    <img class="seal2" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="inner">
+      <div class="dnum" data-anim="fade" style="--d:.2s">Part II</div>
+      <h2 data-anim="rise" style="--d:.35s">The Plaintiff's Case</h2>
+      <div class="dsub" data-anim="rise" style="--d:.55s">Sherman Act §§ 1 &amp; 2</div>
+    </div>
+  </section>
+
+  <!-- ============ PART III · REALPAGE (the defense) ============ -->
+  <!-- 3.1 open -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rp-bg-icon" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    </div>
+    <div class="rp-open">
+      <div class="rp-wm big" data-anim="rise" style="--d:.2s">RealPage</div>
+      <div class="ln2" data-anim="rise" style="--d:.4s">The defense.</div>
+      <div class="rp-stat-row" data-anim="rise" style="--d:.65s">
+        <div class="rs"><span class="rv">10M+</span><span class="rl">units managed</span></div>
+        <div class="rs"><span class="rv">~80%</span><span class="rl">market share</span></div>
+        <div class="rs"><span class="rv">30+</span><span class="rl">states</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.2 defense roadmap -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">Our argument</div><h2 data-anim="rise" style="--d:.2s">Two lines of defense</h2></div>
+    <div class="def-stack">
+      <div class="def-card on" data-anim="rise" style="--d:.38s">
+        <div class="dc-num">1</div>
+        <div class="dc-body">
+          <div class="dc-head">Structural &amp; Liability <span class="dc-tag">this speaker</span></div>
+          <div class="dc-items">
+            <span class="dc-item">1.1 · §1 — No Agreement</span>
+            <span class="dc-item">1.2 · §2 — No Monopolization</span>
+          </div>
+        </div>
+      </div>
+      <div class="def-card off" data-anim="rise" style="--d:.54s">
+        <div class="dc-num">2</div>
+        <div class="dc-body">
+          <div class="dc-head">Market &amp; Framing</div>
+          <div class="dc-items">
+            <span class="dc-item">2.1 · Lawful Exchange</span>
+            <span class="dc-item">2.2 · Rule of Reason — No Effects</span>
+            <span class="dc-item">2.3 · Framing &amp; Precedent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.3 civil not criminal -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">Framing</div><h2 data-anim="rise" style="--d:.2s">Civil — not criminal.</h2></div>
+    <div class="civil-imgs" data-anim="rise" style="--d:.35s;height:230px">
+      <div class="civil-cell bad">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" alt="criminal law" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <div class="ov"></div>
+        <div class="lab"><div class="tg">✕ not this</div><div class="tx">criminal · collusion</div></div>
+      </div>
+      <div class="civil-cell good">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80&auto=format&fit=crop" alt="civil law" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <div class="ov"></div>
+        <div class="lab"><div class="tg">✓ this applies</div><div class="tx">civil · rule of reason</div></div>
+      </div>
+    </div>
+    <div class="paths" style="top:398px">
+      <div class="path bad" data-anim="rise" style="--d:.5s"><span>criminal · collusion</span> ✕</div>
+      <div class="path good" data-anim="rise" style="--d:.65s"><span>civil · rule of reason</span> ✓</div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="--d:.78s;top:580px;left:84px;right:84px">
+      <span class="fi">⚖</span><span>Rule of reason applies — government must prove <b>actual anticompetitive harm</b> in the relevant market</span>
+    </div>
+    <div class="civil-next" data-anim="fade" style="--d:.92s"><span>→</span><b>Next: Analysing Sherman Act</b></div>
+  </section>
+
+  <!-- 3.4 §1 statute -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · Sherman Act</div><h2 data-anim="rise" style="--d:.2s">Section 1 — No Agreement</h2></div>
+    <div class="statute" data-anim="rise" style="position:absolute;left:84px;width:580px;top:168px;--d:.35s">
+      <div class="sn">15 U.S.C. § 1</div>
+      <div class="sq">"Every contract, combination… or conspiracy, in restraint of trade…"</div>
+    </div>
+    <div class="rp-point" data-anim="fade" style="top:328px;width:580px;--d:.6s">
+      <div class="rp-li"><span class="b">›</span><div><b>genuine concerted action</b> required</div></div>
+      <div class="rp-li"><span class="b">?</span><div>same software ≠ <b>agreement</b></div></div>
+      <div class="rp-li"><span class="b">≡</span><div>no direct communication between landlords</div></div>
+      <div class="rp-li"><span class="b">✓</span><div><b>They did not agree.</b></div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:598px;--d:.85s;right:auto;width:580px">
+      <span class="fi">⚖</span><span>Twombly standard — allegation must be <b>plausible, not merely conceivable</b></span>
+    </div>
+    <div class="rp-aside-tall" data-anim="rise" style="--d:.75s">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="ov"></div>
+      <div class="lab"><div class="tg">key question</div><div class="tx">Was there<br>an agreement?</div></div>
+    </div>
+  </section>
+
+  <!-- 3.5 hub-and-spoke, no rim -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · The DOJ's theory</div><h2 data-anim="rise" style="--d:.2s">"Hub-and-spoke" —<br>but the rim is missing.</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:260px;width:490px;--d:.5s">
+      <div class="rp-li"><span class="b">✕</span><div>no <b>rim</b> · no landlord-to-landlord agreement</div></div>
+      <div class="rp-li"><span class="b">≈</span><div>same tool ≠ agreement · independent decisions</div></div>
+      <div class="rp-li"><span class="b">⚖</span><div>hub-and-spoke requires <b>vertical + horizontal</b> conspiracy</div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:510px;width:490px;left:84px;right:auto;--d:.75s">
+      <span class="fi">🔵</span><span>Spokes only — <b>no rim = no §1 violation</b></span>
+    </div>
+    <svg class="wheel" viewBox="0 0 1280 720" data-anim="fade" style="position:absolute;inset:0;z-index:2;--d:.5s">
+      <defs>
+        <linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A3D"/><stop offset="1" stop-color="#FF4D6D"/></linearGradient>
+        <filter id="hubglow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="nodeglow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Spokes -->
+      <g stroke="#5E7E63" stroke-width="2" opacity=".6">
+        <line x1="950" y1="380" x2="950" y2="230"/><line x1="950" y1="380" x2="1093" y2="334"/>
+        <line x1="950" y1="380" x2="1038" y2="501"/><line x1="950" y1="380" x2="862" y2="501"/>
+        <line x1="950" y1="380" x2="807" y2="334"/>
+      </g>
+      <!-- Animated rim (spinning dash) -->
+      <circle cx="950" cy="380" r="150" fill="none" stroke="#9B2226" stroke-width="2" stroke-dasharray="6 11" opacity=".65">
+        <animate attributeName="stroke-dashoffset" from="0" to="-102" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Outer glow ring -->
+      <circle cx="950" cy="380" r="152" fill="none" stroke="#9B2226" stroke-width="6" stroke-dasharray="1 999" opacity=".12"/>
+      <!-- Landlord nodes with pulse -->
+      <g filter="url(#nodeglow)">
+        <circle cx="950" cy="230" r="14" fill="#3A3D45"><animate attributeName="opacity" values=".55;1;.55" dur="2.8s" begin="0s" repeatCount="indefinite"/></circle>
+        <circle cx="1093" cy="334" r="14" fill="#3A3D45"><animate attributeName="opacity" values=".55;1;.55" dur="2.8s" begin=".56s" repeatCount="indefinite"/></circle>
+        <circle cx="1038" cy="501" r="14" fill="#3A3D45"><animate attributeName="opacity" values=".55;1;.55" dur="2.8s" begin="1.12s" repeatCount="indefinite"/></circle>
+        <circle cx="862" cy="501" r="14" fill="#3A3D45"><animate attributeName="opacity" values=".55;1;.55" dur="2.8s" begin="1.68s" repeatCount="indefinite"/></circle>
+        <circle cx="807" cy="334" r="14" fill="#3A3D45"><animate attributeName="opacity" values=".55;1;.55" dur="2.8s" begin="2.24s" repeatCount="indefinite"/></circle>
+      </g>
+      <!-- Pulsing hub -->
+      <circle cx="950" cy="380" r="56" fill="url(#hubg)" filter="url(#hubglow)" opacity=".35">
+        <animate attributeName="r" values="52;64;52" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+        <animate attributeName="opacity" values=".35;.18;.35" dur="2.4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="950" cy="380" r="46" fill="url(#hubg)"/>
+      <text x="950" y="377" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="800" font-size="12">RealPage</text>
+      <text x="950" y="390" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="IBM Plex Mono,monospace" font-size="9">hub</text>
+      <!-- Labels -->
+      <text x="950" y="197" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="11.5">landlords</text>
+      <text x="950" y="568" text-anchor="middle" fill="#9B2226" font-family="IBM Plex Mono,monospace" font-size="13.5" font-weight="600">✕ no rim · no agreement</text>
+    </svg>
+  </section>
+
+  <!-- 3.6 parallel conduct -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · What it really is</div><h2 data-anim="rise" style="--d:.2s">Parallel conduct — not conspiracy.</h2></div>
+    <div class="statute" data-anim="rise" style="position:absolute;left:84px;width:580px;top:164px;--d:.35s">
+      <div class="sn">Bell Atlantic v. Twombly</div>
+      <div class="sq">"plausible, not merely conceivable."</div>
+    </div>
+    <div class="rp-cards" data-anim="fade" style="top:308px;left:84px;right:auto;width:580px;--d:.6s">
+      <div class="rp-c"><div class="cn">Non-binding</div><div class="ct">Landlords override</div></div>
+      <div class="rp-c"><div class="cn">Up · down · flat</div><div class="ct">Not just up</div></div>
+      <div class="rp-c"><div class="cn">Optional</div><div class="ct">Auto-accept off</div></div>
+    </div>
+    <!-- Strip-away diagram -->
+    <div class="no-rim" data-anim="fade" style="--d:.9s;left:84px;right:auto;width:580px;justify-content:flex-start">
+      <div class="nr-n">🏢 A</div>
+      <span class="nr-x">╌</span>
+      <div class="nr-n">🏢 B</div>
+      <span class="nr-x">╌</span>
+      <div class="nr-n">🏢 C</div>
+      <span class="nr-eq">− software =</span>
+      <div class="nr-r">no relationship</div>
+    </div>
+    <!-- Right photo panel -->
+    <div class="rp-aside-tall" data-anim="rise" style="--d:.7s">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="ov"></div>
+      <div class="lab"><div class="tg">the test</div><div class="tx">Conscious<br>parallelism only</div></div>
+    </div>
+  </section>
+
+  <!-- 3.7 RealPage's own words -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · Their evidence</div><h2 data-anim="rise" style="--d:.2s">Ambition — not agreement.</h2></div>
+    <div class="bubbles" style="left:84px;top:148px;bottom:68px;width:560px;justify-content:center">
+      <div class="bubble" data-anim="pop" style="--d:.4s">"Drive every opportunity to increase price."</div>
+      <div class="bubble two" data-anim="pop" style="--d:.55s">"Avoid the race to the bottom."</div>
+      <div class="bubble" data-anim="pop" style="--d:.68s;margin-left:0">"Maximize revenue per available unit."</div>
+    </div>
+    <div class="rp-aside-tall" data-anim="rise" style="--d:.5s;width:460px">
+      <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="ov"></div>
+      <div class="lab">
+        <div class="tg">the defense</div>
+        <div class="tx">Ambition ≠ agreement</div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
+          <div class="rp-li" style="font-size:14px"><span class="b">›</span><div>higher revenue ≠ <b>agreement</b></div></div>
+          <div class="rp-li" style="font-size:14px"><span class="b">⚖</span><div>rule of reason · <b>market effects</b></div></div>
+          <div class="rp-li" style="font-size:14px"><span class="b">✓</span><div>internal aspiration ≠ conspiracy</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3.8 §2 + Grinnell -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.2 · Sherman Act</div><h2 data-anim="rise" style="--d:.2s">Section 2 — No Monopolization</h2></div>
+    <div class="statute" data-anim="rise" style="position:absolute;left:84px;width:580px;top:164px;--d:.35s">
+      <div class="sn">United States v. Grinnell — two prongs</div>
+      <div class="sq">"as distinguished from growth… from a <b style="font-style:normal">superior product.</b>"</div>
+    </div>
+    <div class="rp-point" data-anim="fade" style="top:318px;width:580px;--d:.6s">
+      <div class="rp-li"><span class="b">✓</span><div>market share ≠ illegal · <b>exclusionary conduct</b> required</div></div>
+      <div class="rp-li"><span class="b">★</span><div><b>superior product</b> — YieldStar won on merit</div></div>
+      <div class="rp-li"><span class="b">⚡</span><div>Yardi competes head-to-head · low switching costs</div></div>
+      <div class="rp-li"><span class="b">✓</span><div>no willful acquisition of monopoly power</div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:600px;--d:.85s;right:auto;width:580px">
+      <span class="fi">📊</span><span>Grinnell prong 2 — <b>no exclusionary conduct</b> proven · growth was organic</span>
+    </div>
+    <div class="rp-aside-tall" data-anim="rise" style="--d:.75s">
+      <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="ov"></div>
+      <div class="lab"><div class="tg">Grinnell test</div><div class="tx">Superior<br>product wins</div></div>
+    </div>
+  </section>
+
+  <!-- 3.9 no durable monopoly -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.2 · No durable monopoly</div><h2 data-anim="rise" style="--d:.2s">A market you can enter and leave.</h2></div>
+    <div class="rp-cards" data-anim="fade" style="top:204px;left:84px;right:auto;width:580px;--d:.4s">
+      <div class="rp-c"><div class="cn">Byproduct</div><div class="ct">Data &amp; scale</div><div class="cd">not a weapon</div></div>
+      <div class="rp-c"><div class="cn">2017 · LRO</div><div class="ct">Acquisition not blocked</div><div class="cd">closed unchallenged</div></div>
+      <div class="rp-c"><div class="cn">Yardi &amp; others</div><div class="ct">Real competition</div><div class="cd">low switching costs</div></div>
+    </div>
+    <div class="rp-point" data-anim="fade" style="top:370px;width:580px;--d:.6s">
+      <div class="rp-li"><span class="b">›</span><div>no durable monopoly power · entrants displace incumbents</div></div>
+      <div class="rp-li"><span class="b">✓</span><div>consent decree settled without <b>admission of liability</b></div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:558px;left:84px;right:auto;width:580px;--d:.8s">
+      <span class="fi">🏙️</span><span>Market entry by Entrata, MRI, Yardi — <b>low switching costs</b></span>
+    </div>
+    <div class="rp-aside-tall" data-anim="rise" style="--d:.65s">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="ov"></div>
+      <div class="lab"><div class="tg">open market</div><div class="tx">Enter &amp; exit<br>freely</div></div>
+    </div>
+  </section>
+
+  <!-- 3.10 hand-off -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">Hand-off</div><h2 data-anim="rise" style="--d:.2s">No agreement. No monopoly.</h2></div>
+    <div class="rp-toc" style="right:504px">
+      <div class="col off" data-anim="rise" style="--d:.4s"><div class="ph">Part 1 · Structural &amp; Liability</div><ul><li>1.1 · §1 — No Agreement ✓</li><li>1.2 · §2 — No Monopolization ✓</li></ul></div>
+      <div class="col on" data-anim="rise" style="--d:.55s"><div class="ph">Part 2 · Market &amp; Framing<span class="pt">up next</span></div><ul><li>2.1 · Lawful Exchange</li><li>2.2 · Rule of Reason — No Effects</li><li>2.3 · Framing &amp; Precedent</li></ul></div>
+    </div>
+    <div class="rp-aside-tall" data-anim="rise" style="--d:.48s;width:380px">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div class="ov"></div>
+      <div class="lab"><div class="tg">hand-off</div><div class="tx">Passing to<br>Part 2</div></div>
+    </div>
+  </section>
+
+  <!-- ============ PART IV · CONCLUSION ============ -->
+  <!-- 4.1 full timeline -->
+  <section class="slide s-time full" data-part="conclusion">
+    <div class="pbar"></div>
+    <div class="head"><div class="kicker" data-anim="left" style="--d:.1s">Conclusion</div><h2 data-anim="rise" style="--d:.25s">Full timeline of events</h2></div>
+    <div class="tl-legend" data-anim="fade" style="--d:.4s"><span><i style="background:#5E7E63"></i>DOJ case</span><span><i style="background:#FF4D6D"></i>parallel cases</span><span><i style="background:#C9A227"></i>key outcome</span></div>
+    <div class="axis"></div>
+    <div class="node up key" style="left:100px;--d:.45s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">2020</div><div class="lb"><b>AIRM</b> launches</div></div></div>
+    <div class="node dn" style="left:172px;--d:.5s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Oct '22</div><div class="lb">ProPublica exposé</div></div></div>
+    <div class="node up" style="left:244px;--d:.55s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Nov '22</div><div class="lb">DOJ probe opens</div></div></div>
+    <div class="node dn key" style="left:316px;--d:.6s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Aug '24</div><div class="lb"><b>Complaint filed</b></div></div></div>
+    <div class="node up" style="left:388px;--d:.65s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Fall '24</div><div class="lb">Motion to dismiss</div></div></div>
+    <div class="node dn" style="left:460px;--d:.7s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jan '25</div><div class="lb">Amended · +6 LLs</div></div></div>
+    <div class="node up" style="left:532px;--d:.75s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jan '25</div><div class="lb">Cortland settles</div></div></div>
+    <div class="node dn" style="left:604px;--d:.8s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Aug '25</div><div class="lb">Greystar settles</div></div></div>
+    <div class="node up parallel" style="left:676px;--d:.85s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Oct '25</div><div class="lb">Class action · $141.8M</div></div></div>
+    <div class="node dn parallel" style="left:748px;--d:.9s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Nov '25</div><div class="lb">Sues NY AG</div></div></div>
+    <div class="node up outcome" style="left:820px;--d:.95s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Nov '25</div><div class="lb"><b>Consent decree</b></div></div></div>
+    <div class="node dn" style="left:892px;--d:1s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Dec '25</div><div class="lb">LivCor settles</div></div></div>
+    <div class="node up" style="left:964px;--d:1.05s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jan '26</div><div class="lb">Tunney Act</div></div></div>
+    <div class="node dn" style="left:1036px;--d:1.1s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">May '26</div><div class="lb">DOJ responds</div></div></div>
+    <div class="node up outcome key" style="left:1108px;--d:1.15s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">~May '26</div><div class="lb"><b>Final judgment</b></div></div></div>
+    <div class="node dn outcome" style="left:1180px;--d:1.2s" data-anim="pop"><span class="stem"></span><span class="pt"></span><div class="card"><div class="yr">Jun '26</div><div class="lb"><b>Decree in force</b></div></div></div>
+  </section>
+
+  <!-- 4.2 both sides summary -->
+  <section class="slide s-sum" data-part="conclusion">
+    <div class="pbar"></div>
+    <div class="head"><div class="kicker" data-anim="left" style="--d:.1s">Conclusion</div><h2 data-anim="rise" style="--d:.25s">Both sides, in summary</h2></div>
+    <div class="sumrow" data-anim="rise" style="--d:.4s;bottom:90px">
+      <div class="sumcol doj">
+        <img class="sum-bg" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <div class="sum-fade"></div>
+        <div class="sh">◆ Plaintiff — DOJ &amp; States</div>
+        <div class="row"><b>Charges:</b> §1 &amp; §2 Sherman Act · state antitrust laws</div>
+        <div class="row"><b>Theory:</b> hub-and-spoke · ~80% market share · nonpublic data loop</div>
+        <div class="row"><b>Evidence:</b> RealPage internal emails · landlord acceptance rates</div>
+        <div class="row"><b>Relief sought:</b> structural remedy · behavioural injunction</div>
+        <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.15)"><b>Settled:</b> Cortland, Greystar, LivCor &amp; others · class action $141.8M</div>
+      </div>
+      <div class="seam2"></div>
+      <div class="sumcol rp">
+        <img class="sum-bg" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <div class="sum-fade"></div>
+        <div class="sh">◆ Defense — RealPage</div>
+        <div class="row"><b>§1 defense:</b> no rim · Twombly · rule of reason</div>
+        <div class="row"><b>§2 defense:</b> Grinnell · superior product · Yardi competes</div>
+        <div class="row"><b>Framing:</b> civil rule of reason · no per-se collusion</div>
+        <div class="row"><b>Market:</b> low switching costs · entrants displace incumbents</div>
+        <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px solid rgba(201,162,39,.18)"><b>Outcome:</b> consent decree · injunctive only · no fine · no admission</div>
+      </div>
+    </div>
+    <div class="outcome-banner" data-anim="fade" style="--d:.7s"><span class="ob-t">Outcome —</span><span>consent decree · injunctive only · data ≥ 12 months old · court-appointed monitor · 7-year term · <b style="color:#fff">no fine, no admission of liability</b>.</span></div>
+  </section>
+
+  <!-- 4.3 thank you -->
+  <section class="slide s-thanks" data-part="conclusion">
+    <div class="pbar"></div>
+    <div class="inner">
+      <h2 data-anim="rise" style="--d:.2s">Thank you.</h2>
+      <p data-anim="fade" style="--d:.5s">Q&amp;A</p>
+      <div class="lock2" data-anim="fade" style="--d:.75s">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="DOJ" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+        <span class="vs">v.</span>
+        <span class="rp-wm">RealPage</span>
+      </div>
     </div>
   </section>
 
@@ -462,14 +1101,14 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 
 <div class="chrome">
   <div class="part">PART <b id="partName">I · INTRODUCTION</b></div>
-  <div class="count"><span id="cur">01</span> / <span id="tot">09</span></div>
+  <div class="count"><span id="cur">01</span> / <span id="tot">23</span></div>
   <div class="progress"><span id="progBar"></span></div>
 </div>
 
 <div class="rail" id="rail">
   <button data-go="intro" title="Introduction"><span class="lbl">Intro</span><span class="tick"></span></button>
-  <button data-go="us" title="The United States"><span class="lbl">U.S.</span><span class="tick"></span></button>
-  <button data-go="realpage" title="RealPage"><span class="lbl">RealPage</span><span class="tick"></span></button>
+  <button data-go="us" title="The Plaintiff's Case"><span class="lbl">DOJ</span><span class="tick"></span></button>
+  <button data-go="realpage" title="The Defense — RealPage"><span class="lbl">RealPage</span><span class="tick"></span></button>
   <button data-go="conclusion" title="Conclusion"><span class="lbl">Conclusion</span><span class="tick"></span></button>
 </div>
 
@@ -483,8 +1122,8 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 (function(){
   const slides=[...document.querySelectorAll('.slide')];
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cur=0,step=0,leaving=null,leftTimer=null;
-  const PART={intro:'I · INTRODUCTION',us:'II · THE UNITED STATES',realpage:'III · REALPAGE',conclusion:'IV · CONCLUSION'};
+  let cur=0,leaving=null,leftTimer=null;
+  const PART={intro:"I · INTRODUCTION",us:"II · THE PLAINTIFF'S CASE",realpage:'III · THE DEFENSE',conclusion:'IV · CONCLUSION'};
   const RAIL={intro:0,us:1,realpage:2,conclusion:3};
   const $=id=>document.getElementById(id);
 
@@ -495,18 +1134,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 
   function fit(){document.documentElement.style.setProperty('--s',Math.min(innerWidth/1280,innerHeight/720));}
   addEventListener('resize',fit);fit();
-  function frags(){return [...slides[cur].querySelectorAll('[data-fragment]')];}
 
-  function countUp(el){
-    const t=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),dur=+(el.dataset.dur||1300),start=performance.now();
-    const fmt=v=>v.toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec});
-    if(reduce){el.textContent=fmt(t);return;}
-    requestAnimationFrame(function tick(now){
-      const p=Math.min(1,(now-start)/dur),e=1-Math.pow(1-p,3);
-      el.textContent=fmt(t*e);
-      if(p<1)requestAnimationFrame(tick);else el.textContent=fmt(t);
-    });
-  }
   function updateChrome(){
     const part=slides[cur].dataset.part||'intro';
     $('partName').textContent=PART[part]||'';
@@ -514,10 +1142,8 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     $('tot').textContent=String(slides.length).padStart(2,'0');
     $('progBar').style.width=((cur+1)/slides.length*100)+'%';
     document.querySelectorAll('#rail button').forEach((b,i)=>b.classList.toggle('on',i===RAIL[part]));
-    slides[cur].querySelectorAll('[data-count]').forEach(el=>{el.textContent='0';countUp(el);});
   }
 
-  // sweep LEFT within a topic; sweep DOWN when the topic changes (mirror on the way back)
   const OFFSETS={
     right:{enter:'translate(-110%,0)',exit:'translate(110%,0)'},
     left :{enter:'translate(110%,0)', exit:'translate(-110%,0)'},
@@ -541,9 +1167,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     const from=cur, dir=dirFor(from,n), old=slides[from], neu=slides[n];
     finalize();
     cur=n;
-    const f=[...neu.querySelectorAll('[data-fragment]')];
-    f.forEach(x=>x.classList.remove('shown'));
-    if(n<from||reduce){f.forEach(x=>x.classList.add('shown'));step=f.length;}else step=0;
     if(reduce||!dir||!OFFSETS[dir]){
       old.classList.remove('active','leaving');neu.classList.add('active');updateChrome();return;
     }
@@ -559,9 +1182,8 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     leaving=old;leftTimer=setTimeout(finalize,780);
     updateChrome();
   }
-
-  function next(){const f=frags();if(step<f.length){f[step].classList.add('shown');step++;return;}if(cur<slides.length-1)go(cur+1);}
-  function prev(){if(step>0){step--;frags()[step].classList.remove('shown');return;}if(cur>0)go(cur-1);}
+  function next(){if(cur<slides.length-1)go(cur+1);}
+  function prev(){if(cur>0)go(cur-1);}
   function goPart(key){const idx=slides.findIndex(s=>s.dataset.part===key);if(idx>=0)go(idx);}
 
   addEventListener('keydown',e=>{
@@ -580,6 +1202,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   function toggleFS(){if(document.fullscreenElement){document.exitFullscreen();}else if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen();}}
   $('fsBtn').onclick=e=>{e.stopPropagation();toggleFS();};
   document.addEventListener('fullscreenchange',()=>{$('fsBtn').classList.toggle('hidden',!!document.fullscreenElement);});
+
   let tx=0;
   addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
   addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)dx<0?next():prev();},{passive:true});
