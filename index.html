@@ -506,6 +506,23 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 @keyframes spin-rim{to{stroke-dashoffset:-102}}
 @keyframes pulse-hub{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.75;transform:scale(1.12)}}
 @keyframes node-pulse{0%,100%{opacity:.65}50%{opacity:1}}
+/* ── DOJ argument slides (Part II) ── */
+.s-doj-arg{background:linear-gradient(158deg,#0D1A30 0%,#162846 58%,#1A3060 100%);color:#EFE9DA}
+.s-doj-arg .doj-seal-wm{position:absolute;right:-50px;bottom:-40px;width:310px;opacity:.055;z-index:0;pointer-events:none;filter:grayscale(1) brightness(2)}
+.s-doj-arg .dhead{position:absolute;left:84px;top:54px;right:84px;z-index:3}
+.s-doj-arg .dkick{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--doj-gold-lt);margin-bottom:14px;display:flex;align-items:center;gap:14px}
+.s-doj-arg .dkick::before{content:'';display:block;width:30px;height:2px;background:var(--doj-gold);flex-shrink:0}
+.s-doj-arg h2{font-family:var(--font-legal);font-size:32px;line-height:1.12;font-weight:700;color:#fff;margin:0}
+.s-doj-arg .dbody{position:absolute;left:84px;right:84px;top:148px;bottom:60px;display:flex;gap:52px;z-index:3}
+.s-doj-arg .dbulle{flex:0 0 540px;display:flex;flex-direction:column;justify-content:space-evenly}
+.s-doj-arg .dbulle li{list-style:none;padding:13px 0 13px 22px;border-bottom:1px solid rgba(201,162,39,.11);font-family:var(--font-mono);font-size:13px;color:rgba(239,233,218,.72);line-height:1.6;position:relative}
+.s-doj-arg .dbulle li:first-child{padding-top:0}
+.s-doj-arg .dbulle li:last-child{border-bottom:none}
+.s-doj-arg .dbulle li::before{content:'›';color:var(--doj-gold);font-weight:700;position:absolute;left:0;top:13px}
+.s-doj-arg .dbulle li:first-child::before{top:0}
+.s-doj-arg .dbulle strong{color:#fff;font-weight:600}
+.s-doj-arg .dviz{flex:1;display:flex;align-items:center;justify-content:center;border-left:1px solid rgba(201,162,39,.14);padding-left:36px}
+.s-doj-arg .dviz svg{width:100%;height:auto;max-height:420px}
 /* S1 background particles */
 .title-particles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 .title-particles span{position:absolute;border-radius:50%;animation:tpFloat var(--dur,10s) ease-in-out var(--del,0s) infinite alternate}
@@ -514,6 +531,82 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .title-glyphs{position:absolute;inset:0;z-index:1;pointer-events:none}
 .title-glyphs span{position:absolute;font-family:var(--font-legal);font-size:80px;color:rgba(139,168,143,.032);line-height:1;animation:glyphDrift var(--ds,18s) ease-in-out var(--dd,0s) infinite alternate;user-select:none}
 @keyframes glyphDrift{from{transform:translate(0,0) rotate(-4deg)}to{transform:translate(14px,-18px) rotate(4deg)}}
+
+/* ===================== NEW ANIMATIONS & DIAGRAM ELEMENTS ===================== */
+/* Slide in from right */
+.slide.active [data-anim="right"]{animation-name:slideRight;animation-duration:.85s;animation-timing-function:var(--e-out);animation-fill-mode:both;animation-delay:var(--d,0s)}
+@keyframes slideRight{from{opacity:0;transform:translateX(34px)}to{opacity:1;transform:none}}
+
+/* Scale-pop for diagram nodes */
+.slide.active [data-anim="scale-in"]{animation-name:scaleIn;animation-duration:.65s;animation-timing-function:var(--e-spring);animation-fill-mode:both;animation-delay:var(--d,0s)}
+@keyframes scaleIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+
+/* SVG path draw-in */
+.draw-path{stroke-dasharray:var(--dl,500);stroke-dashoffset:var(--dl,500)}
+.slide.active .draw-path{animation:drawPath 1.1s var(--e-out) var(--pd,.3s) both}
+@keyframes drawPath{to{stroke-dashoffset:0}}
+
+/* Diagram aside panel (replaces photo .rp-aside-tall) */
+.rp-aside-diag{position:absolute;right:84px;top:148px;bottom:68px;width:420px;z-index:3;border-radius:14px;border:1px solid rgba(43,45,51,.1);background:rgba(255,255,255,.7);box-shadow:0 20px 52px rgba(43,45,51,.1);display:flex;align-items:center;justify-content:center;padding:18px;overflow:visible}
+.rp-aside-diag svg{width:100%;height:auto;overflow:visible}
+
+/* Statute glow pulse on slide entry */
+.slide.active .statute{animation:statuteGlow 3.5s ease-in-out 1.2s 1}
+@keyframes statuteGlow{0%,100%{border-left-color:var(--rp-coral);box-shadow:0 16px 44px rgba(43,45,51,.08)}45%{border-left-color:rgba(255,77,109,.55);box-shadow:0 16px 44px rgba(255,77,109,.18),-4px 0 14px rgba(255,77,109,.2)}}
+
+/* Fill-bar flash pulse on first appear */
+.slide.active .rp-fill-bar{animation:riseY .85s var(--e-out) var(--d,.5s) both,fillFlash .5s ease-out var(--d,.5s) 1}
+@keyframes fillFlash{0%{background:rgba(255,77,109,.22)}100%{background:rgba(255,77,109,.06)}}
+
+/* Floating node for diagrams */
+@keyframes nodeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* DOJ slide ambient gold scan-line */
+.s-doj-arg::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(108deg,transparent 30%,rgba(201,162,39,.04) 50%,transparent 70%);background-size:300% 100%;animation:dojScan 9s ease-in-out 1s infinite}
+@keyframes dojScan{0%,100%{background-position:200% 0}50%{background-position:-100% 0}}
+
+/* DOJ stat badges for bullet emphasis */
+.doj-badge{display:inline-flex;align-items:center;background:rgba(201,162,39,.14);border:1px solid rgba(201,162,39,.35);border-radius:6px;padding:2px 8px;font-family:var(--font-mono);font-size:11px;color:var(--doj-gold-lt);font-weight:600;vertical-align:middle;margin-left:4px}
+
+/* rp-bg decorative ambient glow pulse */
+.rp-bg .blob{animation:blobPulse 8s ease-in-out infinite alternate}
+@keyframes blobPulse{from{opacity:.13;transform:scale(1)}to{opacity:.2;transform:scale(1.12)}}
+
+/* Kicker coral underline sweep */
+.slide.active .rk{animation:slideLeft .85s var(--e-out) var(--d,0s) both,rkUnderline 1s var(--e-out) calc(var(--d,0s) + .5s) 1}
+@keyframes rkUnderline{from{text-decoration-color:transparent}to{text-decoration-color:var(--rp-coral)}}
+
+/* Diagram node floating (applied inline) */
+.diag-float{animation:nodeFloat 5s ease-in-out infinite}
+.diag-float-b{animation:nodeFloat 6s ease-in-out .8s infinite}
+.diag-float-c{animation:nodeFloat 4.5s ease-in-out 1.6s infinite}
+
+/* Bar grow from bottom */
+.slide.active .diag-bar{animation:diagBarIn .65s var(--e-out) var(--d,0s) both;transform-box:fill-box;transform-origin:bottom center}
+@keyframes diagBarIn{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+/* ===== SVG DIAGRAM ANIMATION SYSTEM ===== */
+/* Node pop-in (CSS, needs transform-box:fill-box on element) */
+.slide.active .diag-node{animation:diagNodeIn .52s cubic-bezier(.34,1.56,.64,1) var(--d,.1s) both;transform-box:fill-box;transform-origin:center}
+@keyframes diagNodeIn{from{opacity:0;transform:scale(.25)}to{opacity:1;transform:scale(1)}}
+/* Continuously flowing dashes — living arrows */
+.flow-dash{stroke-dasharray:5 8;animation:flowDash 1.6s linear infinite}
+.flow-dash-b{stroke-dasharray:5 8;animation:flowDash 2s linear .5s infinite}
+.flow-dash-c{stroke-dasharray:5 8;animation:flowDash 2.5s linear 1s infinite}
+@keyframes flowDash{to{stroke-dashoffset:-26}}
+/* Badge pop (label rects) */
+.slide.active .diag-badge{animation:diagNodeIn .38s cubic-bezier(.34,1.56,.64,1) var(--d,.5s) both;transform-box:fill-box;transform-origin:center}
+/* Verdict/result node glow */
+.diag-verdict{animation:verdictGlow 2.6s ease-in-out .6s infinite}
+@keyframes verdictGlow{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 9px rgba(255,77,109,.45))}}
+/* Green positive verdict glow */
+.diag-verdict-pos{animation:verdictGlowPos 2.6s ease-in-out .8s infinite}
+@keyframes verdictGlowPos{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 9px rgba(94,126,99,.5))}}
+/* Ripple ring behind hub/center nodes */
+.diag-ripple{transform-box:fill-box;transform-origin:center;animation:diagRipple 2.2s ease-out var(--d,0s) infinite}
+@keyframes diagRipple{from{transform:scale(1);opacity:.4}to{transform:scale(2.2);opacity:0}}
+/* X stamp entrance */
+.slide.active .diag-x{animation:diagXIn .4s ease-out var(--d,.7s) both;transform-box:fill-box;transform-origin:center}
+@keyframes diagXIn{from{opacity:0;transform:scale(2.5)}to{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -786,6 +879,253 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     </div>
   </section>
 
+  <!-- ============ PART II · DOJ ARGUMENT SLIDES ============ -->
+
+  <!-- P1 · Market Definition -->
+  <section class="slide s-doj-arg" data-part="us">
+    <div class="pbar"></div>
+    <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="dhead">
+      <div class="dkick" data-anim="left" style="--d:.1s">Market Definition · P1</div>
+      <h2 data-anim="rise" style="--d:.22s">The Hyper-Local Reality</h2>
+    </div>
+    <div class="dbody">
+      <ul class="dbulle">
+        <li data-anim="rise" style="--d:.35s"><strong>Granular Market Definition:</strong> Rental housing competition operates strictly on a localized, neighborhood-by-neighborhood basis.</li>
+        <li data-anim="rise" style="--d:.48s"><strong>High Submarket Concentration:</strong> Within target institutional multifamily submarkets, the data-pooling network encompasses 70% to 90% of available supply.</li>
+        <li data-anim="rise" style="--d:.61s"><strong>The SSNIP Test Standard:</strong> Low cross-elasticity of demand proves luxury high-rises constitute a distinct product market from single-family homes.</li>
+        <li data-anim="rise" style="--d:.74s"><strong>Pre-Leasing Network Capture:</strong> New construction is integrated into the algorithmic pool prior to opening, establishing a uniform pricing baseline from day one.</li>
+      </ul>
+      <div class="dviz" data-anim="fade" style="--d:.4s">
+        <svg viewBox="0 0 380 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="190" y="22" text-anchor="middle" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">SINGLE SUBMARKET</text>
+          <!-- Row 1 — tallest buildings, stagger left→right -->
+          <rect x="18"  y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.45s"/>
+          <rect x="80"  y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.52s"/>
+          <rect x="142" y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.59s"/>
+          <rect x="204" y="34" width="52" height="65" rx="3" fill="rgba(239,233,218,.06)" stroke="rgba(239,233,218,.22)" stroke-width="1.5" class="diag-bar" style="--d:.66s"/>
+          <rect x="266" y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.73s"/>
+          <rect x="328" y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.80s"/>
+          <!-- Row 2 -->
+          <rect x="18"  y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.50s"/>
+          <rect x="80"  y="110" width="52" height="65" rx="3" fill="rgba(239,233,218,.06)" stroke="rgba(239,233,218,.22)" stroke-width="1.5" class="diag-bar" style="--d:.57s"/>
+          <rect x="142" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.64s"/>
+          <rect x="204" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.71s"/>
+          <rect x="266" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.78s"/>
+          <rect x="328" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.85s"/>
+          <!-- Row 3 — shortest -->
+          <rect x="18"  y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.55s"/>
+          <rect x="80"  y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.62s"/>
+          <rect x="142" y="186" width="52" height="52" rx="3" fill="rgba(239,233,218,.06)" stroke="rgba(239,233,218,.22)" stroke-width="1.5" class="diag-bar" style="--d:.69s"/>
+          <rect x="204" y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.76s"/>
+          <rect x="266" y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.83s"/>
+          <rect x="328" y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.90s"/>
+          <!-- Legend -->
+          <rect x="18" y="256" width="11" height="11" rx="2" fill="rgba(201,162,39,.22)" stroke="#C9A227" stroke-width="1" class="diag-badge" style="--d:1.05s"/>
+          <text x="35" y="265" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:1.05s">In network (80–90%)</text>
+          <rect x="210" y="256" width="11" height="11" rx="2" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.22)" stroke-width="1" class="diag-badge" style="--d:1.1s"/>
+          <text x="227" y="265" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:1.1s">Non-network</text>
+          <text x="190" y="292" text-anchor="middle" fill="rgba(201,162,39,.6)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".06em" data-anim="fade" style="--d:1.2s">CAPTIVE RENTERS — NO SUBSTITUTE</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- P2 · Causation: Algorithmic Premium -->
+  <section class="slide s-doj-arg" data-part="us">
+    <div class="pbar"></div>
+    <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="dhead">
+      <div class="dkick" data-anim="left" style="--d:.1s">Causation · P2</div>
+      <h2 data-anim="rise" style="--d:.22s">The Algorithmic Premium &amp; Market Contagion</h2>
+    </div>
+    <div class="dbody">
+      <ul class="dbulle">
+        <li data-anim="rise" style="--d:.35s"><strong>The Isolated Premium:</strong> Advanced regression models isolate a statistically significant &#8220;RealPage Premium&#8221; over non-software properties.</li>
+        <li data-anim="rise" style="--d:.48s"><strong>Umbrella Pricing Mechanism:</strong> Artificially inflated benchmarks pull the entire market baseline upward, affecting non-users.</li>
+        <li data-anim="rise" style="--d:.61s"><strong>Systemic Suppression of Concessions:</strong> Software protocols explicitly eliminate traditional discounts (e.g., &#8220;one month free&#8221;) to enforce downward price rigidity.</li>
+      </ul>
+      <div class="dviz" data-anim="fade" style="--d:.4s">
+        <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="190" y="20" text-anchor="middle" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".12em">RENT INDEX (REGRESSION-CONTROLLED)</text>
+          <!-- Axes -->
+          <line x1="52" y1="240" x2="360" y2="240" stroke="rgba(239,233,218,.22)" stroke-width="1.5"/>
+          <line x1="52" y1="240" x2="52" y2="36" stroke="rgba(239,233,218,.22)" stroke-width="1.5"/>
+          <!-- Year labels -->
+          <text x="52" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2017</text>
+          <text x="155" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2019</text>
+          <text x="258" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2021</text>
+          <text x="360" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2023</text>
+          <!-- Tick marks -->
+          <line x1="155" y1="237" x2="155" y2="243" stroke="rgba(239,233,218,.22)" stroke-width="1"/>
+          <line x1="258" y1="237" x2="258" y2="243" stroke="rgba(239,233,218,.22)" stroke-width="1"/>
+          <!-- Non-software baseline (dashed grey, fades in) -->
+          <path d="M 52 200 C 140 192 230 170 360 148" stroke="rgba(239,233,218,.32)" stroke-width="2" stroke-dasharray="6 4" data-anim="fade" style="--d:.48s"/>
+          <text x="350" y="143" text-anchor="end" fill="rgba(239,233,218,.45)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.55s">non-software</text>
+          <!-- Shaded premium area (fades behind the gold line) -->
+          <path d="M 52 200 C 140 178 230 130 360 68 L 360 148 C 230 170 140 192 52 200 Z" fill="rgba(201,162,39,.07)" data-anim="fade" style="--d:.9s"/>
+          <!-- RealPage line (gold, draws itself in) -->
+          <path d="M 52 200 C 140 178 230 130 360 68" stroke="#C9A227" stroke-width="2.5" class="draw-path" style="--dl:390;--pd:.6s"/>
+          <circle cx="360" cy="68" r="4" fill="#C9A227" class="diag-badge" style="--d:1.15s"/>
+          <text x="350" y="62" text-anchor="end" fill="#C9A227" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:1.15s">RealPage</text>
+          <!-- Premium callout -->
+          <line x1="310" y1="96" x2="310" y2="140" stroke="rgba(201,162,39,.55)" stroke-width="1.5" stroke-dasharray="3 3" data-anim="fade" style="--d:1.28s"/>
+          <text x="318" y="120" fill="rgba(201,162,39,.8)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:1.32s">premium</text>
+          <!-- Umbrella arrow (non-user drag up) -->
+          <path d="M 280 148 C 295 143 300 138 310 140" stroke="rgba(239,233,218,.4)" stroke-width="1" stroke-dasharray="3 3" data-anim="fade" style="--d:1.4s"/>
+          <text x="240" y="160" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="8" data-anim="fade" style="--d:1.4s">umbrella effect</text>
+          <!-- Y axis label -->
+          <text x="30" y="140" text-anchor="middle" fill="rgba(239,233,218,.28)" font-family="IBM Plex Mono,monospace" font-size="8" transform="rotate(-90,30,140)">RENT INDEX</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- P3 · Coordinated Supply Suppression -->
+  <section class="slide s-doj-arg" data-part="us">
+    <div class="pbar"></div>
+    <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="dhead">
+      <div class="dkick" data-anim="left" style="--d:.1s">Operational Mechanics · P3</div>
+      <h2 data-anim="rise" style="--d:.22s">Coordinated Supply Suppression</h2>
+    </div>
+    <div class="dbody">
+      <ul class="dbulle">
+        <li data-anim="rise" style="--d:.35s"><strong>Horizontal Competitor-Data Pooling:</strong> The platform relies entirely on the exchange of nonpublic, real-time competitor data.</li>
+        <li data-anim="rise" style="--d:.48s"><strong>Horizontal Lease Staggering:</strong> Algorithmic coordination of lease expirations acts as a functional market-allocation scheme.</li>
+        <li data-anim="rise" style="--d:.61s"><strong>Revenue Protection Mode:</strong> Systemic suppression of the competitive instinct to lower rents, choosing vacancy to protect high price floors.</li>
+      </ul>
+      <div class="dviz" data-anim="fade" style="--d:.4s">
+        <svg viewBox="0 0 360 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="p3a" d="M 90 68 L 142 116"/>
+            <path id="p3b" d="M 270 68 L 218 116"/>
+            <path id="p3c" d="M 76 233 L 140 193"/>
+            <path id="p3d" d="M 284 233 L 220 193"/>
+          </defs>
+          <!-- Ripple rings pulse behind hub -->
+          <circle cx="180" cy="155" r="46" fill="none" stroke="rgba(155,34,38,.35)" stroke-width="1.5" class="diag-ripple" style="--d:.6s"/>
+          <circle cx="180" cy="155" r="46" fill="none" stroke="rgba(155,34,38,.22)" stroke-width="1.5" class="diag-ripple" style="--d:1.75s"/>
+          <!-- Center hub pops in -->
+          <circle cx="180" cy="155" r="46" fill="rgba(155,34,38,.2)" stroke="rgba(155,34,38,.65)" stroke-width="2" class="diag-node" style="--d:.45s"/>
+          <text x="180" y="151" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" data-anim="fade" style="--d:.62s">RealPage</text>
+          <text x="180" y="165" text-anchor="middle" fill="rgba(239,233,218,.5)" font-family="IBM Plex Mono,monospace" font-size="8.5" data-anim="fade" style="--d:.65s">clearinghouse</text>
+          <!-- Landlord nodes pop in staggered -->
+          <circle cx="65"  cy="52"  r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.28s"/>
+          <text x="65"  y="56"  text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.42s">Landlord A</text>
+          <circle cx="295" cy="52"  r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.35s"/>
+          <text x="295" y="56"  text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.48s">Landlord B</text>
+          <circle cx="52"  cy="255" r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.42s"/>
+          <text x="52"  y="259" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.55s">Landlord C</text>
+          <circle cx="308" cy="255" r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.50s"/>
+          <text x="308" y="259" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.62s">Landlord D</text>
+          <!-- Gold data-in lines + arrowheads (static — packets carry the motion) -->
+          <line x1="90"  y1="68"  x2="142" y2="116" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
+          <polygon points="138,108 142,116 134,114" fill="rgba(201,162,39,.6)"/>
+          <line x1="270" y1="68"  x2="218" y2="116" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
+          <polygon points="222,108 218,116 226,114" fill="rgba(201,162,39,.6)"/>
+          <line x1="76"  y1="233" x2="140" y2="193" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
+          <polygon points="136,201 140,193 132,194" fill="rgba(201,162,39,.6)"/>
+          <line x1="284" y1="233" x2="220" y2="193" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
+          <polygon points="224,201 220,193 228,194" fill="rgba(201,162,39,.6)"/>
+          <!-- Animated data packets ride each path toward hub -->
+          <circle r="3.5" fill="#C9A227" opacity=".9">
+            <animateMotion dur=".7s" repeatCount="indefinite" begin="0s"><mpath href="#p3a"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#C9A227" opacity=".9">
+            <animateMotion dur=".7s" repeatCount="indefinite" begin=".17s"><mpath href="#p3b"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#C9A227" opacity=".9">
+            <animateMotion dur=".7s" repeatCount="indefinite" begin=".35s"><mpath href="#p3c"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#C9A227" opacity=".9">
+            <animateMotion dur=".7s" repeatCount="indefinite" begin=".52s"><mpath href="#p3d"/></animateMotion>
+          </circle>
+          <!-- Red output dashes flow outward from hub -->
+          <line x1="148" y1="112" x2="94"  y2="68"  stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
+          </line>
+          <line x1="212" y1="112" x2="268" y2="68"  stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
+          </line>
+          <line x1="145" y1="195" x2="80"  y2="233" stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
+          </line>
+          <line x1="215" y1="195" x2="282" y2="233" stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
+            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
+          </line>
+          <!-- Legend -->
+          <line x1="18" y1="295" x2="36" y2="295" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
+          <text x="42" y="299" fill="rgba(239,233,218,.5)" font-family="IBM Plex Mono,monospace" font-size="8.5" data-anim="fade" style="--d:1.1s">data in (nonpublic)</text>
+          <line x1="190" y1="295" x2="208" y2="295" stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="214" y="299" fill="rgba(239,233,218,.5)" font-family="IBM Plex Mono,monospace" font-size="8.5" data-anim="fade" style="--d:1.15s">coordinated output</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- P4 · Class Certification -->
+  <section class="slide s-doj-arg" data-part="us">
+    <div class="pbar"></div>
+    <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+    <div class="dhead">
+      <div class="dkick" data-anim="left" style="--d:.1s">Class Certification · P4</div>
+      <h2 data-anim="rise" style="--d:.22s">Formulaic Injury &amp; The <em style="font-style:italic">Comcast</em> Model</h2>
+    </div>
+    <div class="dbody">
+      <ul class="dbulle">
+        <li data-anim="rise" style="--d:.35s"><strong>Formulaic Injury &amp; Commonality:</strong> Liability rests on a systemic, common distortion of the baseline starting price under Rule 23(b)(3).</li>
+        <li data-anim="rise" style="--d:.48s"><strong>Comcast v. Behrend Compliance:</strong> Hedonic regression models perfectly isolate the software-driven premium from individual unit variables.</li>
+        <li data-anim="rise" style="--d:.61s"><strong>Propensity Score Matching:</strong> Control benchmarks utilize mathematically paired markets to isolate the &#8220;but-for&#8221; competitive baseline.</li>
+      </ul>
+      <div class="dviz" data-anim="fade" style="--d:.4s">
+        <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="190" y="20" text-anchor="middle" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".12em">CLASS-WIDE INJURY MODEL</text>
+          <!-- Unit blocks grow up from baseline (staggered diag-bar on each group) -->
+          <g class="diag-bar" style="--d:.60s">
+            <rect x="38"  y="110" width="48" height="63" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
+            <text x="62"  y="140" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">Studio</text>
+          </g>
+          <g class="diag-bar" style="--d:.68s">
+            <rect x="100" y="90"  width="48" height="83" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
+            <text x="124" y="135" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">1 BR</text>
+          </g>
+          <g class="diag-bar" style="--d:.76s">
+            <rect x="162" y="100" width="48" height="73" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
+            <text x="186" y="140" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">2 BR</text>
+          </g>
+          <g class="diag-bar" style="--d:.84s">
+            <rect x="224" y="118" width="48" height="55" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
+            <text x="248" y="148" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">3 BR</text>
+          </g>
+          <g class="diag-bar" style="--d:.92s">
+            <rect x="286" y="105" width="48" height="68" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
+            <text x="310" y="142" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">Penthouse</text>
+          </g>
+          <!-- Inflated baseline pops in first (buildings need a floor to sit on) -->
+          <rect x="28" y="175" width="324" height="22" rx="4" fill="rgba(155,34,38,.3)" stroke="rgba(155,34,38,.7)" stroke-width="1.5" class="diag-node" style="--d:.48s"/>
+          <text x="190" y="190" text-anchor="middle" fill="rgba(239,233,218,.85)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:.5s">INFLATED PRICE BASELINE (SOFTWARE)</text>
+          <!-- But-for baseline fades in after inflated bar -->
+          <rect x="28" y="225" width="324" height="14" rx="4" fill="rgba(78,114,184,.15)" stroke="rgba(78,114,184,.5)" stroke-width="1.5" stroke-dasharray="6 4" data-anim="fade" style="--d:.8s"/>
+          <text x="190" y="236" text-anchor="middle" fill="rgba(78,114,184,.75)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.82s">but-for baseline</text>
+          <!-- Premium delta arrow reveals after both baselines -->
+          <g data-anim="fade" style="--d:1.0s">
+            <line x1="60" y1="197" x2="60" y2="225" stroke="rgba(201,162,39,.7)" stroke-width="1.5"/>
+            <polygon points="56,222 60,230 64,222" fill="rgba(201,162,39,.7)"/>
+            <polygon points="56,200 60,192 64,200" fill="rgba(201,162,39,.7)"/>
+            <text x="70" y="213" fill="rgba(201,162,39,.8)" font-family="IBM Plex Mono,monospace" font-size="8.5">Δ premium</text>
+          </g>
+          <!-- Comcast badge pops in -->
+          <rect x="228" y="258" width="148" height="26" rx="13" fill="rgba(201,162,39,.14)" stroke="rgba(201,162,39,.45)" stroke-width="1" class="diag-badge" style="--d:1.12s"/>
+          <text x="302" y="275" text-anchor="middle" fill="rgba(201,162,39,.9)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:1.15s">Comcast-compliant ✓</text>
+          <!-- Hedonic regression note -->
+          <text x="28" y="275" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="8" data-anim="fade" style="--d:1.2s">hedonic regression strips unit</text>
+          <text x="28" y="287" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="8" data-anim="fade" style="--d:1.22s">variables → isolates premium</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PART III · REALPAGE (the defense) ============ -->
   <!-- 3.1 open -->
   <section class="slide rp-bg" data-part="realpage">
@@ -859,23 +1199,68 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
     <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · Sherman Act</div><h2 data-anim="rise" style="--d:.2s">Section 1 — No Agreement</h2></div>
-    <div class="statute" data-anim="rise" style="position:absolute;left:84px;width:580px;top:168px;--d:.35s">
+    <div data-anim="rise" style="position:absolute;left:84px;width:580px;top:168px;--d:.35s"><div class="statute">
       <div class="sn">15 U.S.C. § 1</div>
       <div class="sq">"Every contract, combination… or conspiracy, in restraint of trade…"</div>
-    </div>
-    <div class="rp-point" data-anim="fade" style="top:328px;width:580px;--d:.6s">
+    </div></div>
+    <div class="rp-point" data-anim="fade" style="top:322px;width:580px;--d:.6s">
       <div class="rp-li"><span class="b">›</span><div><b>genuine concerted action</b> required</div></div>
       <div class="rp-li"><span class="b">?</span><div>same software ≠ <b>agreement</b></div></div>
       <div class="rp-li"><span class="b">≡</span><div>no direct communication between landlords</div></div>
       <div class="rp-li"><span class="b">✓</span><div><b>They did not agree.</b></div></div>
     </div>
-    <div class="rp-fill-bar" data-anim="fade" style="top:598px;--d:.85s;right:auto;width:580px">
+    <div class="rp-fill-bar" data-anim="fade" style="top:516px;--d:.85s;right:auto;width:580px">
       <span class="fi">⚖</span><span>Twombly standard — allegation must be <b>plausible, not merely conceivable</b></span>
     </div>
-    <div class="rp-aside-tall" data-anim="rise" style="--d:.75s">
-      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-      <div class="ov"></div>
-      <div class="lab"><div class="tg">key question</div><div class="tx">Was there<br>an agreement?</div></div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.65s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="spA" d="M 180 94 L 180 148"/>
+          <path id="spB" d="M 265 342 L 228 248"/>
+          <path id="spC" d="M 95 342 L 132 248"/>
+        </defs>
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">AGREEMENT TEST · §1</text>
+        <!-- Ripple behind RealPage hub -->
+        <circle cx="180" cy="200" r="52" fill="none" stroke="rgba(255,77,109,.25)" stroke-width="1.5" class="diag-ripple" style="--d:0s"/>
+        <circle cx="180" cy="200" r="52" fill="none" stroke="rgba(255,77,109,.2)" stroke-width="1.5" class="diag-ripple" style="--d:.9s"/>
+        <!-- RealPage hub -->
+        <circle cx="180" cy="200" r="52" fill="rgba(255,77,109,.09)" stroke="rgba(255,77,109,.45)" stroke-width="1.5" class="diag-float"/>
+        <text x="180" y="196" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="800" font-size="13">RealPage</text>
+        <text x="180" y="213" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">algorithm</text>
+        <!-- Landlord A (top) -->
+        <rect x="130" y="44" width="100" height="50" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="diag-float diag-node" style="--d:.2s"/>
+        <text x="180" y="67" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Landlord A</text>
+        <text x="180" y="83" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">independent</text>
+        <!-- Landlord B -->
+        <rect x="248" y="340" width="100" height="50" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="diag-float-b diag-node" style="--d:.35s"/>
+        <text x="298" y="363" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Landlord B</text>
+        <text x="298" y="379" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">independent</text>
+        <!-- Landlord C -->
+        <rect x="12" y="340" width="100" height="50" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="diag-float-c diag-node" style="--d:.5s"/>
+        <text x="62" y="363" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Landlord C</text>
+        <text x="62" y="379" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">independent</text>
+        <!-- Spoke A→hub: flowing -->
+        <line x1="180" y1="94" x2="180" y2="148" stroke="#5E7E63" stroke-width="1.8" class="flow-dash"/>
+        <polygon points="180,150 176,140 184,140" fill="#5E7E63" opacity=".7"/>
+        <!-- Packet A -->
+        <circle r="4" fill="rgba(94,126,99,.75)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.3s"><mpath href="#spA"/></animateMotion></circle>
+        <!-- Spoke B→hub: flowing -->
+        <line x1="265" y1="342" x2="228" y2="248" stroke="#5E7E63" stroke-width="1.8" class="flow-dash-b"/>
+        <polygon points="230,250 222,244 234,240" fill="#5E7E63" opacity=".7"/>
+        <!-- Packet B -->
+        <circle r="4" fill="rgba(94,126,99,.75)"><animateMotion dur="1.5s" repeatCount="indefinite" begin="0.1s"><mpath href="#spB"/></animateMotion></circle>
+        <!-- Spoke C→hub: flowing -->
+        <line x1="95" y1="342" x2="132" y2="248" stroke="#5E7E63" stroke-width="1.8" class="flow-dash-c"/>
+        <polygon points="130,250 126,240 138,244" fill="#5E7E63" opacity=".7"/>
+        <!-- Packet C -->
+        <circle r="4" fill="rgba(94,126,99,.75)"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.7s"><mpath href="#spC"/></animateMotion></circle>
+        <!-- Phantom rim B–C, crossed -->
+        <line x1="112" y1="365" x2="248" y2="365" stroke="rgba(155,34,38,.28)" stroke-width="1.2" stroke-dasharray="5 5"/>
+        <text x="180" y="374" text-anchor="middle" fill="#9B2226" font-family="Inter,sans-serif" font-size="26" font-weight="900" opacity=".8" class="diag-x" style="--d:.9s">✕</text>
+        <!-- Footer -->
+        <text x="180" y="444" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">no landlord-to-landlord link</text>
+        <text x="180" y="460" text-anchor="middle" fill="#9B2226" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">spokes only · no rim · §1 fails</text>
+      </svg>
     </div>
   </section>
 
@@ -959,10 +1344,41 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
       <div class="nr-r">no relationship</div>
     </div>
     <!-- Right photo panel -->
-    <div class="rp-aside-tall" data-anim="rise" style="--d:.7s">
-      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-      <div class="ov"></div>
-      <div class="lab"><div class="tg">the test</div><div class="tx">Conscious<br>parallelism only</div></div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.65s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">RENT INDEX · PARALLEL CONDUCT</text>
+        <!-- Grid lines -->
+        <line x1="60" y1="380" x2="310" y2="380" stroke="rgba(43,45,51,.12)" stroke-width="1"/>
+        <line x1="60" y1="320" x2="310" y2="320" stroke="rgba(43,45,51,.07)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="60" y1="260" x2="310" y2="260" stroke="rgba(43,45,51,.07)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="60" y1="200" x2="310" y2="200" stroke="rgba(43,45,51,.07)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="60" y1="140" x2="310" y2="140" stroke="rgba(43,45,51,.07)" stroke-width="1" stroke-dasharray="4 4"/>
+        <!-- Y-axis -->
+        <line x1="60" y1="60" x2="60" y2="380" stroke="rgba(43,45,51,.2)" stroke-width="1.2"/>
+        <!-- Building A bars (sage green) - staggered bar grow -->
+        <rect x="80" y="330" width="38" height="50" rx="4" fill="rgba(94,126,99,.22)" stroke="rgba(94,126,99,.5)" stroke-width="1.2" class="diag-bar" style="--d:.4s"/>
+        <rect x="80" y="240" width="38" height="140" rx="4" fill="rgba(94,126,99,.22)" stroke="rgba(94,126,99,.5)" stroke-width="1.2" class="diag-bar" style="--d:.55s"/>
+        <rect x="80" y="160" width="38" height="220" rx="4" fill="rgba(94,126,99,.35)" stroke="rgba(94,126,99,.65)" stroke-width="1.5" class="diag-bar" style="--d:.7s"/>
+        <!-- Building B bars (coral) -->
+        <rect x="188" y="320" width="38" height="60" rx="4" fill="rgba(255,77,109,.18)" stroke="rgba(255,77,109,.45)" stroke-width="1.2" class="diag-bar" style="--d:.48s"/>
+        <rect x="188" y="235" width="38" height="145" rx="4" fill="rgba(255,77,109,.18)" stroke="rgba(255,77,109,.45)" stroke-width="1.2" class="diag-bar" style="--d:.63s"/>
+        <rect x="188" y="150" width="38" height="230" rx="4" fill="rgba(255,77,109,.28)" stroke="rgba(255,77,109,.6)" stroke-width="1.5" class="diag-bar" style="--d:.78s"/>
+        <!-- X-axis labels -->
+        <text x="99" y="398" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">2021</text>
+        <text x="99" y="410" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">2022</text>
+        <text x="99" y="422" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">2023</text>
+        <text x="207" y="398" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">2021</text>
+        <text x="207" y="410" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">2022</text>
+        <text x="207" y="422" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">2023</text>
+        <!-- Column labels -->
+        <text x="99" y="442" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Building A</text>
+        <text x="207" y="442" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Building B</text>
+        <!-- No connection: X stamps in -->
+        <text x="155" y="195" text-anchor="middle" fill="rgba(155,34,38,.55)" font-family="Inter,sans-serif" font-size="22" font-weight="900" class="diag-x" style="--d:1s">✕</text>
+        <!-- "same direction" label -->
+        <rect x="60" y="52" width="246" height="34" rx="8" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.2)" stroke-width="1" class="diag-node" style="--d:.3s"/>
+        <text x="183" y="73" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing=".04em">same direction ≠ conspiracy</text>
+      </svg>
     </div>
   </section>
 
@@ -976,7 +1392,27 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
       <div class="bubble" data-anim="pop" style="--d:.68s;margin-left:0">"Maximize revenue per available unit."</div>
     </div>
     <div class="rp-aside-tall" data-anim="rise" style="--d:.5s;width:460px">
-      <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 460 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Abstract background: two paths from a common start -->
+        <circle cx="230" cy="100" r="34" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.3)" stroke-width="1.5"/>
+        <text x="230" y="104" text-anchor="middle" fill="rgba(43,45,51,.55)" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">aspiration</text>
+        <!-- Path A: aspiration → revenue (OK) -->
+        <path d="M 215 134 Q 140 220 120 320" stroke="rgba(94,126,99,.35)" stroke-width="2" stroke-dasharray="6 5"/>
+        <circle cx="110" cy="360" r="28" fill="rgba(94,126,99,.15)" stroke="rgba(94,126,99,.4)" stroke-width="1.5"/>
+        <text x="110" y="356" text-anchor="middle" fill="rgba(43,45,51,.55)" font-family="IBM Plex Mono,monospace" font-size="9">higher</text>
+        <text x="110" y="370" text-anchor="middle" fill="rgba(43,45,51,.55)" font-family="IBM Plex Mono,monospace" font-size="9">revenue</text>
+        <text x="110" y="400" text-anchor="middle" fill="rgba(94,126,99,.7)" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">✓ legal</text>
+        <!-- Path B: aspiration → conspiracy (blocked) -->
+        <path d="M 245 134 Q 320 220 340 300" stroke="rgba(155,34,38,.25)" stroke-width="2" stroke-dasharray="5 6"/>
+        <circle cx="350" cy="340" r="28" fill="rgba(155,34,38,.08)" stroke="rgba(155,34,38,.3)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="350" y="336" text-anchor="middle" fill="rgba(155,34,38,.45)" font-family="IBM Plex Mono,monospace" font-size="9">conspire</text>
+        <text x="350" y="350" text-anchor="middle" fill="rgba(155,34,38,.45)" font-family="IBM Plex Mono,monospace" font-size="9">w/ rivals</text>
+        <text x="350" y="382" text-anchor="middle" fill="#9B2226" font-family="Inter,sans-serif" font-size="22" font-weight="900" opacity=".65">✕</text>
+        <!-- Label paths -->
+        <text x="84" y="444" text-anchor="middle" fill="rgba(94,126,99,.65)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".06em">ASPIRATIONAL</text>
+        <text x="350" y="420" text-anchor="middle" fill="rgba(155,34,38,.55)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".06em">CONSPIRACY</text>
+        <text x="350" y="434" text-anchor="middle" fill="rgba(155,34,38,.55)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".04em">(not proven)</text>
+      </svg>
       <div class="ov"></div>
       <div class="lab">
         <div class="tg">the defense</div>
@@ -994,23 +1430,56 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
     <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.2 · Sherman Act</div><h2 data-anim="rise" style="--d:.2s">Section 2 — No Monopolization</h2></div>
-    <div class="statute" data-anim="rise" style="position:absolute;left:84px;width:580px;top:164px;--d:.35s">
+    <div data-anim="rise" style="position:absolute;left:84px;width:580px;top:192px;--d:.35s"><div class="statute">
       <div class="sn">United States v. Grinnell — two prongs</div>
       <div class="sq">"as distinguished from growth… from a <b style="font-style:normal">superior product.</b>"</div>
-    </div>
-    <div class="rp-point" data-anim="fade" style="top:318px;width:580px;--d:.6s">
+    </div></div>
+    <div class="rp-point" data-anim="fade" style="top:340px;width:580px;--d:.6s">
       <div class="rp-li"><span class="b">✓</span><div>market share ≠ illegal · <b>exclusionary conduct</b> required</div></div>
       <div class="rp-li"><span class="b">★</span><div><b>superior product</b> — YieldStar won on merit</div></div>
       <div class="rp-li"><span class="b">⚡</span><div>Yardi competes head-to-head · low switching costs</div></div>
       <div class="rp-li"><span class="b">✓</span><div>no willful acquisition of monopoly power</div></div>
     </div>
-    <div class="rp-fill-bar" data-anim="fade" style="top:600px;--d:.85s;right:auto;width:580px">
+    <div class="rp-fill-bar" data-anim="fade" style="top:520px;--d:.85s;right:auto;width:580px">
       <span class="fi">📊</span><span>Grinnell prong 2 — <b>no exclusionary conduct</b> proven · growth was organic</span>
     </div>
-    <div class="rp-aside-tall" data-anim="rise" style="--d:.75s">
-      <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-      <div class="ov"></div>
-      <div class="lab"><div class="tg">Grinnell test</div><div class="tx">Superior<br>product wins</div></div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.65s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">GRINNELL TEST · §2</text>
+        <!-- "Both required" label -->
+        <text x="180" y="54" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".08em">violation requires BOTH prongs</text>
+        <!-- Prong 1: Market Power -->
+        <rect x="26" y="72" width="140" height="150" rx="12" fill="rgba(201,162,39,.08)" stroke="rgba(201,162,39,.5)" stroke-width="1.5" class="diag-node" style="--d:.3s"/>
+        <text x="96" y="100" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".1em">PRONG 1</text>
+        <text x="96" y="120" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="700" font-size="13">Market</text>
+        <text x="96" y="137" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="700" font-size="13">Power</text>
+        <!-- Gold partial fill bar animates in -->
+        <rect x="40" y="160" width="108" height="10" rx="5" fill="rgba(201,162,39,.18)" stroke="rgba(201,162,39,.3)" stroke-width="1"/>
+        <rect x="40" y="160" width="68" height="10" rx="5" fill="rgba(201,162,39,.6)" class="diag-bar" style="--d:.7s;transform-origin:left center"/>
+        <text x="96" y="192" text-anchor="middle" fill="#a9791a" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600">~ partial</text>
+        <text x="96" y="208" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">(contested)</text>
+        <!-- Prong 2: Exclusionary Conduct -->
+        <rect x="194" y="72" width="140" height="150" rx="12" fill="rgba(155,34,38,.06)" stroke="rgba(155,34,38,.4)" stroke-width="1.5" class="diag-node" style="--d:.45s"/>
+        <text x="264" y="100" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".1em">PRONG 2</text>
+        <text x="264" y="120" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="700" font-size="13">Exclusionary</text>
+        <text x="264" y="137" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="700" font-size="13">Conduct</text>
+        <text x="264" y="188" text-anchor="middle" fill="#9B2226" font-family="Inter,sans-serif" font-size="36" font-weight="900" class="diag-x" style="--d:.85s">✕</text>
+        <text x="264" y="210" text-anchor="middle" fill="#9B2226" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">not proven</text>
+        <!-- AND gate with flow lines -->
+        <text x="180" y="254" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing=".08em">AND</text>
+        <line x1="96" y1="222" x2="96" y2="264" stroke="rgba(43,45,51,.3)" stroke-width="1.5" class="flow-dash"/>
+        <line x1="264" y1="222" x2="264" y2="264" stroke="rgba(155,34,38,.4)" stroke-width="1.5" class="flow-dash-b"/>
+        <line x1="96" y1="264" x2="264" y2="264" stroke="rgba(43,45,51,.2)" stroke-width="1.2"/>
+        <line x1="180" y1="264" x2="180" y2="290" stroke="rgba(43,45,51,.3)" stroke-width="1.5" class="flow-dash-c"/>
+        <!-- Result with verdict glow -->
+        <rect x="86" y="290" width="188" height="70" rx="12" fill="rgba(155,34,38,.08)" stroke="rgba(155,34,38,.45)" stroke-width="1.5" class="diag-verdict diag-node" style="--d:.7s"/>
+        <text x="180" y="320" text-anchor="middle" fill="#9B2226" font-family="Inter,sans-serif" font-size="28" font-weight="900" class="diag-x" style="--d:1s">✕</text>
+        <text x="180" y="346" text-anchor="middle" fill="#9B2226" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">§2 fails · prong 2 absent</text>
+        <!-- YieldStar note -->
+        <rect x="40" y="390" width="280" height="48" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.22)" stroke-width="1" class="diag-badge" style="--d:.8s"/>
+        <text x="180" y="411" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">YieldStar won on merit</text>
+        <text x="180" y="428" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">superior product · organic growth</text>
+      </svg>
     </div>
   </section>
 
@@ -1030,10 +1499,41 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="rp-fill-bar" data-anim="fade" style="top:558px;left:84px;right:auto;width:580px;--d:.8s">
       <span class="fi">🏙️</span><span>Market entry by Entrata, MRI, Yardi — <b>low switching costs</b></span>
     </div>
-    <div class="rp-aside-tall" data-anim="rise" style="--d:.65s">
-      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
-      <div class="ov"></div>
-      <div class="lab"><div class="tg">open market</div><div class="tx">Enter &amp; exit<br>freely</div></div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.6s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">COMPETITIVE MARKET · §2</text>
+        <!-- Market boundary circle -->
+        <circle cx="180" cy="230" r="140" fill="rgba(94,126,99,.04)" stroke="rgba(94,126,99,.2)" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <text x="180" y="58" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">rental software market</text>
+        <!-- Ripple rings behind RealPage -->
+        <circle cx="180" cy="230" r="36" fill="none" stroke="rgba(255,77,109,.22)" stroke-width="1.5" class="diag-ripple" style="--d:0s"/>
+        <circle cx="180" cy="230" r="36" fill="none" stroke="rgba(255,77,109,.18)" stroke-width="1.5" class="diag-ripple" style="--d:1.1s"/>
+        <!-- RealPage node (center) -->
+        <circle cx="180" cy="230" r="36" fill="rgba(255,77,109,.1)" stroke="rgba(255,77,109,.45)" stroke-width="1.5" class="diag-float"/>
+        <text x="180" y="226" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="800" font-size="11">RealPage</text>
+        <text x="180" y="242" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">incumbent</text>
+        <!-- Competitors: node pop-in staggered -->
+        <circle cx="80" cy="150" r="28" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.4)" stroke-width="1.2" class="diag-float-b diag-node" style="--d:.3s"/>
+        <text x="80" y="154" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9.5">Yardi</text>
+        <circle cx="280" cy="150" r="28" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.4)" stroke-width="1.2" class="diag-float-c diag-node" style="--d:.45s"/>
+        <text x="280" y="154" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9.5">Entrata</text>
+        <circle cx="100" cy="320" r="24" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.4)" stroke-width="1.2" class="diag-float diag-node" style="--d:.6s"/>
+        <text x="100" y="324" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9">MRI</text>
+        <circle cx="280" cy="320" r="24" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.4)" stroke-width="1.2" class="diag-float-b diag-node" style="--d:.75s"/>
+        <text x="280" y="324" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9">others</text>
+        <!-- Entry arrow: continuously flowing -->
+        <line x1="180" y1="85" x2="180" y2="73" stroke="#5E7E63" stroke-width="2.5" class="flow-dash"/>
+        <polygon points="180,70 175,80 185,80" fill="#5E7E63"/>
+        <text x="180" y="64" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8.5">enter</text>
+        <!-- Exit arrow: flowing -->
+        <line x1="310" y1="230" x2="326" y2="230" stroke="rgba(155,34,38,.5)" stroke-width="2.5" class="flow-dash-b"/>
+        <polygon points="330,226 338,230 330,234" fill="rgba(155,34,38,.5)"/>
+        <text x="344" y="234" text-anchor="middle" fill="rgba(155,34,38,.6)" font-family="IBM Plex Mono,monospace" font-size="8.5">exit</text>
+        <!-- Low switching cost badge -->
+        <rect x="52" y="404" width="256" height="38" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.25)" stroke-width="1" class="diag-verdict-pos diag-badge" style="--d:.8s"/>
+        <text x="180" y="421" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5">low switching costs</text>
+        <text x="180" y="435" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">no durable monopoly power</text>
+      </svg>
     </div>
   </section>
 
@@ -1064,6 +1564,456 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ============ PART III · SECOND SPEAKER (2.1 – 2.3) ============ -->
+
+  <!-- G0 · pivot / second-speaker intro -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2nd Speaker</div><h2 data-anim="rise" style="--d:.2s">Market, Constitution &amp; Framing</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:172px;width:560px;--d:.35s">
+      <div class="rp-li"><span class="b">$</span><div><b>Economic reality &amp; quantification</b></div></div>
+      <div class="rp-li"><span class="b">§</span><div>Even past <b>§1/§2 structural flaws</b> → <b>no valid damages data</b></div></div>
+      <div class="rp-li"><span class="b">✓</span><div>RealPage = <b>efficient tool</b> — <b>legally sound, procompetitive, protected</b></div></div>
+    </div>
+    <div class="rp-cards" data-anim="rise" style="top:440px;--d:.55s">
+      <div class="rp-c"><div class="cn">2.1 · Lawful Exchange</div><div class="ct">AI &amp; IP · Information Sharing · First Amendment</div></div>
+      <div class="rp-c"><div class="cn">2.2 · Rule of Reason</div><div class="ct">No market power · no causal effects</div></div>
+      <div class="rp-c"><div class="cn">2.3 · Framing &amp; Precedent</div><div class="ct">No class action · Theatre Enterprises · Sorrell</div></div>
+    </div>
+  </section>
+
+  <!-- G1 · 2.1 AI & IP: Code and Data -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.1 · AI &amp; IP Law</div><h2 data-anim="rise" style="--d:.2s">Code and Data</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:172px;width:580px;--d:.35s">
+      <div class="rp-li"><span class="b">⚖</span><div><b>AI &amp; IP law perspective</b></div></div>
+      <div class="rp-li"><span class="b">©</span><div><b>Code = protected expression</b></div></div>
+      <div class="rp-li"><span class="b">↔</span><div><b>Data aggregation = lawful information exchange</b></div></div>
+    </div>
+    <div class="rp-cards" data-anim="rise" style="top:430px;right:auto;left:84px;width:580px;--d:.55s">
+      <div class="rp-c"><div class="cn">Software</div><div class="ct">Code = protected expression</div><div class="cd">17 U.S.C. — copyright in algorithmic logic</div></div>
+      <div class="rp-c"><div class="cn">Data</div><div class="ct">Aggregation = lawful exchange</div><div class="cd">Not a conspiracy — public pricing signals</div></div>
+    </div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.55s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">AI &amp; IP LAW · 17 U.S.C.</text>
+        <defs><path id="cA" d="M 110 108 L 134 108"/><path id="cB" d="M 204 108 L 228 108"/><path id="dA" d="M 110 302 L 134 302"/><path id="dB" d="M 204 302 L 228 302"/></defs>
+        <!-- Track 1: Code / Copyright -->
+        <rect x="26" y="50" width="300" height="170" rx="12" fill="rgba(94,126,99,.05)" stroke="rgba(94,126,99,.2)" stroke-width="1" class="diag-node" style="--d:.2s"/>
+        <text x="42" y="74" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".1em">CODE TRACK</text>
+        <!-- Code → © → Expression -->
+        <rect x="38" y="84" width="72" height="48" rx="8" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.4)" stroke-width="1.2" class="diag-node" style="--d:.35s"/>
+        <text x="74" y="109" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600">{ code }</text>
+        <line x1="110" y1="108" x2="134" y2="108" stroke="#5E7E63" stroke-width="1.5" class="flow-dash"/>
+        <polygon points="134,104 142,108 134,112" fill="#5E7E63" opacity=".8"/>
+        <circle r="3.5" fill="rgba(94,126,99,.8)"><animateMotion dur="1s" repeatCount="indefinite" begin="0.4s"><mpath href="#cA"/></animateMotion></circle>
+        <rect x="144" y="84" width="60" height="48" rx="8" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.4)" stroke-width="1.2" class="diag-node" style="--d:.5s"/>
+        <text x="174" y="104" text-anchor="middle" fill="#5E7E63" font-family="Inter,sans-serif" font-size="22" font-weight="900">©</text>
+        <text x="174" y="124" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">protect</text>
+        <line x1="204" y1="108" x2="228" y2="108" stroke="#5E7E63" stroke-width="1.5" class="flow-dash-b"/>
+        <polygon points="228,104 236,108 228,112" fill="#5E7E63" opacity=".8"/>
+        <circle r="3.5" fill="rgba(94,126,99,.8)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.1s"><mpath href="#cB"/></animateMotion></circle>
+        <rect x="238" y="84" width="72" height="48" rx="8" fill="rgba(94,126,99,.2)" stroke="rgba(94,126,99,.55)" stroke-width="1.5" class="diag-node diag-verdict-pos" style="--d:.65s"/>
+        <text x="274" y="104" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">protected</text>
+        <text x="274" y="118" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">expression</text>
+        <text x="274" y="144" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing=".04em">17 U.S.C.</text>
+        <!-- Track 2: Data / Exchange -->
+        <rect x="26" y="245" width="300" height="170" rx="12" fill="rgba(91,107,140,.04)" stroke="rgba(91,107,140,.2)" stroke-width="1" class="diag-node" style="--d:.4s"/>
+        <text x="42" y="268" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".1em">DATA TRACK</text>
+        <!-- Data → aggregate → lawful -->
+        <rect x="38" y="278" width="72" height="48" rx="8" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="diag-node" style="--d:.55s"/>
+        <text x="74" y="298" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">raw</text>
+        <text x="74" y="312" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">data</text>
+        <line x1="110" y1="302" x2="134" y2="302" stroke="#5B6B8C" stroke-width="1.5" class="flow-dash-c"/>
+        <polygon points="134,298 142,302 134,306" fill="#5B6B8C" opacity=".8"/>
+        <circle r="3.5" fill="rgba(91,107,140,.8)"><animateMotion dur="1s" repeatCount="indefinite" begin="0.6s"><mpath href="#dA"/></animateMotion></circle>
+        <rect x="144" y="278" width="60" height="48" rx="8" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="diag-node" style="--d:.7s"/>
+        <text x="174" y="298" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">aggre-</text>
+        <text x="174" y="312" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">gate</text>
+        <line x1="204" y1="302" x2="228" y2="302" stroke="#5B6B8C" stroke-width="1.5" class="flow-dash"/>
+        <polygon points="228,298 236,302 228,306" fill="#5B6B8C" opacity=".8"/>
+        <circle r="3.5" fill="rgba(91,107,140,.8)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.2s"><mpath href="#dB"/></animateMotion></circle>
+        <rect x="238" y="278" width="72" height="48" rx="8" fill="rgba(91,107,140,.18)" stroke="rgba(91,107,140,.45)" stroke-width="1.5" class="diag-node diag-verdict-pos" style="--d:.85s"/>
+        <text x="274" y="298" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">lawful</text>
+        <text x="274" y="312" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">exchange</text>
+        <text x="274" y="338" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing=".04em">public signals</text>
+        <!-- Both = RealPage -->
+        <rect x="66" y="442" width="228" height="18" rx="5" fill="rgba(255,77,109,.08)" stroke="rgba(255,77,109,.2)" stroke-width="1" class="diag-badge" style="--d:1s"/>
+        <text x="180" y="455" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">RealPage = both · fully protected</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- G2 · 2.1 Information Sharing Is Procompetitive -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.1 · Precedent</div><h2 data-anim="rise" style="--d:.2s">Sharing Information Is Procompetitive</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:276px;width:560px;--d:.38s">
+      <div class="rp-li"><span class="b">✓</span><div><b>Supreme Court precedent</b> — sharing information → <b>rational production choices</b></div></div>
+      <div class="rp-li"><span class="b">≠</span><div>Industry-wide pricing data ≠ <b>per se unlawful</b> — intent &amp; effect matter</div></div>
+      <div class="rp-li"><span class="b">↑</span><div>Efficient pricing signals → <b>better market allocation</b>, not harm</div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:488px;right:auto;width:560px;--d:.58s">
+      <span class="fi">📊</span><span>Information exchange is <b>core to how competitive markets function</b></span>
+    </div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.5s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><path id="pA" d="M 56 92 L 155 155"/><path id="pB" d="M 180 92 L 180 153"/><path id="pC" d="M 304 92 L 205 155"/><path id="pD" d="M 180 211 L 180 241"/><path id="pE" d="M 180 307 L 180 337"/></defs>
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">PROCOMPETITIVE FLOW</text>
+        <!-- Three landlord nodes at top -->
+        <rect x="14" y="42" width="84" height="50" rx="8" fill="rgba(91,107,140,.09)" stroke="rgba(91,107,140,.28)" stroke-width="1.2" class="diag-float diag-node" style="--d:.25s"/>
+        <text x="56" y="62" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Landlord A</text>
+        <text x="56" y="76" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">vacancy data</text>
+        <rect x="138" y="42" width="84" height="50" rx="8" fill="rgba(91,107,140,.09)" stroke="rgba(91,107,140,.28)" stroke-width="1.2" class="diag-float-b diag-node" style="--d:.4s"/>
+        <text x="180" y="62" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Landlord B</text>
+        <text x="180" y="76" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">lease comps</text>
+        <rect x="262" y="42" width="84" height="50" rx="8" fill="rgba(91,107,140,.09)" stroke="rgba(91,107,140,.28)" stroke-width="1.2" class="diag-float-c diag-node" style="--d:.55s"/>
+        <text x="304" y="62" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Landlord C</text>
+        <text x="304" y="76" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">demand signals</text>
+        <!-- Arrows converging to aggregator -->
+        <line x1="56" y1="92" x2="155" y2="155" stroke="rgba(91,107,140,.3)" stroke-width="1.4" class="flow-dash"/>
+        <line x1="180" y1="92" x2="180" y2="153" stroke="rgba(91,107,140,.3)" stroke-width="1.4" class="flow-dash-b"/>
+        <line x1="304" y1="92" x2="205" y2="155" stroke="rgba(91,107,140,.3)" stroke-width="1.4" class="flow-dash-c"/>
+        <circle r="3.5" fill="rgba(91,107,140,.75)"><animateMotion dur="1.1s" repeatCount="indefinite" begin="0s"><mpath href="#pA"/></animateMotion></circle>
+        <circle r="3.5" fill="rgba(91,107,140,.75)"><animateMotion dur="1s" repeatCount="indefinite" begin="0.3s"><mpath href="#pB"/></animateMotion></circle>
+        <circle r="3.5" fill="rgba(91,107,140,.75)"><animateMotion dur="1.1s" repeatCount="indefinite" begin="0.6s"><mpath href="#pC"/></animateMotion></circle>
+        <!-- Aggregator: RealPage -->
+        <rect x="100" y="157" width="160" height="54" rx="10" fill="rgba(201,162,39,.1)" stroke="rgba(201,162,39,.38)" stroke-width="1.5" class="diag-float-b diag-node" style="--d:.7s"/>
+        <text x="180" y="180" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">RealPage</text>
+        <text x="180" y="196" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">anonymised · aggregated</text>
+        <!-- Arrow down -->
+        <line x1="180" y1="211" x2="180" y2="241" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="flow-dash"/>
+        <polygon points="175,239 180,249 185,239" fill="rgba(94,126,99,.6)"/>
+        <circle r="3.5" fill="rgba(94,126,99,.75)"><animateMotion dur="0.8s" repeatCount="indefinite" begin="0.2s"><mpath href="#pD"/></animateMotion></circle>
+        <!-- Efficient Pricing Signal -->
+        <rect x="88" y="253" width="184" height="54" rx="10" fill="rgba(94,126,99,.1)" stroke="rgba(94,126,99,.38)" stroke-width="1.5" class="diag-float-c diag-node" style="--d:.85s"/>
+        <text x="180" y="276" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">Price signal</text>
+        <text x="180" y="292" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8">rational · market-clearing</text>
+        <!-- Arrow down -->
+        <line x1="180" y1="307" x2="180" y2="337" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="flow-dash-b"/>
+        <polygon points="175,335 180,345 185,335" fill="rgba(94,126,99,.6)"/>
+        <circle r="3.5" fill="rgba(94,126,99,.75)"><animateMotion dur="0.8s" repeatCount="indefinite" begin="0.5s"><mpath href="#pE"/></animateMotion></circle>
+        <!-- Market outcome -->
+        <rect x="76" y="349" width="208" height="54" rx="10" fill="rgba(94,126,99,.15)" stroke="rgba(94,126,99,.45)" stroke-width="1.8" class="diag-node diag-verdict-pos" style="--d:1s"/>
+        <text x="180" y="372" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">Better allocation</text>
+        <text x="180" y="388" text-anchor="middle" fill="#3d6b42" font-family="IBM Plex Mono,monospace" font-size="8.5">procompetitive outcome ✓</text>
+        <!-- Bottom note -->
+        <rect x="30" y="424" width="300" height="20" rx="5" fill="rgba(91,107,140,.06)" stroke="rgba(91,107,140,.18)" stroke-width="1" class="diag-badge" style="--d:1.2s"/>
+        <text x="180" y="438" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">SCOTUS · lawful market information flow</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- G3 · 2.1 First Amendment Protection -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead" style="right:556px"><div class="rk" data-anim="left" style="--d:.1s">2.1 · First Amendment</div><h2 data-anim="rise" style="--d:.2s">Algorithm Output = Protected Speech</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:240px;width:580px;--d:.35s">
+      <div class="rp-li"><span class="b">1A</span><div><b>First Amendment</b> — algorithm output = <b>protected speech</b></div></div>
+      <div class="rp-li"><span class="b">→</span><div><b>Publishes a prediction</b> — does <b>not dictate or enforce</b> price</div></div>
+      <div class="rp-li"><span class="b">!</span><div>A ban = <b>dangerous precedent</b> → criminalizing <b>data analytics &amp; econometric modeling</b></div></div>
+    </div>
+    <div class="no-rim" data-anim="fade" style="--d:.7s;left:84px;right:auto;width:580px;bottom:auto;top:450px;justify-content:flex-start">
+      <div class="nr-n">📡 RealPage output</div>
+      <span class="nr-x">→</span>
+      <div class="nr-n">suggestion only</div>
+      <span class="nr-x">≠</span>
+      <div class="nr-r" style="background:rgba(94,126,99,.1);border-color:rgba(94,126,99,.35);color:#3d6b42">mandate or enforcement</div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:548px;right:auto;width:580px;--d:.85s">
+      <span class="fi">🛡</span><span>Sorrell v. IMS Health — <b>data analytics = protected speech</b></span>
+    </div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.55s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><path id="g3A" d="M 180 90 L 180 120"/><path id="g3B" d="M 180 188 L 180 216"/><path id="g3C" d="M 180 288 L 180 318"/></defs>
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">1ST AMENDMENT · SORRELL</text>
+        <!-- Step 1: Market Data Input -->
+        <rect x="100" y="44" width="160" height="46" rx="9" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="diag-float diag-node" style="--d:.3s"/>
+        <text x="180" y="65" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">market data</text>
+        <text x="180" y="80" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">vacancy · comps · demand</text>
+        <!-- Arrow down -->
+        <line x1="180" y1="90" x2="180" y2="120" stroke="#5B6B8C" stroke-width="1.5" class="flow-dash"/>
+        <polygon points="175,118 180,128 185,118" fill="#5B6B8C" opacity=".7"/>
+        <circle r="3.5" fill="rgba(91,107,140,.8)"><animateMotion dur="0.9s" repeatCount="indefinite" begin="0.1s"><mpath href="#g3A"/></animateMotion></circle>
+        <!-- Step 2: AI Model -->
+        <rect x="94" y="132" width="172" height="56" rx="9" fill="rgba(201,162,39,.08)" stroke="rgba(201,162,39,.35)" stroke-width="1.5" class="diag-float-b diag-node" style="--d:.5s"/>
+        <text x="180" y="155" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">AI pricing model</text>
+        <text x="180" y="170" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">YieldStar · trained on history</text>
+        <text x="180" y="183" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">protected expression</text>
+        <!-- Arrow down -->
+        <line x1="180" y1="188" x2="180" y2="216" stroke="#5B6B8C" stroke-width="1.5" class="flow-dash-b"/>
+        <polygon points="175,214 180,224 185,214" fill="#5B6B8C" opacity=".7"/>
+        <circle r="3.5" fill="rgba(201,162,39,.8)"><animateMotion dur="0.9s" repeatCount="indefinite" begin="0.4s"><mpath href="#g3B"/></animateMotion></circle>
+        <!-- Step 3: Recommendation with 1A shield -->
+        <rect x="88" y="228" width="184" height="60" rx="9" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.35)" stroke-width="1.5" class="diag-float-c diag-node" style="--d:.7s"/>
+        <text x="180" y="250" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">recommendation</text>
+        <text x="156" y="266" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8.5">rent: $1,847</text>
+        <!-- 1A shield badge -->
+        <rect x="196" y="258" width="64" height="22" rx="5" fill="rgba(94,126,99,.18)" stroke="rgba(94,126,99,.5)" stroke-width="1" class="diag-badge" style="--d:.9s"/>
+        <text x="228" y="273" text-anchor="middle" fill="#3d6b42" font-family="IBM Plex Mono,monospace" font-size="8.5" font-weight="700">1A protected</text>
+        <!-- Arrow down -->
+        <line x1="180" y1="288" x2="180" y2="318" stroke="#5B6B8C" stroke-width="1.5" class="flow-dash-c"/>
+        <polygon points="175,316 180,326 185,316" fill="#5B6B8C" opacity=".7"/>
+        <circle r="3.5" fill="rgba(94,126,99,.8)"><animateMotion dur="0.9s" repeatCount="indefinite" begin="0.7s"><mpath href="#g3C"/></animateMotion></circle>
+        <!-- Step 4: Human Decision (toggle) -->
+        <rect x="100" y="330" width="160" height="56" rx="9" fill="rgba(43,45,51,.05)" stroke="rgba(43,45,51,.18)" stroke-width="1.5" class="diag-node" style="--d:.9s"/>
+        <text x="180" y="351" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">human decision</text>
+        <!-- Toggle pill -->
+        <rect x="136" y="360" width="60" height="18" rx="9" fill="rgba(94,126,99,.2)" stroke="rgba(94,126,99,.4)" stroke-width="1"/>
+        <circle cx="186" cy="369" r="7" fill="#5E7E63"/>
+        <text x="148" y="373" text-anchor="middle" fill="#3d6b42" font-family="IBM Plex Mono,monospace" font-size="7.5">accept</text>
+        <rect x="204" y="360" width="44" height="18" rx="9" fill="rgba(43,45,51,.05)" stroke="rgba(43,45,51,.18)" stroke-width="1"/>
+        <text x="226" y="373" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">reject</text>
+        <!-- Bottom label -->
+        <rect x="56" y="412" width="248" height="22" rx="6" fill="rgba(255,77,109,.07)" stroke="rgba(255,77,109,.2)" stroke-width="1" class="diag-badge" style="--d:1.1s"/>
+        <text x="180" y="427" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">prediction only · no mandate · §1A</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- G4 · 2.2 Rule of Reason: No Effects -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.2 · Rule of Reason</div><h2 data-anim="rise" style="--d:.2s">No Effects</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:172px;width:580px;--d:.35s">
+      <div class="rp-li"><span class="b">⚖</span><div><b>Rule of Reason burden</b> — must prove <b>relevant market</b> + <b>market power</b> → <b>fails both</b></div></div>
+      <div class="rp-li"><span class="b">📍</span><div><b>Hyper-local geographic market</b> — <b>block-by-block</b></div></div>
+      <div class="rp-li"><span class="b">≠</span><div>Recs to a <b>fraction of independent landlords</b> ≠ <b>market control</b>; landlords <b>retain final authority</b></div></div>
+      <div class="rp-li"><span class="b">↔</span><div><b>Cross-elasticity</b> — substitutes (single-family rentals, new builds) → <b>share too small to harm</b></div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:576px;right:auto;width:580px;--d:.8s">
+      <span class="fi">🏘</span><span>Plaintiff's market definition is <b>overinclusive</b> — collapses the hyper-local reality</span>
+    </div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.55s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">MARKET SHARE · RULE OF REASON</text>
+        <!-- Large total market circle -->
+        <circle cx="180" cy="210" r="148" fill="rgba(91,107,140,.05)" stroke="rgba(91,107,140,.2)" stroke-width="1.5" class="diag-node" style="--d:.2s"/>
+        <!-- "Total market" label -->
+        <text x="180" y="46" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">total rental housing market</text>
+        <!-- Competitor circles -->
+        <circle cx="90" cy="120" r="34" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.3)" stroke-width="1" class="diag-float diag-node" style="--d:.35s"/>
+        <text x="90" y="116" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="8.5" font-weight="600">single-family</text>
+        <text x="90" y="130" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">rentals</text>
+        <circle cx="270" cy="120" r="30" fill="rgba(94,126,99,.1)" stroke="rgba(94,126,99,.3)" stroke-width="1" class="diag-float-b diag-node" style="--d:.45s"/>
+        <text x="270" y="116" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="8.5" font-weight="600">new builds</text>
+        <text x="270" y="130" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8">compete</text>
+        <circle cx="306" cy="220" r="26" fill="rgba(201,162,39,.08)" stroke="rgba(201,162,39,.3)" stroke-width="1" class="diag-float-c diag-node" style="--d:.55s"/>
+        <text x="306" y="216" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600">condo</text>
+        <text x="306" y="230" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="7.5">rentals</text>
+        <circle cx="260" cy="305" r="26" fill="rgba(91,107,140,.08)" stroke="rgba(91,107,140,.25)" stroke-width="1" class="diag-float diag-node" style="--d:.65s"/>
+        <text x="260" y="301" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600">suburban</text>
+        <text x="260" y="315" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">supply</text>
+        <circle cx="100" cy="300" r="28" fill="rgba(43,45,51,.05)" stroke="rgba(43,45,51,.2)" stroke-width="1" class="diag-float-b diag-node" style="--d:.75s"/>
+        <text x="100" y="296" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600">older</text>
+        <text x="100" y="310" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">stock</text>
+        <!-- Cross-elasticity dashes flowing inward -->
+        <line x1="122" y1="145" x2="155" y2="185" stroke="rgba(91,107,140,.4)" stroke-width="1.2" class="flow-dash"/>
+        <line x1="242" y1="142" x2="212" y2="180" stroke="rgba(94,126,99,.4)" stroke-width="1.2" class="flow-dash-b"/>
+        <line x1="282" y1="220" x2="222" y2="210" stroke="rgba(201,162,39,.35)" stroke-width="1.2" class="flow-dash-c"/>
+        <line x1="238" y1="290" x2="210" y2="240" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="flow-dash"/>
+        <line x1="126" y1="282" x2="158" y2="240" stroke="rgba(43,45,51,.3)" stroke-width="1.2" class="flow-dash-b"/>
+        <!-- RealPage center – ripple + tiny slice -->
+        <circle cx="180" cy="210" r="22" fill="rgba(255,77,109,.04)" stroke="rgba(255,77,109,.2)" stroke-width="1" class="diag-ripple" style="--d:.5s"/>
+        <circle cx="180" cy="210" r="22" fill="rgba(255,77,109,.12)" stroke="rgba(255,77,109,.45)" stroke-width="1.8" class="diag-node" style="--d:.9s"/>
+        <text x="180" y="206" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="700">Real</text>
+        <text x="180" y="218" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="700">Page</text>
+        <!-- Bottom verdict badge -->
+        <rect x="44" y="386" width="272" height="38" rx="8" fill="rgba(255,77,109,.07)" stroke="rgba(255,77,109,.22)" stroke-width="1.2" class="diag-badge diag-verdict" style="--d:1.1s"/>
+        <text x="180" y="402" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">market share too small</text>
+        <text x="180" y="416" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">cross-elasticity defeats market definition</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- G5 · 2.2 Causation: Correlation ≠ Cause -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.2 · Causation</div><h2 data-anim="rise" style="--d:.2s">Correlation Is Not Cause</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:172px;width:560px;--d:.35s">
+      <div class="rp-li"><span class="b">≠</span><div><b>Causation flaw</b> — <b>correlation ≠ causation</b></div></div>
+      <div class="rp-li"><span class="b">🏗</span><div><b>Supply:</b> <b>3.5M+ home shortage</b> (decade of underbuilding)</div></div>
+      <div class="rp-li"><span class="b">📈</span><div><b>Demand:</b> pandemic shifts · remote-work boom · inflation · <b>spiking interest rates</b> trap renters</div></div>
+      <div class="rp-li"><span class="b">👤</span><div><b>Human override</b> — agents still offered <b>"one month free"</b></div></div>
+    </div>
+    <div class="rp-cards" data-anim="rise" style="top:508px;right:auto;left:84px;width:560px;--d:.6s">
+      <div class="rp-c"><div class="cn">Supply shock</div><div class="ct">3.5M unit gap</div><div class="cd">A decade of underbuilding pre-dated RealPage adoption</div></div>
+      <div class="rp-c"><div class="cn">Demand shock</div><div class="ct">2020–2023 macro</div><div class="cd">Pandemic, rate hikes, and remote work — not an algorithm</div></div>
+    </div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.5s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><path id="g5A" d="M 59 104 L 152 210"/><path id="g5B" d="M 180 104 L 180 208"/><path id="g5C" d="M 301 104 L 208 210"/></defs>
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">ACTUAL CAUSES · 2020–2023</text>
+        <!-- Three cause nodes -->
+        <rect x="14" y="44" width="90" height="60" rx="9" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.3)" stroke-width="1.2" class="diag-float diag-node" style="--d:.3s"/>
+        <text x="59" y="68" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Supply</text>
+        <text x="59" y="82" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">3.5M unit gap</text>
+        <text x="59" y="96" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="7.5">underbuilding</text>
+        <rect x="135" y="44" width="90" height="60" rx="9" fill="rgba(201,162,39,.08)" stroke="rgba(201,162,39,.3)" stroke-width="1.2" class="diag-float-b diag-node" style="--d:.45s"/>
+        <text x="180" y="68" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Demand</text>
+        <text x="180" y="82" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">pandemic · rates</text>
+        <text x="180" y="96" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="7.5">remote work</text>
+        <rect x="256" y="44" width="90" height="60" rx="9" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.3)" stroke-width="1.2" class="diag-float-c diag-node" style="--d:.6s"/>
+        <text x="301" y="68" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Human</text>
+        <text x="301" y="82" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8">agents override</text>
+        <text x="301" y="96" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="7.5">concessions given</text>
+        <!-- Arrows converging to Rent Rise -->
+        <line x1="59" y1="104" x2="152" y2="210" stroke="rgba(91,107,140,.45)" stroke-width="1.5" class="flow-dash"/>
+        <line x1="180" y1="104" x2="180" y2="208" stroke="rgba(201,162,39,.45)" stroke-width="1.5" class="flow-dash-b"/>
+        <line x1="301" y1="104" x2="208" y2="210" stroke="rgba(94,126,99,.45)" stroke-width="1.5" class="flow-dash-c"/>
+        <circle r="3.5" fill="rgba(91,107,140,.8)"><animateMotion dur="1.3s" repeatCount="indefinite" begin="0s"><mpath href="#g5A"/></animateMotion></circle>
+        <circle r="3.5" fill="rgba(201,162,39,.8)"><animateMotion dur="1.1s" repeatCount="indefinite" begin="0.4s"><mpath href="#g5B"/></animateMotion></circle>
+        <circle r="3.5" fill="rgba(94,126,99,.8)"><animateMotion dur="1.3s" repeatCount="indefinite" begin="0.8s"><mpath href="#g5C"/></animateMotion></circle>
+        <!-- Rent Rise node -->
+        <rect x="110" y="214" width="140" height="52" rx="10" fill="rgba(255,77,109,.12)" stroke="rgba(255,77,109,.4)" stroke-width="1.5" class="diag-node diag-verdict" style="--d:.8s"/>
+        <text x="180" y="238" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700">Rent Rise ↑</text>
+        <text x="180" y="255" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="8.5">macro-driven · structural</text>
+        <!-- Divider -->
+        <line x1="40" y1="296" x2="320" y2="296" stroke="rgba(43,45,51,.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="180" y="314" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing=".08em">NOT THE CAUSE</text>
+        <!-- RealPage disconnected -->
+        <rect x="110" y="326" width="140" height="52" rx="10" fill="rgba(43,45,51,.03)" stroke="rgba(43,45,51,.15)" stroke-width="1.2" stroke-dasharray="5 4" class="diag-node" style="--d:1s"/>
+        <text x="180" y="348" text-anchor="middle" fill="rgba(43,45,51,.4)" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600">RealPage</text>
+        <text x="180" y="364" text-anchor="middle" fill="rgba(43,45,51,.3)" font-family="IBM Plex Mono,monospace" font-size="8">pricing software</text>
+        <!-- X through it -->
+        <line x1="120" y1="336" x2="240" y2="368" stroke="rgba(155,34,38,.4)" stroke-width="2" class="diag-x" style="--d:1.15s"/>
+        <line x1="240" y1="336" x2="120" y2="368" stroke="rgba(155,34,38,.4)" stroke-width="2" class="diag-x" style="--d:1.2s"/>
+        <!-- No causal arrow -->
+        <text x="180" y="406" text-anchor="middle" fill="rgba(155,34,38,.55)" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">no causal link proven</text>
+        <!-- Bottom badge -->
+        <rect x="44" y="422" width="272" height="22" rx="6" fill="rgba(91,107,140,.07)" stroke="rgba(91,107,140,.2)" stroke-width="1" class="diag-badge" style="--d:1.3s"/>
+        <text x="180" y="437" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">correlation ≠ causation</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- G6 · 2.3 Framing: No Class Action -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.3 · Framing</div><h2 data-anim="rise" style="--d:.2s">No Class Action</h2></div>
+    <div class="rp-point" data-anim="fade" style="top:172px;width:580px;--d:.35s">
+      <div class="rp-li"><span class="b">✕</span><div><b>No class action</b> — claims must be <b>near-identical</b></div></div>
+      <div class="rp-li"><span class="b">🏠</span><div><b>Apartment pricing is idiosyncratic</b> — floor · view · renovated kitchen · neighborhood safety</div></div>
+      <div class="rp-li"><span class="b">📅</span><div><b>Timing matters</b> — <b>2020 lockdown vs. 2023 economy</b> → can't be lumped together</div></div>
+    </div>
+    <div class="rp-cards" data-anim="rise" style="top:370px;right:auto;left:84px;width:580px;--d:.6s">
+      <div class="rp-c"><div class="cn">Unit variation</div><div class="ct">Every unit is unique</div><div class="cd">Floor, view, amenities, finish — idiosyncratic pricing</div></div>
+      <div class="rp-c"><div class="cn">Timing variation</div><div class="ct">Different economies</div><div class="cd">2020 lockdown vs. 2022 inflation vs. 2023 rate hikes</div></div>
+    </div>
+    <div class="rp-fill-bar" data-anim="fade" style="top:542px;right:auto;width:580px;--d:.78s">
+      <span class="fi">📋</span><span>Rule 23 requires <b>common questions dominate</b> — they don't here</span>
+    </div>
+    <div class="rp-aside-diag" data-anim="right" style="--d:.5s">
+      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">UNIT VARIATION · RULE 23</text>
+        <!-- Unit A -->
+        <rect x="24" y="38" width="312" height="56" rx="9" fill="rgba(91,107,140,.07)" stroke="rgba(91,107,140,.25)" stroke-width="1.2" class="diag-float diag-node" style="--d:.25s"/>
+        <text x="42" y="60" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">Unit 2A</text>
+        <rect x="100" y="48" width="54" height="17" rx="4" fill="rgba(91,107,140,.12)" stroke="rgba(91,107,140,.3)" stroke-width="1"/>
+        <text x="127" y="60" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">Floor 2</text>
+        <rect x="162" y="48" width="60" height="17" rx="4" fill="rgba(91,107,140,.12)" stroke="rgba(91,107,140,.3)" stroke-width="1"/>
+        <text x="192" y="60" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">Standard</text>
+        <rect x="230" y="48" width="72" height="17" rx="4" fill="rgba(91,107,140,.12)" stroke="rgba(91,107,140,.3)" stroke-width="1"/>
+        <text x="266" y="60" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">Parking lot</text>
+        <text x="42" y="83" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">$1,200 / mo · 2020 lockdown market</text>
+        <!-- Unit B -->
+        <rect x="24" y="108" width="312" height="56" rx="9" fill="rgba(94,126,99,.06)" stroke="rgba(94,126,99,.25)" stroke-width="1.2" class="diag-float-b diag-node" style="--d:.4s"/>
+        <text x="42" y="130" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">Unit 7B</text>
+        <rect x="100" y="118" width="54" height="17" rx="4" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.3)" stroke-width="1"/>
+        <text x="127" y="130" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8">Floor 7</text>
+        <rect x="162" y="118" width="60" height="17" rx="4" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.3)" stroke-width="1"/>
+        <text x="192" y="130" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8">Park view</text>
+        <rect x="230" y="118" width="72" height="17" rx="4" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.3)" stroke-width="1"/>
+        <text x="266" y="130" text-anchor="middle" fill="#5E7E63" font-family="IBM Plex Mono,monospace" font-size="8">Renovated</text>
+        <text x="42" y="153" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">$1,650 / mo · 2022 inflation spike</text>
+        <!-- Unit C -->
+        <rect x="24" y="178" width="312" height="56" rx="9" fill="rgba(201,162,39,.06)" stroke="rgba(201,162,39,.25)" stroke-width="1.2" class="diag-float-c diag-node" style="--d:.55s"/>
+        <text x="42" y="200" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">Unit 12C</text>
+        <rect x="108" y="188" width="54" height="17" rx="4" fill="rgba(201,162,39,.12)" stroke="rgba(201,162,39,.3)" stroke-width="1"/>
+        <text x="135" y="200" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">Floor 12</text>
+        <rect x="170" y="188" width="72" height="17" rx="4" fill="rgba(201,162,39,.12)" stroke="rgba(201,162,39,.3)" stroke-width="1"/>
+        <text x="206" y="200" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">City skyline</text>
+        <rect x="250" y="188" width="72" height="17" rx="4" fill="rgba(201,162,39,.12)" stroke="rgba(201,162,39,.3)" stroke-width="1"/>
+        <text x="286" y="200" text-anchor="middle" fill="#8B7030" font-family="IBM Plex Mono,monospace" font-size="8">Penthouse</text>
+        <text x="42" y="223" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">$2,400 / mo · 2023 rate-hike economy</text>
+        <!-- Unit D -->
+        <rect x="24" y="248" width="312" height="56" rx="9" fill="rgba(43,45,51,.04)" stroke="rgba(43,45,51,.18)" stroke-width="1.2" class="diag-float diag-node" style="--d:.7s"/>
+        <text x="42" y="270" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="700">Unit 3D</text>
+        <rect x="100" y="258" width="54" height="17" rx="4" fill="rgba(43,45,51,.07)" stroke="rgba(43,45,51,.2)" stroke-width="1"/>
+        <text x="127" y="270" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">Floor 3</text>
+        <rect x="162" y="258" width="60" height="17" rx="4" fill="rgba(43,45,51,.07)" stroke="rgba(43,45,51,.2)" stroke-width="1"/>
+        <text x="192" y="270" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">Courtyard</text>
+        <rect x="230" y="258" width="72" height="17" rx="4" fill="rgba(43,45,51,.07)" stroke="rgba(43,45,51,.2)" stroke-width="1"/>
+        <text x="266" y="270" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8">No reno</text>
+        <text x="42" y="293" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9">$1,300 / mo · agent gave 1 month free</text>
+        <!-- Divider + no-class badge -->
+        <line x1="40" y1="332" x2="320" y2="332" stroke="rgba(43,45,51,.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="180" y="352" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing=".08em">ZERO UNITS ARE IDENTICAL</text>
+        <!-- Rule 23 verdict -->
+        <rect x="44" y="368" width="272" height="46" rx="8" fill="rgba(255,77,109,.07)" stroke="rgba(255,77,109,.2)" stroke-width="1.2" class="diag-badge diag-verdict" style="--d:.9s"/>
+        <text x="180" y="388" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Rule 23(b)(3) fails</text>
+        <text x="180" y="403" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">individual questions overwhelm</text>
+        <text x="180" y="416" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="8.5">any common ones</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- G7 · 2.3 Precedents -->
+  <section class="slide rp-bg" data-part="realpage">
+    <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:3" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="g7pL" d="M 320 358 C 320 455 640 455 640 534"/>
+        <path id="g7pR" d="M 960 358 C 960 455 640 455 640 534"/>
+      </defs>
+      <!-- Kicker -->
+      <text x="640" y="46" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" letter-spacing=".2em" class="diag-badge" style="--d:.05s">2.3 · PRECEDENTS IN OUR FAVOR</text>
+      <!-- ── Left card: Theatre Enterprises ── -->
+      <rect x="60" y="68" width="520" height="284" rx="16" fill="rgba(255,255,255,.78)" stroke="rgba(91,107,140,.28)" stroke-width="1.5" class="diag-node" style="--d:.2s"/>
+      <rect x="60" y="68" width="7" height="284" rx="3.5" fill="rgba(91,107,140,.5)"/>
+      <text x="86" y="106" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="800" font-size="18">Theatre Enterprises v. Paramount</text>
+      <text x="86" y="126" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="10.5">1954 · SCOTUS · §1 Sherman Act</text>
+      <line x1="86" y1="138" x2="562" y2="138" stroke="rgba(91,107,140,.12)" stroke-width="1"/>
+      <text x="86" y="163" fill="#2B2D33" font-family="Libre Baskerville,Georgia,serif" font-style="italic" font-size="14">"Parallel conduct alone does not establish conspiracy."</text>
+      <text x="86" y="195" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="11">Distributors each independently denied first-run rights to a</text>
+      <text x="86" y="213" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="11">suburban theatre — maximising profit, no communication.</text>
+      <rect x="86" y="232" width="472" height="38" rx="8" fill="rgba(91,107,140,.07)" stroke="rgba(91,107,140,.16)" stroke-width="1" class="diag-badge" style="--d:.5s"/>
+      <text x="322" y="256" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="10.5">→  Landlords use RealPage independently · same pattern · §1 fails</text>
+      <rect x="86" y="282" width="178" height="22" rx="6" fill="rgba(91,107,140,.12)" stroke="rgba(91,107,140,.26)" stroke-width="1" class="diag-badge" style="--d:.62s"/>
+      <text x="175" y="297" text-anchor="middle" fill="#3B4D6B" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">conscious parallelism ✓</text>
+      <!-- ── Right card: Sorrell ── -->
+      <rect x="700" y="68" width="520" height="284" rx="16" fill="rgba(255,255,255,.78)" stroke="rgba(94,126,99,.28)" stroke-width="1.5" class="diag-node" style="--d:.38s"/>
+      <rect x="700" y="68" width="7" height="284" rx="3.5" fill="rgba(94,126,99,.5)"/>
+      <text x="726" y="106" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="800" font-size="18">Sorrell v. IMS Health</text>
+      <text x="726" y="126" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="10.5">2011 · SCOTUS · 1st Amendment</text>
+      <line x1="726" y1="138" x2="1202" y2="138" stroke="rgba(94,126,99,.12)" stroke-width="1"/>
+      <text x="726" y="163" fill="#2B2D33" font-family="Libre Baskerville,Georgia,serif" font-style="italic" font-size="14">"Collecting &amp; analysing data is protected speech."</text>
+      <text x="726" y="195" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="11">Vermont banned data companies from selling prescribing data —</text>
+      <text x="726" y="213" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="11">struck down: gov't cannot ban analytics for its economic outcome.</text>
+      <rect x="726" y="232" width="472" height="38" rx="8" fill="rgba(94,126,99,.07)" stroke="rgba(94,126,99,.16)" stroke-width="1" class="diag-badge" style="--d:.68s"/>
+      <text x="962" y="256" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="10.5">→  RealPage algorithm = protected expression · 1A shields it</text>
+      <rect x="726" y="282" width="172" height="22" rx="6" fill="rgba(94,126,99,.12)" stroke="rgba(94,126,99,.26)" stroke-width="1" class="diag-badge" style="--d:.78s"/>
+      <text x="812" y="297" text-anchor="middle" fill="#3d6b42" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">data = protected speech ✓</text>
+      <!-- ── Converging paths ── -->
+      <path d="M 320 358 C 320 455 640 455 640 534" stroke="rgba(43,45,51,.16)" stroke-width="2" stroke-dasharray="6 8" class="draw-path" style="--dl:400;--pd:.72s"/>
+      <path d="M 960 358 C 960 455 640 455 640 534" stroke="rgba(43,45,51,.16)" stroke-width="2" stroke-dasharray="6 8" class="draw-path" style="--dl:400;--pd:.82s"/>
+      <!-- Animated packets -->
+      <circle r="5" fill="rgba(91,107,140,.58)"><animateMotion dur="2s" repeatCount="indefinite" begin="0.3s"><mpath href="#g7pL"/></animateMotion></circle>
+      <circle r="5" fill="rgba(91,107,140,.58)"><animateMotion dur="2s" repeatCount="indefinite" begin="1.3s"><mpath href="#g7pL"/></animateMotion></circle>
+      <circle r="5" fill="rgba(94,126,99,.58)"><animateMotion dur="2s" repeatCount="indefinite" begin="0.7s"><mpath href="#g7pR"/></animateMotion></circle>
+      <circle r="5" fill="rgba(94,126,99,.58)"><animateMotion dur="2s" repeatCount="indefinite" begin="1.7s"><mpath href="#g7pR"/></animateMotion></circle>
+      <!-- ── Result node ── -->
+      <rect x="390" y="542" width="500" height="100" rx="16" fill="rgba(255,77,109,.07)" stroke="rgba(255,77,109,.36)" stroke-width="1.8" class="diag-node diag-verdict" style="--d:1.05s"/>
+      <text x="640" y="579" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="800" font-size="19">RealPage — Both Holdings Apply</text>
+      <text x="640" y="601" text-anchor="middle" fill="#FF4D6D" font-family="IBM Plex Mono,monospace" font-size="11.5">§1 parallel conduct defense · 1A data analytics protection</text>
+      <rect x="416" y="616" width="168" height="20" rx="5" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.24)" stroke-width="1" class="diag-badge" style="--d:1.2s"/>
+      <text x="500" y="630" text-anchor="middle" fill="#3B4D6B" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Theatre · §1 fails</text>
+      <rect x="596" y="616" width="168" height="20" rx="5" fill="rgba(94,126,99,.1)" stroke="rgba(94,126,99,.24)" stroke-width="1" class="diag-badge" style="--d:1.3s"/>
+      <text x="680" y="630" text-anchor="middle" fill="#3d6b42" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">Sorrell · 1A protects</text>
+    </svg>
   </section>
 
   <!-- ============ PART IV · CONCLUSION ============ -->
