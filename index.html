@@ -568,6 +568,20 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 /* DOJ stat badges for bullet emphasis */
 .doj-badge{display:inline-flex;align-items:center;background:rgba(201,162,39,.14);border:1px solid rgba(201,162,39,.35);border-radius:6px;padding:2px 8px;font-family:var(--font-mono);font-size:11px;color:var(--doj-gold-lt);font-weight:600;vertical-align:middle;margin-left:4px}
 
+/* DOJ two-topic split layout */
+.dtwin{flex:1;min-width:0;display:flex;flex-direction:column}
+.dtwin-h{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--doj-gold-lt);padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid rgba(201,162,39,.28)}
+.dtwin-sep{width:1px;background:rgba(201,162,39,.14);flex-shrink:0;align-self:stretch}
+.dtwin-ul{list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.dtwin-ul>li{padding:6px 0 6px 18px;border-bottom:1px solid rgba(201,162,39,.08);font-family:var(--font-mono);font-size:11.5px;color:rgba(239,233,218,.72);line-height:1.5;position:relative}
+.dtwin-ul>li:last-child{border-bottom:none}
+.dtwin-ul>li::before{content:'›';color:var(--doj-gold);font-weight:700;position:absolute;left:0;top:6px}
+.dtwin-ul>li:first-child::before{top:0}
+.dtwin-ul strong{color:#fff;font-weight:600}
+.dtwin-sub{list-style:none;margin:5px 0 2px 12px;padding:0}
+.dtwin-sub li{font-size:10.5px;padding:2px 0 2px 14px;position:relative;color:rgba(239,233,218,.5);line-height:1.45}
+.dtwin-sub li::before{content:'–';color:rgba(201,162,39,.55);position:absolute;left:0;top:2px}
+
 /* rp-bg decorative ambient glow pulse */
 .rp-bg .blob{animation:blobPulse 8s ease-in-out infinite alternate}
 @keyframes blobPulse{from{opacity:.13;transform:scale(1)}to{opacity:.2;transform:scale(1.12)}}
@@ -881,247 +895,226 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 
   <!-- ============ PART II · DOJ ARGUMENT SLIDES ============ -->
 
-  <!-- P1 · Market Definition -->
+  <!-- P1 · The Threat to American Renters -->
   <section class="slide s-doj-arg" data-part="us">
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">Market Definition · P1</div>
-      <h2 data-anim="rise" style="--d:.22s">The Hyper-Local Reality</h2>
+      <div class="dkick" data-anim="left" style="--d:.1s">P1 · The Scheme</div>
+      <h2 data-anim="rise" style="--d:.22s">The Threat to American Renters</h2>
     </div>
     <div class="dbody">
       <ul class="dbulle">
-        <li data-anim="rise" style="--d:.35s"><strong>Granular Market Definition:</strong> Rental housing competition operates strictly on a localized, neighborhood-by-neighborhood basis.</li>
-        <li data-anim="rise" style="--d:.48s"><strong>High Submarket Concentration:</strong> Within target institutional multifamily submarkets, the data-pooling network encompasses 70% to 90% of available supply.</li>
-        <li data-anim="rise" style="--d:.61s"><strong>The SSNIP Test Standard:</strong> Low cross-elasticity of demand proves luxury high-rises constitute a distinct product market from single-family homes.</li>
-        <li data-anim="rise" style="--d:.74s"><strong>Pre-Leasing Network Capture:</strong> New construction is integrated into the algorithmic pool prior to opening, establishing a uniform pricing baseline from day one.</li>
+        <li data-anim="rise" style="--d:.35s"><strong>Housing as a Right, Not a Commodity:</strong> Millions of American renters depend on competitive pricing — but landlords replaced the free market with an algorithmic price-fixing cartel.</li>
+        <li data-anim="rise" style="--d:.48s"><strong>Data Pooling:</strong> Competing landlords secretly pool non-public, sensitive data — occupancy rates, lease expirations, concession offers — into RealPage's central algorithm.</li>
+        <li data-anim="rise" style="--d:.61s"><strong>"Autopilot" Pricing:</strong> The algorithm dictates daily inflated rent recommendations adopted by up to 90% of participating landlords, with minimal human override.</li>
+        <li data-anim="rise" style="--d:.74s"><strong>A Cartel by Algorithm:</strong> What was once independent competitive pricing became coordinated artificial inflation — a per se Sherman Act violation.</li>
       </ul>
       <div class="dviz" data-anim="fade" style="--d:.4s">
-        <svg viewBox="0 0 380 310" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="190" y="22" text-anchor="middle" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">SINGLE SUBMARKET</text>
-          <!-- Row 1 — tallest buildings, stagger left→right -->
-          <rect x="18"  y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.45s"/>
-          <rect x="80"  y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.52s"/>
-          <rect x="142" y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.59s"/>
-          <rect x="204" y="34" width="52" height="65" rx="3" fill="rgba(239,233,218,.06)" stroke="rgba(239,233,218,.22)" stroke-width="1.5" class="diag-bar" style="--d:.66s"/>
-          <rect x="266" y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.73s"/>
-          <rect x="328" y="34" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.80s"/>
-          <!-- Row 2 -->
-          <rect x="18"  y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.50s"/>
-          <rect x="80"  y="110" width="52" height="65" rx="3" fill="rgba(239,233,218,.06)" stroke="rgba(239,233,218,.22)" stroke-width="1.5" class="diag-bar" style="--d:.57s"/>
-          <rect x="142" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.64s"/>
-          <rect x="204" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.71s"/>
-          <rect x="266" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.78s"/>
-          <rect x="328" y="110" width="52" height="65" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.85s"/>
-          <!-- Row 3 — shortest -->
-          <rect x="18"  y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.55s"/>
-          <rect x="80"  y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.62s"/>
-          <rect x="142" y="186" width="52" height="52" rx="3" fill="rgba(239,233,218,.06)" stroke="rgba(239,233,218,.22)" stroke-width="1.5" class="diag-bar" style="--d:.69s"/>
-          <rect x="204" y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.76s"/>
-          <rect x="266" y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.83s"/>
-          <rect x="328" y="186" width="52" height="52" rx="3" fill="rgba(201,162,39,.18)" stroke="#C9A227" stroke-width="1.5" class="diag-bar" style="--d:.90s"/>
+        <svg viewBox="0 0 340 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- ── RENT LINE CHART (top) ── -->
+          <text x="170" y="18" text-anchor="middle" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".12em">RENT INDEX · 2016–2023</text>
+          <!-- Grid lines -->
+          <line x1="40" y1="40"  x2="300" y2="40"  stroke="rgba(201,162,39,.07)" stroke-width="1"/>
+          <line x1="40" y1="70"  x2="300" y2="70"  stroke="rgba(201,162,39,.07)" stroke-width="1"/>
+          <line x1="40" y1="100" x2="300" y2="100" stroke="rgba(201,162,39,.07)" stroke-width="1"/>
+          <line x1="40" y1="130" x2="300" y2="130" stroke="rgba(201,162,39,.07)" stroke-width="1"/>
+          <line x1="40" y1="160" x2="300" y2="160" stroke="rgba(201,162,39,.07)" stroke-width="1"/>
+          <line x1="40" y1="190" x2="300" y2="190" stroke="rgba(239,233,218,.18)" stroke-width="1"/>
+          <line x1="40" y1="30"  x2="40"  y2="190" stroke="rgba(239,233,218,.18)" stroke-width="1"/>
+          <!-- Competitive baseline (dashed blue, gentle slope) -->
+          <path d="M 40 175 C 100 168 180 162 300 155" stroke="rgba(78,114,184,.55)" stroke-width="1.8" stroke-dasharray="5 4" data-anim="fade" style="--d:.6s"/>
+          <!-- Coordinated rent line (gold, steep) -->
+          <path d="M 40 175 C 80 165 140 130 220 80 L 300 50" stroke="#C9A227" stroke-width="2.5" class="draw-path" style="--dl:375;--pd:.8s"/>
+          <!-- Area fill -->
+          <path d="M 40 175 C 80 165 140 130 220 80 L 300 50 L 300 155 C 180 162 100 168 40 175 Z" fill="rgba(155,34,38,.1)" data-anim="fade" style="--d:1.1s"/>
+          <circle cx="300" cy="50" r="4" fill="#C9A227" class="diag-badge" style="--d:1.3s"/>
+          <!-- Algorithm active marker -->
+          <line x1="155" y1="35" x2="155" y2="185" stroke="rgba(201,162,39,.22)" stroke-width="1" stroke-dasharray="3 3" data-anim="fade" style="--d:1.0s"/>
+          <rect x="88" y="26" width="134" height="17" rx="4" fill="rgba(155,34,38,.2)" stroke="rgba(155,34,38,.45)" stroke-width="1" class="diag-badge" style="--d:1.0s"/>
+          <text x="155" y="38" text-anchor="middle" fill="rgba(239,233,218,.85)" font-family="IBM Plex Mono,monospace" font-size="8">RealPage algorithm active</text>
           <!-- Legend -->
-          <rect x="18" y="256" width="11" height="11" rx="2" fill="rgba(201,162,39,.22)" stroke="#C9A227" stroke-width="1" class="diag-badge" style="--d:1.05s"/>
-          <text x="35" y="265" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:1.05s">In network (80–90%)</text>
-          <rect x="210" y="256" width="11" height="11" rx="2" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.22)" stroke-width="1" class="diag-badge" style="--d:1.1s"/>
-          <text x="227" y="265" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:1.1s">Non-network</text>
-          <text x="190" y="292" text-anchor="middle" fill="rgba(201,162,39,.6)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".06em" data-anim="fade" style="--d:1.2s">CAPTIVE RENTERS — NO SUBSTITUTE</text>
+          <line x1="44" y1="205" x2="68" y2="205" stroke="#C9A227" stroke-width="2"/>
+          <text x="73" y="209" fill="rgba(239,233,218,.6)" font-family="IBM Plex Mono,monospace" font-size="8.5">coordinated rents</text>
+          <line x1="175" y1="205" x2="199" y2="205" stroke="rgba(78,114,184,.6)" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="204" y="209" fill="rgba(239,233,218,.6)" font-family="IBM Plex Mono,monospace" font-size="8.5">free market</text>
+          <!-- X labels -->
+          <text x="40"  y="200" text-anchor="middle" fill="rgba(239,233,218,.3)" font-family="IBM Plex Mono,monospace" font-size="7.5">'16</text>
+          <text x="110" y="200" text-anchor="middle" fill="rgba(239,233,218,.3)" font-family="IBM Plex Mono,monospace" font-size="7.5">'18</text>
+          <text x="190" y="200" text-anchor="middle" fill="rgba(239,233,218,.3)" font-family="IBM Plex Mono,monospace" font-size="7.5">'20</text>
+          <text x="260" y="200" text-anchor="middle" fill="rgba(239,233,218,.3)" font-family="IBM Plex Mono,monospace" font-size="7.5">'22</text>
+          <text x="300" y="200" text-anchor="middle" fill="rgba(239,233,218,.3)" font-family="IBM Plex Mono,monospace" font-size="7.5">'23</text>
+          <!-- ── FLOWCHART (bottom): The Scheme ── -->
+          <text x="170" y="228" text-anchor="middle" fill="rgba(239,233,218,.28)" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing=".1em">THE SCHEME</text>
+          <!-- Landlord nodes -->
+          <rect x="22"  y="242" width="62" height="36" rx="6" fill="rgba(78,114,184,.1)" stroke="rgba(78,114,184,.4)" stroke-width="1.2" class="diag-node" style="--d:.5s"/>
+          <text x="53"  y="258" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="8">🏢 Landlord</text>
+          <text x="53"  y="271" text-anchor="middle" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="7.5">A</text>
+          <rect x="139" y="242" width="62" height="36" rx="6" fill="rgba(78,114,184,.1)" stroke="rgba(78,114,184,.4)" stroke-width="1.2" class="diag-node" style="--d:.62s"/>
+          <text x="170" y="258" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="8">🏢 Landlord</text>
+          <text x="170" y="271" text-anchor="middle" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="7.5">B</text>
+          <rect x="256" y="242" width="62" height="36" rx="6" fill="rgba(78,114,184,.1)" stroke="rgba(78,114,184,.4)" stroke-width="1.2" class="diag-node" style="--d:.74s"/>
+          <text x="287" y="258" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="8">🏢 Landlord</text>
+          <text x="287" y="271" text-anchor="middle" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="7.5">C</text>
+          <!-- Flowing arrows to RealPage hub -->
+          <line x1="53"  y1="278" x2="110" y2="316" stroke="rgba(201,162,39,.45)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.9s" repeatCount="indefinite"/></line>
+          <line x1="170" y1="278" x2="170" y2="308" stroke="rgba(201,162,39,.45)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.9s" repeatCount="indefinite"/></line>
+          <line x1="287" y1="278" x2="230" y2="316" stroke="rgba(201,162,39,.45)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.9s" repeatCount="indefinite"/></line>
+          <!-- RealPage hub -->
+          <rect x="112" y="308" width="116" height="40" rx="8" fill="rgba(155,34,38,.15)" stroke="rgba(155,34,38,.55)" stroke-width="1.5" class="diag-node" style="--d:.9s"/>
+          <text x="170" y="325" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="700">RealPage</text>
+          <text x="170" y="340" text-anchor="middle" fill="rgba(239,233,218,.6)" font-family="IBM Plex Mono,monospace" font-size="7.5">ALGORITHM</text>
+          <!-- Output arrow -->
+          <line x1="170" y1="348" x2="170" y2="368" stroke="rgba(155,34,38,.6)" stroke-width="2" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.8s" repeatCount="indefinite"/></line>
+          <polygon points="165,366 170,376 175,366" fill="rgba(155,34,38,.65)" data-anim="fade" style="--d:1.1s"/>
+          <text x="170" y="392" text-anchor="middle" fill="rgba(201,162,39,.9)" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="600">↑ INFLATED RENTS</text>
         </svg>
       </div>
     </div>
   </section>
 
-  <!-- P2 · Causation: Algorithmic Premium -->
+  <!-- P2 · The Data Moat Monopoly -->
   <section class="slide s-doj-arg" data-part="us">
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">Causation · P2</div>
-      <h2 data-anim="rise" style="--d:.22s">The Algorithmic Premium &amp; Market Contagion</h2>
+      <div class="dkick" data-anim="left" style="--d:.1s">P2 · Sherman Act §§ 1 &amp; 2</div>
+      <h2 data-anim="rise" style="--d:.22s">The "Data Moat" Monopoly</h2>
     </div>
     <div class="dbody">
       <ul class="dbulle">
-        <li data-anim="rise" style="--d:.35s"><strong>The Isolated Premium:</strong> Advanced regression models isolate a statistically significant &#8220;RealPage Premium&#8221; over non-software properties.</li>
-        <li data-anim="rise" style="--d:.48s"><strong>Umbrella Pricing Mechanism:</strong> Artificially inflated benchmarks pull the entire market baseline upward, affecting non-users.</li>
-        <li data-anim="rise" style="--d:.61s"><strong>Systemic Suppression of Concessions:</strong> Software protocols explicitly eliminate traditional discounts (e.g., &#8220;one month free&#8221;) to enforce downward price rigidity.</li>
+        <li data-anim="rise" style="--d:.35s"><strong>§1 — Price Fixing:</strong> Algorithms do not launder illegal conduct. Sharing competitor pricing data through shared software is per se horizontal price-fixing under the Sherman Act.</li>
+        <li data-anim="rise" style="--d:.48s"><strong>§2 — Monopolization:</strong> RealPage controls 80%+ of the algorithmic rental pricing market — illegally maintained through proprietary illicit data hoarding.</li>
+        <li data-anim="rise" style="--d:.61s"><strong>The "Data Moat":</strong> Years of pooled non-public data created an insurmountable competitive barrier — no rival can replicate this dataset, blocking all meaningful market entry.</li>
+        <li data-anim="rise" style="--d:.74s"><strong>The Harm &amp; Remedy:</strong> Renters in 40+ states paid artificially inflated rents. The United States seeks to dismantle this cartel, break the data monopoly, and restore independent, fair market competition.</li>
       </ul>
       <div class="dviz" data-anim="fade" style="--d:.4s">
-        <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="190" y="20" text-anchor="middle" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".12em">RENT INDEX (REGRESSION-CONTROLLED)</text>
-          <!-- Axes -->
-          <line x1="52" y1="240" x2="360" y2="240" stroke="rgba(239,233,218,.22)" stroke-width="1.5"/>
-          <line x1="52" y1="240" x2="52" y2="36" stroke="rgba(239,233,218,.22)" stroke-width="1.5"/>
-          <!-- Year labels -->
-          <text x="52" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2017</text>
-          <text x="155" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2019</text>
-          <text x="258" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2021</text>
-          <text x="360" y="256" text-anchor="middle" fill="rgba(239,233,218,.35)" font-family="IBM Plex Mono,monospace" font-size="9">2023</text>
-          <!-- Tick marks -->
-          <line x1="155" y1="237" x2="155" y2="243" stroke="rgba(239,233,218,.22)" stroke-width="1"/>
-          <line x1="258" y1="237" x2="258" y2="243" stroke="rgba(239,233,218,.22)" stroke-width="1"/>
-          <!-- Non-software baseline (dashed grey, fades in) -->
-          <path d="M 52 200 C 140 192 230 170 360 148" stroke="rgba(239,233,218,.32)" stroke-width="2" stroke-dasharray="6 4" data-anim="fade" style="--d:.48s"/>
-          <text x="350" y="143" text-anchor="end" fill="rgba(239,233,218,.45)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.55s">non-software</text>
-          <!-- Shaded premium area (fades behind the gold line) -->
-          <path d="M 52 200 C 140 178 230 130 360 68 L 360 148 C 230 170 140 192 52 200 Z" fill="rgba(201,162,39,.07)" data-anim="fade" style="--d:.9s"/>
-          <!-- RealPage line (gold, draws itself in) -->
-          <path d="M 52 200 C 140 178 230 130 360 68" stroke="#C9A227" stroke-width="2.5" class="draw-path" style="--dl:390;--pd:.6s"/>
-          <circle cx="360" cy="68" r="4" fill="#C9A227" class="diag-badge" style="--d:1.15s"/>
-          <text x="350" y="62" text-anchor="end" fill="#C9A227" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:1.15s">RealPage</text>
-          <!-- Premium callout -->
-          <line x1="310" y1="96" x2="310" y2="140" stroke="rgba(201,162,39,.55)" stroke-width="1.5" stroke-dasharray="3 3" data-anim="fade" style="--d:1.28s"/>
-          <text x="318" y="120" fill="rgba(201,162,39,.8)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:1.32s">premium</text>
-          <!-- Umbrella arrow (non-user drag up) -->
-          <path d="M 280 148 C 295 143 300 138 310 140" stroke="rgba(239,233,218,.4)" stroke-width="1" stroke-dasharray="3 3" data-anim="fade" style="--d:1.4s"/>
-          <text x="240" y="160" fill="rgba(239,233,218,.4)" font-family="IBM Plex Mono,monospace" font-size="8" data-anim="fade" style="--d:1.4s">umbrella effect</text>
-          <!-- Y axis label -->
-          <text x="30" y="140" text-anchor="middle" fill="rgba(239,233,218,.28)" font-family="IBM Plex Mono,monospace" font-size="8" transform="rotate(-90,30,140)">RENT INDEX</text>
+        <svg viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="170" y="18" text-anchor="middle" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing=".12em">§2 · DATA MOAT MONOPOLY</text>
+          <!-- Outer moat ring (pulsing) -->
+          <circle cx="170" cy="185" r="118" fill="rgba(78,114,184,.04)" stroke="rgba(78,114,184,.22)" stroke-width="14" stroke-dasharray="6 5" class="diag-ripple" style="--d:0s"/>
+          <!-- Moat data labels -->
+          <text x="62"  y="80"  fill="rgba(78,114,184,.42)" font-family="IBM Plex Mono,monospace" font-size="7.5" transform="rotate(-35 62 80)">01 11 00 10</text>
+          <text x="237" y="65"  fill="rgba(78,114,184,.42)" font-family="IBM Plex Mono,monospace" font-size="7.5" transform="rotate(35 237 65)">occupancy</text>
+          <text x="46"  y="272" fill="rgba(78,114,184,.42)" font-family="IBM Plex Mono,monospace" font-size="7.5" transform="rotate(35 46 272)">lease data</text>
+          <text x="246" y="288" fill="rgba(78,114,184,.42)" font-family="IBM Plex Mono,monospace" font-size="7.5" transform="rotate(-35 246 288)">10 01 11 00</text>
+          <text x="170" y="68"  text-anchor="middle" fill="rgba(78,114,184,.32)" font-family="IBM Plex Mono,monospace" font-size="7">DATA MOAT</text>
+          <text x="170" y="308" text-anchor="middle" fill="rgba(78,114,184,.32)" font-family="IBM Plex Mono,monospace" font-size="7">PROPRIETARY DATA</text>
+          <!-- Castle body (RealPage) -->
+          <rect x="116" y="150" width="108" height="72" rx="4" fill="rgba(155,34,38,.12)" stroke="rgba(155,34,38,.5)" stroke-width="1.5" class="diag-node" style="--d:.5s"/>
+          <!-- Crenellations -->
+          <rect x="116" y="140" width="18" height="14" rx="2" fill="rgba(155,34,38,.18)" stroke="rgba(155,34,38,.45)" stroke-width="1.2"/>
+          <rect x="143" y="140" width="18" height="14" rx="2" fill="rgba(155,34,38,.18)" stroke="rgba(155,34,38,.45)" stroke-width="1.2"/>
+          <rect x="170" y="140" width="18" height="14" rx="2" fill="rgba(155,34,38,.18)" stroke="rgba(155,34,38,.45)" stroke-width="1.2"/>
+          <rect x="197" y="140" width="18" height="14" rx="2" fill="rgba(155,34,38,.18)" stroke="rgba(155,34,38,.45)" stroke-width="1.2"/>
+          <text x="170" y="178" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-size="12" font-weight="800">RealPage</text>
+          <text x="170" y="196" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">80%+ market share</text>
+          <text x="170" y="212" text-anchor="middle" fill="rgba(201,162,39,.85)" font-family="IBM Plex Mono,monospace" font-size="8">DATA MONOPOLY</text>
+          <!-- Rivals blocked outside moat -->
+          <circle cx="66"  cy="130" r="20" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="diag-float-b diag-node" style="--d:.35s"/>
+          <text x="66"  y="128" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="7.5">Rival A</text>
+          <text x="66"  y="114" text-anchor="middle" fill="rgba(155,34,38,.75)" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="900">✕</text>
+          <circle cx="274" cy="130" r="20" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="diag-float-c diag-node" style="--d:.5s"/>
+          <text x="274" y="128" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="7.5">Rival B</text>
+          <text x="274" y="114" text-anchor="middle" fill="rgba(155,34,38,.75)" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="900">✕</text>
+          <circle cx="170" cy="252" r="20" fill="rgba(91,107,140,.1)" stroke="rgba(91,107,140,.35)" stroke-width="1.2" class="diag-float diag-node" style="--d:.65s"/>
+          <text x="170" y="250" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="7.5">Rival C</text>
+          <text x="170" y="236" text-anchor="middle" fill="rgba(155,34,38,.75)" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="900">✕</text>
+          <!-- Verdict badge -->
+          <rect x="80" y="330" width="180" height="36" rx="10" fill="rgba(155,34,38,.12)" stroke="rgba(155,34,38,.45)" stroke-width="1" class="diag-verdict diag-badge" style="--d:.9s"/>
+          <text x="170" y="347" text-anchor="middle" fill="rgba(239,233,218,.9)" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600">Sherman Act §§ 1 &amp; 2</text>
+          <text x="170" y="361" text-anchor="middle" fill="rgba(201,162,39,.75)" font-family="IBM Plex Mono,monospace" font-size="8.5">violated · remedy sought</text>
         </svg>
       </div>
     </div>
   </section>
 
-  <!-- P3 · Coordinated Supply Suppression -->
+  <!-- P3 · Coordinated Pricing & Harm to Consumers -->
   <section class="slide s-doj-arg" data-part="us">
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">Operational Mechanics · P3</div>
-      <h2 data-anim="rise" style="--d:.22s">Coordinated Supply Suppression</h2>
+      <div class="dkick" data-anim="left" style="--d:.1s">P3 · The Conduct &amp; The Harm</div>
+      <h2 data-anim="rise" style="--d:.22s">From Independent Pricing to Cartel Control</h2>
     </div>
-    <div class="dbody">
-      <ul class="dbulle">
-        <li data-anim="rise" style="--d:.35s"><strong>Horizontal Competitor-Data Pooling:</strong> The platform relies entirely on the exchange of nonpublic, real-time competitor data.</li>
-        <li data-anim="rise" style="--d:.48s"><strong>Horizontal Lease Staggering:</strong> Algorithmic coordination of lease expirations acts as a functional market-allocation scheme.</li>
-        <li data-anim="rise" style="--d:.61s"><strong>Revenue Protection Mode:</strong> Systemic suppression of the competitive instinct to lower rents, choosing vacancy to protect high price floors.</li>
-      </ul>
-      <div class="dviz" data-anim="fade" style="--d:.4s">
-        <svg viewBox="0 0 360 310" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <path id="p3a" d="M 90 68 L 142 116"/>
-            <path id="p3b" d="M 270 68 L 218 116"/>
-            <path id="p3c" d="M 76 233 L 140 193"/>
-            <path id="p3d" d="M 284 233 L 220 193"/>
-          </defs>
-          <!-- Ripple rings pulse behind hub -->
-          <circle cx="180" cy="155" r="46" fill="none" stroke="rgba(155,34,38,.35)" stroke-width="1.5" class="diag-ripple" style="--d:.6s"/>
-          <circle cx="180" cy="155" r="46" fill="none" stroke="rgba(155,34,38,.22)" stroke-width="1.5" class="diag-ripple" style="--d:1.75s"/>
-          <!-- Center hub pops in -->
-          <circle cx="180" cy="155" r="46" fill="rgba(155,34,38,.2)" stroke="rgba(155,34,38,.65)" stroke-width="2" class="diag-node" style="--d:.45s"/>
-          <text x="180" y="151" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600" data-anim="fade" style="--d:.62s">RealPage</text>
-          <text x="180" y="165" text-anchor="middle" fill="rgba(239,233,218,.5)" font-family="IBM Plex Mono,monospace" font-size="8.5" data-anim="fade" style="--d:.65s">clearinghouse</text>
-          <!-- Landlord nodes pop in staggered -->
-          <circle cx="65"  cy="52"  r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.28s"/>
-          <text x="65"  y="56"  text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.42s">Landlord A</text>
-          <circle cx="295" cy="52"  r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.35s"/>
-          <text x="295" y="56"  text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.48s">Landlord B</text>
-          <circle cx="52"  cy="255" r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.42s"/>
-          <text x="52"  y="259" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.55s">Landlord C</text>
-          <circle cx="308" cy="255" r="28" fill="rgba(239,233,218,.05)" stroke="rgba(239,233,218,.28)" stroke-width="1.5" class="diag-node" style="--d:.50s"/>
-          <text x="308" y="259" text-anchor="middle" fill="rgba(239,233,218,.7)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.62s">Landlord D</text>
-          <!-- Gold data-in lines + arrowheads (static — packets carry the motion) -->
-          <line x1="90"  y1="68"  x2="142" y2="116" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
-          <polygon points="138,108 142,116 134,114" fill="rgba(201,162,39,.6)"/>
-          <line x1="270" y1="68"  x2="218" y2="116" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
-          <polygon points="222,108 218,116 226,114" fill="rgba(201,162,39,.6)"/>
-          <line x1="76"  y1="233" x2="140" y2="193" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
-          <polygon points="136,201 140,193 132,194" fill="rgba(201,162,39,.6)"/>
-          <line x1="284" y1="233" x2="220" y2="193" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
-          <polygon points="224,201 220,193 228,194" fill="rgba(201,162,39,.6)"/>
-          <!-- Animated data packets ride each path toward hub -->
-          <circle r="3.5" fill="#C9A227" opacity=".9">
-            <animateMotion dur=".7s" repeatCount="indefinite" begin="0s"><mpath href="#p3a"/></animateMotion>
-          </circle>
-          <circle r="3.5" fill="#C9A227" opacity=".9">
-            <animateMotion dur=".7s" repeatCount="indefinite" begin=".17s"><mpath href="#p3b"/></animateMotion>
-          </circle>
-          <circle r="3.5" fill="#C9A227" opacity=".9">
-            <animateMotion dur=".7s" repeatCount="indefinite" begin=".35s"><mpath href="#p3c"/></animateMotion>
-          </circle>
-          <circle r="3.5" fill="#C9A227" opacity=".9">
-            <animateMotion dur=".7s" repeatCount="indefinite" begin=".52s"><mpath href="#p3d"/></animateMotion>
-          </circle>
-          <!-- Red output dashes flow outward from hub -->
-          <line x1="148" y1="112" x2="94"  y2="68"  stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
-            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
-          </line>
-          <line x1="212" y1="112" x2="268" y2="68"  stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
-            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
-          </line>
-          <line x1="145" y1="195" x2="80"  y2="233" stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
-            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
-          </line>
-          <line x1="215" y1="195" x2="282" y2="233" stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3">
-            <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.85s" repeatCount="indefinite"/>
-          </line>
-          <!-- Legend -->
-          <line x1="18" y1="295" x2="36" y2="295" stroke="rgba(201,162,39,.6)" stroke-width="1.5"/>
-          <text x="42" y="299" fill="rgba(239,233,218,.5)" font-family="IBM Plex Mono,monospace" font-size="8.5" data-anim="fade" style="--d:1.1s">data in (nonpublic)</text>
-          <line x1="190" y1="295" x2="208" y2="295" stroke="rgba(155,34,38,.55)" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <text x="214" y="299" fill="rgba(239,233,218,.5)" font-family="IBM Plex Mono,monospace" font-size="8.5" data-anim="fade" style="--d:1.15s">coordinated output</text>
-        </svg>
+    <div class="dbody" style="gap:30px;align-items:stretch">
+      <div class="dtwin">
+        <div class="dtwin-h" data-anim="fade" style="--d:.28s">1 · RealPage replaced independent pricing with coordinated pricing</div>
+        <ul class="dtwin-ul">
+          <li data-anim="rise" style="--d:.35s">In a competitive market, landlords make pricing decisions independently based on their own business judgment.</li>
+          <li data-anim="rise" style="--d:.42s">RealPage fundamentally changed this process by centralizing pricing decisions.</li>
+          <li data-anim="rise" style="--d:.49s">Landlords shared confidential pricing and occupancy data through one platform.</li>
+          <li data-anim="rise" style="--d:.56s">The algorithm used competitors' non-public information to generate pricing recommendations.</li>
+          <li data-anim="rise" style="--d:.63s">Although landlords could reject recommendations, RealPage encouraged high compliance and trust in the algorithm.</li>
+          <li data-anim="rise" style="--d:.70s">When many competing landlords rely on the same recommendation system, pricing becomes coordinated rather than truly independent.</li>
+          <li data-anim="rise" style="--d:.77s">This reduces the competitive pressure that normally keeps rents affordable.</li>
+        </ul>
+      </div>
+      <div class="dtwin-sep"></div>
+      <div class="dtwin">
+        <div class="dtwin-h" data-anim="fade" style="--d:.28s">2 · Harm to consumers</div>
+        <ul class="dtwin-ul">
+          <li data-anim="rise" style="--d:.38s">Antitrust law exists to protect competition because competition benefits consumers.</li>
+          <li data-anim="rise" style="--d:.45s">RealPage's conduct caused real harm to renters.</li>
+          <li data-anim="rise" style="--d:.52s">Tenants paid higher rents than they would have in a competitive market.</li>
+          <li data-anim="rise" style="--d:.59s">Discounts, concessions, and promotional offers became less common.</li>
+          <li data-anim="rise" style="--d:.66s">Some apartments were intentionally left vacant instead of being rented at lower prices.</li>
+          <li data-anim="rise" style="--d:.73s">As a result, families had fewer affordable housing options during a housing shortage.</li>
+          <li data-anim="rise" style="--d:.80s">The defense may argue that landlords were simply maximizing profits.</li>
+          <li data-anim="rise" style="--d:.87s">However, earning profits through fair competition is legal.</li>
+          <li data-anim="rise" style="--d:.94s">Coordinating prices using competitors' confidential information is not.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- P4 · Class Certification -->
+  <!-- P4 · Broader Impact & Legal Conclusion -->
   <section class="slide s-doj-arg" data-part="us">
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">Class Certification · P4</div>
-      <h2 data-anim="rise" style="--d:.22s">Formulaic Injury &amp; The <em style="font-style:italic">Comcast</em> Model</h2>
+      <div class="dkick" data-anim="left" style="--d:.1s">P4 · Impact &amp; Conclusion</div>
+      <h2 data-anim="rise" style="--d:.22s">Beyond Housing — The Rule of Law</h2>
     </div>
-    <div class="dbody">
-      <ul class="dbulle">
-        <li data-anim="rise" style="--d:.35s"><strong>Formulaic Injury &amp; Commonality:</strong> Liability rests on a systemic, common distortion of the baseline starting price under Rule 23(b)(3).</li>
-        <li data-anim="rise" style="--d:.48s"><strong>Comcast v. Behrend Compliance:</strong> Hedonic regression models perfectly isolate the software-driven premium from individual unit variables.</li>
-        <li data-anim="rise" style="--d:.61s"><strong>Propensity Score Matching:</strong> Control benchmarks utilize mathematically paired markets to isolate the &#8220;but-for&#8221; competitive baseline.</li>
-      </ul>
-      <div class="dviz" data-anim="fade" style="--d:.4s">
-        <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="190" y="20" text-anchor="middle" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".12em">CLASS-WIDE INJURY MODEL</text>
-          <!-- Unit blocks grow up from baseline (staggered diag-bar on each group) -->
-          <g class="diag-bar" style="--d:.60s">
-            <rect x="38"  y="110" width="48" height="63" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
-            <text x="62"  y="140" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">Studio</text>
-          </g>
-          <g class="diag-bar" style="--d:.68s">
-            <rect x="100" y="90"  width="48" height="83" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
-            <text x="124" y="135" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">1 BR</text>
-          </g>
-          <g class="diag-bar" style="--d:.76s">
-            <rect x="162" y="100" width="48" height="73" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
-            <text x="186" y="140" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">2 BR</text>
-          </g>
-          <g class="diag-bar" style="--d:.84s">
-            <rect x="224" y="118" width="48" height="55" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
-            <text x="248" y="148" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">3 BR</text>
-          </g>
-          <g class="diag-bar" style="--d:.92s">
-            <rect x="286" y="105" width="48" height="68" rx="3" fill="rgba(239,233,218,.07)" stroke="rgba(239,233,218,.3)" stroke-width="1.5"/>
-            <text x="310" y="142" text-anchor="middle" fill="rgba(239,233,218,.55)" font-family="IBM Plex Mono,monospace" font-size="8">Penthouse</text>
-          </g>
-          <!-- Inflated baseline pops in first (buildings need a floor to sit on) -->
-          <rect x="28" y="175" width="324" height="22" rx="4" fill="rgba(155,34,38,.3)" stroke="rgba(155,34,38,.7)" stroke-width="1.5" class="diag-node" style="--d:.48s"/>
-          <text x="190" y="190" text-anchor="middle" fill="rgba(239,233,218,.85)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:.5s">INFLATED PRICE BASELINE (SOFTWARE)</text>
-          <!-- But-for baseline fades in after inflated bar -->
-          <rect x="28" y="225" width="324" height="14" rx="4" fill="rgba(78,114,184,.15)" stroke="rgba(78,114,184,.5)" stroke-width="1.5" stroke-dasharray="6 4" data-anim="fade" style="--d:.8s"/>
-          <text x="190" y="236" text-anchor="middle" fill="rgba(78,114,184,.75)" font-family="IBM Plex Mono,monospace" font-size="9" data-anim="fade" style="--d:.82s">but-for baseline</text>
-          <!-- Premium delta arrow reveals after both baselines -->
-          <g data-anim="fade" style="--d:1.0s">
-            <line x1="60" y1="197" x2="60" y2="225" stroke="rgba(201,162,39,.7)" stroke-width="1.5"/>
-            <polygon points="56,222 60,230 64,222" fill="rgba(201,162,39,.7)"/>
-            <polygon points="56,200 60,192 64,200" fill="rgba(201,162,39,.7)"/>
-            <text x="70" y="213" fill="rgba(201,162,39,.8)" font-family="IBM Plex Mono,monospace" font-size="8.5">Δ premium</text>
-          </g>
-          <!-- Comcast badge pops in -->
-          <rect x="228" y="258" width="148" height="26" rx="13" fill="rgba(201,162,39,.14)" stroke="rgba(201,162,39,.45)" stroke-width="1" class="diag-badge" style="--d:1.12s"/>
-          <text x="302" y="275" text-anchor="middle" fill="rgba(201,162,39,.9)" font-family="IBM Plex Mono,monospace" font-size="9.5" data-anim="fade" style="--d:1.15s">Comcast-compliant ✓</text>
-          <!-- Hedonic regression note -->
-          <text x="28" y="275" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="8" data-anim="fade" style="--d:1.2s">hedonic regression strips unit</text>
-          <text x="28" y="287" fill="rgba(239,233,218,.38)" font-family="IBM Plex Mono,monospace" font-size="8" data-anim="fade" style="--d:1.22s">variables → isolates premium</text>
-        </svg>
+    <div class="dbody" style="gap:30px;align-items:stretch">
+      <div class="dtwin">
+        <div class="dtwin-h" data-anim="fade" style="--d:.28s">3 · Why this case matters beyond housing</div>
+        <ul class="dtwin-ul">
+          <li data-anim="rise" style="--d:.35s">This case is about more than apartment rents.</li>
+          <li data-anim="rise" style="--d:.42s">It raises an important question for the future of the digital economy.</li>
+          <li data-anim="rise" style="--d:.49s">Can companies use algorithms to achieve coordination that competitors could not legally achieve through direct communication?</li>
+          <li data-anim="rise" style="--d:.56s">If this conduct is allowed, similar practices could spread to other industries such as:
+            <ul class="dtwin-sub">
+              <li>Hotels</li>
+              <li>Healthcare</li>
+              <li>Insurance</li>
+              <li>Transportation</li>
+              <li>Retail</li>
+            </ul>
+          </li>
+          <li data-anim="rise" style="--d:.70s">Technology should encourage innovation, not undermine competition.</li>
+          <li data-anim="rise" style="--d:.77s">Algorithms must not become a loophole for price-fixing.</li>
+        </ul>
+      </div>
+      <div class="dtwin-sep"></div>
+      <div class="dtwin">
+        <div class="dtwin-h" data-anim="fade" style="--d:.28s">4 · Legal conclusion</div>
+        <ul class="dtwin-ul" style="justify-content:flex-start;flex:0 0 auto">
+          <li data-anim="rise" style="--d:.38s">The evidence establishes three key facts:
+            <ul class="dtwin-sub">
+              <li>Competitors exchanged commercially sensitive information through RealPage.</li>
+              <li>That information was used to generate coordinated pricing recommendations across competing landlords.</li>
+              <li>Consumers paid higher rents and experienced less price competition.</li>
+            </ul>
+          </li>
+          <li data-anim="rise" style="--d:.60s">These are exactly the kinds of harms the Sherman Act was designed to prevent.</li>
+          <li data-anim="rise" style="--d:.74s">The law protects consumers by preserving independent competition, regardless of whether coordination occurs through people or algorithms.</li>
+        </ul>
+        <div data-anim="fade" style="--d:.85s;flex:1;margin-top:14px;border-radius:10px;overflow:hidden;position:relative;min-height:60px">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/DOJ_Main_Building.jpg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;opacity:.45;display:block">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,26,48,.8) 0%,rgba(13,26,48,.2) 60%,transparent 100%)"></div>
+          <div style="position:absolute;bottom:12px;left:14px;font-family:var(--font-mono);font-size:9px;letter-spacing:.18em;color:rgba(201,162,39,.65);text-transform:uppercase">Equal Justice Under Law</div>
+        </div>
       </div>
     </div>
   </section>
