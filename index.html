@@ -497,10 +497,10 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
 .def-card .dc-item::before{content:'›';color:var(--rp-coral);font-weight:700}
 /* S22 conclusion sumcol photo gradient */
 .sumcol{position:relative;overflow:hidden}
-.sum-bg{position:absolute;left:0;right:0;bottom:0;height:52%;width:100%;object-fit:cover;object-position:center top;opacity:.28;filter:saturate(.55) contrast(1.05);pointer-events:none}
-.sum-fade{position:absolute;left:0;right:0;top:0;height:65%;pointer-events:none;z-index:1}
-.sumcol.doj .sum-fade{background:linear-gradient(to bottom,#1a2744 45%,transparent)}
-.sumcol.rp .sum-fade{background:linear-gradient(to bottom,#fff 45%,transparent)}
+.sum-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;opacity:.32;filter:saturate(.6) contrast(1.05);pointer-events:none}
+.sum-fade{position:absolute;left:0;right:0;top:0;height:55%;pointer-events:none;z-index:1}
+.sumcol.doj .sum-fade{background:linear-gradient(to bottom,#1a2744 55%,transparent)}
+.sumcol.rp .sum-fade{background:linear-gradient(to bottom,#fff 55%,transparent)}
 .sumcol>.sh,.sumcol>.row{position:relative;z-index:2}
 /* Hub-and-spoke SVG animations */
 @keyframes spin-rim{to{stroke-dashoffset:-102}}
@@ -693,25 +693,16 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="pbar"></div>
     <img class="bg-photo" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80&auto=format&fit=crop" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="vhead center">
-      <div class="kicker" data-anim="fade" style="--d:.1s">01 · What is RealPage?</div>
       <div class="logo-line" data-anim="rise" style="--d:.2s"><span class="rp-wm">RealPage</span></div>
       <h2 data-anim="rise" style="--d:.3s;font-size:34px">A multinational real estate technology company</h2>
     </div>
-    <div class="prodrow">
+    <div class="prodrow" style="top:155px;bottom:60px;align-items:center;transform:none">
       <div class="pcard" data-anim="pop" style="--d:.55s">
-        <div class="ptop"><span class="pname">YieldStar</span><span class="pbadge">legacy</span></div>
-        <ul>
-          <li>rival data</li>
-          <li>daily pricing</li>
-        </ul>
+        <div class="ptop" style="margin-bottom:0"><span class="pname">YieldStar</span><span class="pbadge">legacy</span></div>
       </div>
       <div class="pevo" data-anim="fade" style="--d:.8s">→</div>
       <div class="pcard ai" data-anim="pop" style="--d:.7s">
-        <div class="ptop"><span class="pname">AIRM</span><span class="pbadge ai">AI-powered</span></div>
-        <ul>
-          <li>machine learning</li>
-          <li>predictive pricing</li>
-        </ul>
+        <div class="ptop" style="margin-bottom:0"><span class="pname">AIRM</span><span class="pbadge ai">AI-powered</span></div>
       </div>
     </div>
   </section>
@@ -721,7 +712,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="pbar"></div>
     <div class="grid"></div>
     <div class="vhead center">
-      <div class="kicker" data-anim="fade" style="--d:.1s">02 · How it works</div>
       <h2 data-anim="rise" style="--d:.25s">Data in, price out</h2>
     </div>
     <!-- Animated branch paths -->
@@ -736,32 +726,30 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
       <path class="bpath-out" d="M 700 408 C 840 408 880 273 1026 273" marker-end="url(#bah2)"/>
       <path class="bpath-out" d="M 700 408 L 1026 408" marker-end="url(#bah2)"/>
       <path class="bpath-out" d="M 700 408 C 840 408 880 543 1026 543" marker-end="url(#bah2)"/>
-      <text x="44" y="408" text-anchor="middle" fill="#8BA88F" font-family="IBM Plex Mono,monospace" font-size="11" opacity=".55" letter-spacing=".05em" transform="rotate(-90 44 408)">rival landlords</text>
-      <text x="1222" y="408" text-anchor="middle" fill="#EEAD0E" font-family="IBM Plex Mono,monospace" font-size="11" opacity=".55" letter-spacing=".05em" transform="rotate(90 1222 408)">price outputs</text>
     </svg>
     <!-- Input nodes -->
     <div class="bnode" style="left:84px;top:223px;width:176px;--d:.38s" data-anim="pop">
-      <div class="bi">🏢</div><div class="bt">Landlord A</div><div class="bs">private lease data</div>
+      <div class="bi">🏢</div><div class="bt">Landlord A</div>
     </div>
     <div class="bnode" style="left:84px;top:358px;width:176px;--d:.5s" data-anim="pop">
-      <div class="bi">🏢</div><div class="bt">Landlord B</div><div class="bs">nonpublic rates</div>
+      <div class="bi">🏢</div><div class="bt">Landlord B</div><div class="bs">rates</div>
     </div>
     <div class="bnode" style="left:84px;top:493px;width:176px;--d:.62s" data-anim="pop">
-      <div class="bi">🏢</div><div class="bt">Landlord C</div><div class="bs">occupancy data</div>
+      <div class="bi">🏢</div><div class="bt">Landlord C</div><div class="bs">occupancy</div>
     </div>
     <!-- Algorithm hub -->
     <div class="bnode hub" style="left:530px;top:348px;width:170px;--d:.76s" data-anim="pop">
-      <div class="bi">▦</div><div class="bt">RealPage<br>algorithm</div><div class="bs">YieldStar · AIRM</div>
+      <div class="bi">▦</div><div class="bt">RealPage<br>algorithm</div>
     </div>
     <!-- 3 Output nodes -->
     <div class="bnode out" style="left:1026px;top:223px;width:170px;--d:.88s" data-anim="pop">
-      <div class="bi">🏷️</div><div class="bt">Landlord A</div><div class="bs" style="color:#EEAD0E">+2.4% rate</div>
+      <div class="bi">🏷️</div><div class="bt">Landlord A</div><div class="bs" style="color:#EEAD0E">+2.4%</div>
     </div>
     <div class="bnode out" style="left:1026px;top:358px;width:170px;--d:.96s" data-anim="pop">
-      <div class="bi">🏷️</div><div class="bt">Landlord B</div><div class="bs" style="color:#EEAD0E">+1.8% rate</div>
+      <div class="bi">🏷️</div><div class="bt">Landlord B</div><div class="bs" style="color:#EEAD0E">+1.8%</div>
     </div>
     <div class="bnode out" style="left:1026px;top:493px;width:170px;--d:1.04s" data-anim="pop">
-      <div class="bi">🏷️</div><div class="bt">Landlord C</div><div class="bs" style="color:#EEAD0E">+3.1% rate</div>
+      <div class="bi">🏷️</div><div class="bt">Landlord C</div><div class="bs" style="color:#EEAD0E">+3.1%</div>
     </div>
     <!-- Animated data packets -->
     <div class="bpkt b1"></div><div class="bpkt b1 bd2"></div><div class="bpkt b1 bd3"></div>
@@ -770,7 +758,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="bpkt b4a"></div><div class="bpkt b4a bd2"></div>
     <div class="bpkt b4b"></div>
     <div class="bpkt b4c"></div><div class="bpkt b4c bd2"></div>
-    <div class="flow-cap" data-anim="fade" style="--d:1.1s">pooled nonpublic data · <b>feedback loop</b></div>
   </section>
 
   <!-- 5 · HOW IT WORKS (the cycle) -->
@@ -778,7 +765,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="pbar"></div>
     <div class="grid"></div>
     <div class="vhead center">
-      <div class="kicker" data-anim="fade" style="--d:.1s">02 · How it works</div>
       <h2 data-anim="rise" style="--d:.25s">A closed loop</h2>
     </div>
     <svg class="cyc" viewBox="0 0 1280 720" preserveAspectRatio="none">
@@ -788,23 +774,19 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     </svg>
     <div class="pkt top d1"></div><div class="pkt top d2"></div><div class="pkt top d3"></div>
     <div class="pkt bot d1"></div><div class="pkt bot d2"></div><div class="pkt bot d3"></div>
-    <div class="cyc-lab top" data-anim="fade" style="--d:.9s">nonpublic lease data</div>
-    <div class="cnode" style="left:84px;--d:.45s" data-anim="pop"><div class="ci">🏢</div><div class="ct">Competing Landlords</div><div class="cs">private data</div></div>
+    <div class="cnode" style="left:84px;--d:.45s" data-anim="pop"><div class="ci">🏢</div><div class="ct">Landlords</div><div class="cs">data</div></div>
     <div class="cnode rp" style="right:84px;--d:.6s" data-anim="pop"><div class="ci">▦</div><div class="ct"><span class="rp-wm">RealPage</span></div><div class="cs">pooled data</div></div>
-    <div class="cyc-lab bot" data-anim="fade" style="--d:1.05s">← price recommendations</div>
   </section>
 
   <!-- 5 · THE PROBLEM -->
   <section class="slide s-lock" data-part="intro">
     <div class="pbar"></div>
     <div class="txt">
-      <div class="kicker" data-anim="left" style="--d:.1s">03 · What's the problem?</div>
       <h2 class="reveal"><span class="ln" style="--i:0"><i>Rivals moving</i></span><span class="ln" style="--i:1"><i>in <span class="red">lockstep.</span></i></span></h2>
       <div class="conseq">
         <div class="c up" data-anim="left" style="--d:.5s"><span class="ic">▲</span> Rents up</div>
         <div class="c" data-anim="left" style="--d:.6s"><span class="ic">✕</span> Concessions cut</div>
       </div>
-      <div class="frame-note" data-anim="fade" style="--d:.8s"><b>civil · rule of reason</b></div>
     </div>
     <div class="chart" data-anim="pop" style="--d:.4s">
       <img class="cimg" src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=900&q=80&auto=format&fit=crop" alt="apartment buildings" referrerpolicy="no-referrer" onerror="this.style.display='none'">
@@ -826,25 +808,23 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <section class="slide s-why" data-part="intro">
     <div class="pbar"></div>
     <div class="vhead center">
-      <div class="kicker" data-anim="fade" style="--d:.1s">04 · Why this case matters</div>
       <h2 data-anim="rise" style="--d:.25s">A landmark case.</h2>
     </div>
     <div class="imgsplit">
       <div class="imgcell" data-anim="left" style="--d:.4s">
         <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&auto=format&fit=crop" alt="handshake" referrerpolicy="no-referrer">
-        <div class="ov"></div><div class="lab"><div class="tg">THEN</div><div class="tx">price-fixing</div></div>
+        <div class="ov"></div><div class="lab"><div class="tg">THEN</div></div>
       </div>
       <div class="imgcell" data-anim="left" style="--d:.55s">
         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80&auto=format&fit=crop" alt="algorithm chip" referrerpolicy="no-referrer">
-        <div class="ov"></div><div class="lab"><div class="tg">NOW</div><div class="tx">algorithmic coordination</div></div>
+        <div class="ov"></div><div class="lab"><div class="tg">NOW</div></div>
       </div>
     </div>
     <div class="imgeq" data-anim="zoom" style="--d:.8s">=</div>
     <div class="qbar">
-      <div class="qcell doj" data-anim="fade" style="--d:.7s"><div class="who">◆ The United States</div><div class="qt">"Training a machine to break the law is still breaking the law."</div></div>
+      <div class="qcell doj" data-anim="fade" style="--d:.7s"><div class="who">◆ DOJ</div><div class="qt">"Training a machine to break the law is still breaking the law."</div></div>
       <div class="qcell rp" data-anim="fade" style="--d:.82s"><div class="who">◆ RealPage</div><div class="qt">"Our AI simply gives recommendations; the landlords make their decisions."</div></div>
     </div>
-    <div class="landmark" data-anim="fade" style="--d:1s">first AI price-coordination case · <b>no binding precedent</b></div>
   </section>
 
   <!-- 8 · TABLE OF CONTENTS (closing) -->
@@ -881,14 +861,13 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">P1 · The Scheme</div>
       <h2 data-anim="rise" style="--d:.22s">The Threat to American Renters</h2>
     </div>
     <div class="dbody">
       <div class="dbulle" style="flex:0 0 580px;justify-content:center;gap:0;padding-bottom:80px">
         <p data-anim="rise" style="--d:.35s;font-family:var(--font-mono);font-size:22px;color:rgba(239,233,218,.92);line-height:1.6;margin:0;padding:0 0 20px;border-bottom:1px solid rgba(201,162,39,.22);">Landlords replaced competition with algorithmic price-fixing.</p>
         <p data-anim="rise" style="--d:.5s;font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--doj-gold-lt);margin:0;padding:16px 0 12px;">The Scheme</p>
-        <p data-anim="rise" style="--d:.65s;font-family:var(--font-mono);font-size:17px;color:rgba(239,233,218,.72);line-height:1.72;margin:0;">landlords → pool data (occupancy, lease) → RealPage algorithm → rents on <strong style="color:#fff">"autopilot"</strong></p>
+        <p data-anim="rise" style="--d:.65s;font-family:var(--font-mono);font-size:17px;color:rgba(239,233,218,.72);line-height:1.72;margin:0;">landlords → pool data → RealPage → rents on <strong style="color:#fff">"autopilot"</strong></p>
       </div>
       <div class="dviz" data-anim="fade" style="--d:.4s">
         <svg viewBox="0 0 340 440" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -949,14 +928,13 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">P2 · Sherman Act §§ 1 &amp; 2</div>
       <h2 data-anim="rise" style="--d:.22s">Breaking the Law: The Data Moat Monopoly</h2>
     </div>
     <div class="dbody">
       <ul class="dbulle" style="flex:0 0 575px">
         <li data-anim="rise" style="--d:.35s;font-size:16px"><strong>§1 —</strong> Algorithm coordination = price fixing.</li>
-        <li data-anim="rise" style="--d:.5s;font-size:16px"><strong>§2 —</strong> Data "moat" monopolizes pricing software; rivals locked out.</li>
-        <li data-anim="rise" style="--d:.65s;font-size:16px"><strong>Remedy —</strong> landlords profit → renters overpay. U.S.: dismantle cartel.</li>
+        <li data-anim="rise" style="--d:.5s;font-size:16px"><strong>§2 —</strong> Data moat locks rivals out.</li>
+        <li data-anim="rise" style="--d:.65s;font-size:16px"><strong>Remedy —</strong> renters overpay; dismantle the cartel.</li>
       </ul>
       <div class="dviz" data-anim="fade" style="--d:.4s">
         <svg viewBox="0 0 340 440" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -997,30 +975,25 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
     <div class="pbar"></div>
     <img class="doj-seal-wm" src="https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_the_United_States_Department_of_Justice.svg" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">
     <div class="dhead">
-      <div class="dkick" data-anim="left" style="--d:.1s">P3 · The Case</div>
       <h2 data-anim="rise" style="--d:.22s">Conduct, Harm &amp; Conclusion</h2>
     </div>
     <div class="dbody" style="gap:0;flex-direction:column">
       <div style="display:flex;gap:30px;flex:0 0 auto;align-items:stretch">
         <div class="dtwin" style="justify-content:flex-start">
-          <div class="dtwin-h" data-anim="fade" style="--d:.28s">Coordinated pricing</div>
           <ul class="dtwin-ul" style="justify-content:flex-start;flex:0 0 auto;margin-bottom:14px">
-            <li data-anim="rise" style="--d:.35s;font-size:13px">Independent pricing → landlords share confidential data via RealPage → algorithm generates recommendations from competitors&#39; non-public info → high compliance → coordinated (not independent) pricing → reduced competition.</li>
+            <li data-anim="rise" style="--d:.35s;font-size:13px">Data → RealPage → coordinated pricing.</li>
           </ul>
-          <div class="dtwin-h" data-anim="fade" style="--d:.45s">Consumer harm</div>
           <ul class="dtwin-ul" style="justify-content:flex-start;flex:0 0 auto">
-            <li data-anim="rise" style="--d:.52s;font-size:13px">Coordination → higher rents → fewer discounts/concessions → intentional vacancies → less affordable housing. Profiting through fair competition is legal; coordinating via shared confidential data is not.</li>
+            <li data-anim="rise" style="--d:.52s;font-size:13px">Higher rents · vacancies.</li>
           </ul>
         </div>
         <div class="dtwin-sep"></div>
         <div class="dtwin" style="justify-content:flex-start">
-          <div class="dtwin-h" data-anim="fade" style="--d:.28s">Beyond housing</div>
           <ul class="dtwin-ul" style="justify-content:flex-start;flex:0 0 auto;margin-bottom:14px">
-            <li data-anim="rise" style="--d:.35s;font-size:13px">Algorithmic collusion → same harm as illegal human collusion → risk spreads to hotels, healthcare, insurance, transportation, retail → algorithms must not become a price-fixing loophole.</li>
+            <li data-anim="rise" style="--d:.35s;font-size:13px">Algorithms must not become a loophole.</li>
           </ul>
-          <div class="dtwin-h" data-anim="fade" style="--d:.45s">Legal conclusion</div>
           <ul class="dtwin-ul" style="justify-content:flex-start;flex:0 0 auto">
-            <li data-anim="rise" style="--d:.52s;font-size:13px">Shared sensitive data → algorithm-driven coordinated pricing → higher rents, reduced competition → exactly the harm the Sherman Act prohibits, whether coordination happens through people or algorithms.</li>
+            <li data-anim="rise" style="--d:.52s;font-size:13px">Coordination via algorithm = Sherman Act violation.</li>
           </ul>
         </div>
       </div>
@@ -1072,8 +1045,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- 3.3 civil not criminal -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Civil — not criminal.</h2></div>
-    <div class="civil-imgs" data-anim="rise" style="--d:.35s;height:230px">
+    <div class="civil-imgs" data-anim="rise" style="--d:.25s;height:248px;top:107px">
       <div class="civil-cell bad">
         <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" alt="criminal law" referrerpolicy="no-referrer" onerror="this.style.display='none'">
         <div class="ov"></div>
@@ -1083,86 +1055,30 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
         <div class="ov"></div>
       </div>
     </div>
-    <div class="paths" style="top:398px">
+    <div class="paths" style="top:375px">
       <div class="path bad" data-anim="rise" style="--d:.5s"><span>criminal · collusion</span> ✕</div>
       <div class="path good" data-anim="rise" style="--d:.65s"><span>civil · rule of reason</span> ✓</div>
     </div>
-    <div class="rp-fill-bar" data-anim="fade" style="--d:.78s;top:580px;left:84px;right:84px">
-      <span class="fi">⚖</span><span>prove actual anticompetitive harm</span>
+    <div class="rp-fill-bar" data-anim="fade" style="--d:.78s;top:561px;left:84px;right:84px">
+      <span class="fi">⚖</span><span>prove anticompetitive harm</span>
     </div>
-    <div class="civil-next" data-anim="fade" style="--d:.92s"><span>→</span><b>Next: Analysing Sherman Act</b></div>
   </section>
 
-  <!-- 3.4 §1 statute -->
+  <!-- 3.4 §1 statute — merged with hub-and-spoke -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · Sherman Act</div><h2 data-anim="rise" style="--d:.2s">Section 1 — No Agreement</h2></div>
-    <div data-anim="rise" style="position:absolute;left:84px;width:580px;top:232px;--d:.35s"><div class="statute">
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Section 1 — No Agreement</h2></div>
+    <div data-anim="rise" style="position:absolute;left:84px;width:530px;top:210px;--d:.35s"><div class="statute">
       <div class="sn">15 U.S.C. § 1</div>
       <div class="sq">"Every contract, combination… or conspiracy, in restraint of trade…"</div>
     </div></div>
-    <div class="rp-point" data-anim="fade" style="top:415px;width:580px;--d:.6s">
-      <div class="rp-li"><span class="b">›</span><div><b>genuine concerted action</b> required</div></div>
-      <div class="rp-li"><span class="b">?</span><div>same software ≠ <b>agreement</b></div></div>
-      <div class="rp-li"><span class="b">≡</span><div>no direct communication between landlords</div></div>
+    <div class="rp-point" data-anim="fade" style="top:350px;width:490px;--d:.55s">
+      <div class="rp-li"><span class="b">›</span><div>concerted action required</div></div>
+      <div class="rp-li"><span class="b">≈</span><div>same software ≠ <b>agreement</b></div></div>
+      <div class="rp-li"><span class="b">⚖</span><div>requires vertical + horizontal conspiracies</div></div>
       <div class="rp-li"><span class="b">✓</span><div><b>They did not agree.</b></div></div>
     </div>
-    <div class="rp-aside-diag" data-anim="right" style="--d:.65s">
-      <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <path id="spA" d="M 180 94 L 180 148"/>
-          <path id="spB" d="M 265 342 L 228 248"/>
-          <path id="spC" d="M 95 342 L 132 248"/>
-        </defs>
-        <text x="180" y="22" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing=".14em">AGREEMENT TEST · §1</text>
-        <!-- Ripple behind RealPage hub -->
-        <circle cx="180" cy="200" r="52" fill="none" stroke="rgba(255,77,109,.25)" stroke-width="1.5" class="diag-ripple" style="--d:0s"/>
-        <circle cx="180" cy="200" r="52" fill="none" stroke="rgba(255,77,109,.2)" stroke-width="1.5" class="diag-ripple" style="--d:.9s"/>
-        <!-- RealPage hub -->
-        <circle cx="180" cy="200" r="52" fill="rgba(255,77,109,.09)" stroke="rgba(255,77,109,.45)" stroke-width="1.5" class="diag-float"/>
-        <text x="180" y="204" text-anchor="middle" fill="#2B2D33" font-family="Inter,sans-serif" font-weight="800" font-size="13">RealPage</text>
-                <!-- Landlord A (top) -->
-        <rect x="130" y="44" width="100" height="50" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="diag-float diag-node" style="--d:.2s"/>
-        <text x="180" y="73" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Landlord A</text>
-                <!-- Landlord B -->
-        <rect x="248" y="340" width="100" height="50" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="diag-float-b diag-node" style="--d:.35s"/>
-        <text x="298" y="369" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Landlord B</text>
-                <!-- Landlord C -->
-        <rect x="12" y="340" width="100" height="50" rx="10" fill="rgba(94,126,99,.08)" stroke="rgba(94,126,99,.4)" stroke-width="1.5" class="diag-float-c diag-node" style="--d:.5s"/>
-        <text x="62" y="369" text-anchor="middle" fill="#2B2D33" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">Landlord C</text>
-                <!-- Spoke A→hub: flowing -->
-        <line x1="180" y1="94" x2="180" y2="148" stroke="#5E7E63" stroke-width="1.8" class="flow-dash"/>
-        <polygon points="180,150 176,140 184,140" fill="#5E7E63" opacity=".7"/>
-        <!-- Packet A -->
-        <circle r="4" fill="rgba(94,126,99,.75)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.3s"><mpath href="#spA"/></animateMotion></circle>
-        <!-- Spoke B→hub: flowing -->
-        <line x1="265" y1="342" x2="228" y2="248" stroke="#5E7E63" stroke-width="1.8" class="flow-dash-b"/>
-        <polygon points="230,250 222,244 234,240" fill="#5E7E63" opacity=".7"/>
-        <!-- Packet B -->
-        <circle r="4" fill="rgba(94,126,99,.75)"><animateMotion dur="1.5s" repeatCount="indefinite" begin="0.1s"><mpath href="#spB"/></animateMotion></circle>
-        <!-- Spoke C→hub: flowing -->
-        <line x1="95" y1="342" x2="132" y2="248" stroke="#5E7E63" stroke-width="1.8" class="flow-dash-c"/>
-        <polygon points="130,250 126,240 138,244" fill="#5E7E63" opacity=".7"/>
-        <!-- Packet C -->
-        <circle r="4" fill="rgba(94,126,99,.75)"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.7s"><mpath href="#spC"/></animateMotion></circle>
-        <!-- Phantom rim B–C, crossed -->
-        <line x1="112" y1="365" x2="248" y2="365" stroke="rgba(155,34,38,.28)" stroke-width="1.2" stroke-dasharray="5 5"/>
-        <text x="180" y="374" text-anchor="middle" fill="#9B2226" font-family="Inter,sans-serif" font-size="26" font-weight="900" opacity=".8" class="diag-x" style="--d:.9s">✕</text>
-        <!-- Footer -->
-                      </svg>
-    </div>
-  </section>
-
-  <!-- 3.5 hub-and-spoke, no rim -->
-  <section class="slide rp-bg" data-part="realpage">
-    <div class="pbar"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · The DOJ's theory</div><h2 data-anim="rise" style="--d:.2s">"Hub-and-spoke"</h2></div>
-    <div class="rp-point" data-anim="fade" style="top:260px;width:490px;--d:.5s">
-      <div class="rp-li"><span class="b">✕</span><div>no <b>rim</b></div></div>
-      <div class="rp-li"><span class="b">≈</span><div>same tool ≠ agreement</div></div>
-      <div class="rp-li"><span class="b">⚖</span><div>requires vertical + horizontal conspiracies</div></div>
-    </div>
-    <svg class="wheel" viewBox="0 0 1280 720" data-anim="fade" style="position:absolute;inset:0;z-index:2;--d:.5s">
+    <svg class="wheel" viewBox="0 0 1280 720" data-anim="fade" style="position:absolute;inset:0;z-index:2;--d:.65s">
       <defs>
         <linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A3D"/><stop offset="1" stop-color="#FF4D6D"/></linearGradient>
         <filter id="hubglow" x="-50%" y="-50%" width="200%" height="200%">
@@ -1200,8 +1116,6 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
       <circle cx="950" cy="380" r="46" fill="url(#hubg)"/>
       <text x="950" y="377" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="800" font-size="12">RealPage</text>
       <text x="950" y="390" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="IBM Plex Mono,monospace" font-size="9">hub</text>
-      <!-- Labels -->
-      <text x="950" y="197" text-anchor="middle" fill="#5B6B8C" font-family="IBM Plex Mono,monospace" font-size="11.5">landlords</text>
       <text x="950" y="568" text-anchor="middle" fill="#9B2226" font-family="IBM Plex Mono,monospace" font-size="13.5" font-weight="600">✕ no rim · no agreement</text>
     </svg>
   </section>
@@ -1209,35 +1123,25 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- 3.6 parallel conduct -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · What it really is</div><h2 data-anim="rise" style="--d:.2s">Parallel Conduct: Conscious Parallelism</h2></div>
-    <div class="rp-cards" data-anim="fade" style="top:230px;--d:.4s">
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Parallel Conduct: Conscious Parallelism</h2></div>
+    <div class="rp-cards" data-anim="fade" style="top:190px;--d:.4s">
       <div class="rp-c"><div class="cn">Non-binding</div><div class="ct">Landlords override</div></div>
       <div class="rp-c"><div class="cn">Up · down · flat</div><div class="ct">Not just up</div></div>
       <div class="rp-c"><div class="cn">Optional</div><div class="ct">Auto-accept off</div></div>
     </div>
-    <div data-anim="rise" style="position:absolute;left:84px;right:84px;top:420px;--d:.6s"><div class="statute">
-      <div class="sn">Bell Atlantic v. Twombly</div>
-      <div class="sq">"plausible, not merely conceivable."</div>
-    </div></div>
-    <div class="no-rim" data-anim="fade" style="--d:.85s">
-      <div class="nr-n">🏢 A</div>
-      <span class="nr-x">╌</span>
-      <div class="nr-n">🏢 B</div>
-      <span class="nr-x">╌</span>
-      <div class="nr-n">🏢 C</div>
-      <span class="nr-eq">− software =</span>
-      <div class="nr-r">no relationship</div>
+    <div data-anim="fade" style="--d:.65s;position:absolute;left:84px;right:84px;top:360px;bottom:54px;border-radius:14px;overflow:hidden;border:1px solid rgba(94,126,99,.18)">
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80&auto=format&fit=crop" alt="parallel price trends" style="width:100%;height:100%;object-fit:cover;opacity:.72;filter:saturate(.85) contrast(1.05)" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,6,10,.7) 0%,rgba(4,6,10,.1) 60%)"></div>
     </div>
   </section>
 
   <!-- 3.7 RealPage's own words -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.1 · Their evidence</div><h2 data-anim="rise" style="--d:.2s">Ambition ≠ Agreement</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Ambition ≠ Agreement</h2></div>
     <div class="bubbles" style="left:0;right:0;top:148px;bottom:68px;justify-content:center;align-items:center">
       <div style="transform:translateX(-60px)"><div class="bubble" data-anim="pop" style="--d:.4s;font-size:26px;padding:22px 32px;max-width:740px">"Drive every opportunity to increase price."</div></div>
       <div style="transform:translateX(60px)"><div class="bubble" data-anim="pop" style="--d:.55s;font-size:26px;padding:22px 32px;max-width:740px">"Avoid the race to the bottom."</div></div>
-      <div style="transform:translateX(-60px)"><div class="bubble" data-anim="pop" style="--d:.68s;font-size:26px;padding:22px 32px;max-width:740px">"Maximize revenue per available unit."</div></div>
     </div>
 
   </section>
@@ -1245,15 +1149,15 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- 3.8 §2 + Grinnell -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">1.2 · Sherman Act</div><h2 data-anim="rise" style="--d:.2s">Section 2 — No Monopolization</h2></div>
-    <div data-anim="rise" style="position:absolute;left:84px;width:580px;top:232px;--d:.35s"><div class="statute">
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Section 2 — No Monopolization</h2></div>
+    <div data-anim="rise" style="position:absolute;left:84px;width:580px;top:210px;--d:.35s"><div class="statute">
       <div class="sn">15 U.S.C. § 2</div>
       <div class="sq">"shall monopolize, or attempt to monopolize"</div>
     </div></div>
-    <div class="rp-point" data-anim="fade" style="top:358px;width:580px;--d:.6s">
+    <div class="rp-point" data-anim="fade" style="top:340px;width:580px;--d:.55s">
       <div class="rp-li"><span class="b">★</span><div><b>superior product</b> — AIRM won on merit</div></div>
-      <div class="rp-li"><span class="b">⚡</span><div>Has other competitors ex. Yardi</div></div>
-      <div class="rp-li"><span class="b">›</span><div>high market share isn't illegal — customers chose RealPage <b>voluntarily</b></div></div>
+      <div class="rp-li"><span class="b">⚡</span><div>Competitors exist: Yardi</div></div>
+      <div class="rp-li"><span class="b">›</span><div>high market share ≠ illegal</div></div>
     </div>
     <div class="rp-aside-diag" data-anim="right" style="--d:.65s">
       <svg viewBox="0 0 360 460" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1291,7 +1195,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- 3.9 hand-off -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">Hand-off</div><h2 data-anim="rise" style="--d:.2s">No agreement. No monopoly.</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">No agreement. No monopoly.</h2></div>
     <div class="def-stack">
       <div class="def-card off" data-anim="rise" style="--d:.38s">
         <div class="dc-num">1</div>
@@ -1313,7 +1217,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- S1 · Market, Constitution & Framing -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2nd Speaker</div><h2 data-anim="rise" style="--d:.2s">Market, Constitution &amp; Framing</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Market, Constitution &amp; Framing</h2></div>
     <div class="rp-point" data-anim="fade" style="top:172px;width:560px;--d:.35s">
       <div class="rp-li"><span class="b">$</span><div>Insufficient data to support damages</div></div>
       <div class="rp-li"><span class="b">✓</span><div>RealPage = efficient, procompetitive, legally protected tool</div></div>
@@ -1327,7 +1231,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- S2 · 2.1 AI & IP Law Perspective -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.1 · AI &amp; IP Law</div><h2 data-anim="rise" style="--d:.2s">AI &amp; IP Law Perspective</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">AI &amp; IP Law Perspective</h2></div>
     <div class="def-stack" style="top:160px">
       <div class="def-card off" data-anim="rise" style="--d:.35s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">©</div>
@@ -1347,24 +1251,24 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- S3 · 2.1 Information Sharing & Algorithmic Speech -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.1 · Algorithmic Speech</div><h2 data-anim="rise" style="--d:.2s">Information Sharing &amp; Algorithmic Speech</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Information Sharing &amp; Algorithmic Speech</h2></div>
     <div class="def-stack" style="top:215px">
       <div class="def-card off" data-anim="rise" style="--d:.35s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">⚖</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">SCOTUS: information sharing → rational business decisions</div>
+          <div class="dc-head" style="font-size:17px">SCOTUS: info sharing → procompetitive decisions</div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.5s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">🔢</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Algorithm output = math prediction, not a mandated price → First Amendment-protected speech</div>
+          <div class="dc-head" style="font-size:17px">Algorithm = math prediction → First Amendment speech</div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.65s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">⚠</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Banning data analytics sets dangerous precedent</div>
+          <div class="dc-head" style="font-size:17px">Banning analytics sets precedent</div>
         </div>
       </div>
     </div>
@@ -1373,30 +1277,30 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- S4 · 2.2 Rule of Reason: No Effects -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.2 · Rule of Reason</div><h2 data-anim="rise" style="--d:.2s">No Effects</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">No Effects</h2></div>
     <div class="def-stack" style="top:160px">
       <div class="def-card off" data-anim="rise" style="--d:.35s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">⚖</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Plaintiffs must prove: (1) precise relevant market, (2) market power → <b>fail both</b></div>
+          <div class="dc-head" style="font-size:17px">Must prove relevant market + market power → <b>fail both</b></div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.5s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">📍</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Geographic market = hyperlocal (block-by-block, not city-wide)</div>
+          <div class="dc-head" style="font-size:17px">Market = hyperlocal, not city-wide</div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.65s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">≠</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Landlords retain final say → no coordinated conspiracy</div>
+          <div class="dc-head" style="font-size:17px">Landlords retain final say</div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.8s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">↔</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Cross-elasticity: renters have alternatives → RealPage's market share too small</div>
+          <div class="dc-head" style="font-size:17px">Renters have alternatives → share overstated</div>
         </div>
       </div>
     </div>
@@ -1405,7 +1309,7 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- S5 · 2.2 Causation -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.2 · Causation</div><h2 data-anim="rise" style="--d:.2s">Correlation Is Not Cause</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">Correlation Is Not Cause</h2></div>
     <div class="def-stack" style="top:160px">
       <div class="def-card off" data-anim="rise" style="--d:.35s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">≠</div>
@@ -1416,19 +1320,19 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
       <div class="def-card off" data-anim="rise" style="--d:.5s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">🏗</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Supply: pre-existing 3.5M-home shortage (structural, pre-RealPage)</div>
+          <div class="dc-head" style="font-size:17px">Supply: 3.5M-home shortage, pre-RealPage</div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.65s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">📈</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Demand: pandemic migration, remote work, inflation, rate hikes</div>
+          <div class="dc-head" style="font-size:17px">Demand: pandemic migration, inflation, rate hikes</div>
         </div>
       </div>
       <div class="def-card off" data-anim="rise" style="--d:.8s">
         <div style="font-size:28px;min-width:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">👤</div>
         <div class="dc-body">
-          <div class="dc-head" style="font-size:17px">Human agents overrode algorithm (e.g., "one month free")</div>
+          <div class="dc-head" style="font-size:17px">Human agents overrode the algorithm</div>
         </div>
       </div>
     </div>
@@ -1437,9 +1341,9 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <!-- S6 · 2.3 Framing: No Class Action -->
   <section class="slide rp-bg" data-part="realpage">
     <div class="pbar"></div><div class="blob"></div><div class="rp-grid"></div>
-    <div class="rphead"><div class="rk" data-anim="left" style="--d:.1s">2.3 · Framing</div><h2 data-anim="rise" style="--d:.2s">No Class Action</h2></div>
+    <div class="rphead"><h2 data-anim="rise" style="--d:.2s">No Class Action</h2></div>
     <div class="rp-point" data-anim="fade" style="top:172px;width:560px;--d:.35s">
-      <div class="rp-li"><span class="b">🏠</span><div>Apartment pricing = idiosyncratic (floor, view, renovation, safety, lease timing)</div></div>
+      <div class="rp-li"><span class="b">🏠</span><div>Apartment pricing = idiosyncratic</div></div>
       <div class="rp-li"><span class="b">✕</span><div>No uniform harm → class certification fails</div></div>
     </div>
     <div data-anim="rise" style="--d:.5s;position:absolute;right:0;top:0;bottom:0;width:500px;overflow:hidden">
@@ -1515,30 +1419,24 @@ body{font-family:var(--font-ui);color:var(--txt);-webkit-font-smoothing:antialia
   <section class="slide s-sum" data-part="conclusion">
     <div class="pbar"></div>
     <div class="head"><div class="kicker" data-anim="left" style="--d:.1s">Conclusion</div><h2 data-anim="rise" style="--d:.25s">Both sides, in summary</h2></div>
-    <div class="sumrow" data-anim="rise" style="--d:.4s;bottom:90px">
+    <div class="sumrow" data-anim="rise" style="--d:.4s;bottom:40px">
       <div class="sumcol doj">
         <img class="sum-bg" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&auto=format&fit=crop" referrerpolicy="no-referrer" onerror="this.style.display='none'">
         <div class="sum-fade"></div>
         <div class="sh">◆ Plaintiff — DOJ &amp; States</div>
-        <div class="row"><b>Charges:</b> §1 &amp; §2 Sherman Act · state antitrust laws</div>
-        <div class="row"><b>Theory:</b> hub-and-spoke · ~80% market share · nonpublic data loop</div>
-        <div class="row"><b>Evidence:</b> RealPage internal emails · landlord acceptance rates</div>
-        <div class="row"><b>Relief sought:</b> structural remedy · behavioural injunction</div>
-        <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.15)"><b>Settled:</b> Cortland, Greystar, LivCor &amp; others · class action $141.8M</div>
+        <div class="row"><b>Theory:</b> hub-and-spoke · data loop</div>
+        <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.15)"><b>Settled:</b> Cortland, Greystar &amp; others</div>
       </div>
       <div class="seam2"></div>
       <div class="sumcol rp">
         <img class="sum-bg" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop" referrerpolicy="no-referrer" onerror="this.style.display='none'">
         <div class="sum-fade"></div>
         <div class="sh">◆ Defense — RealPage</div>
-        <div class="row"><b>§1 defense:</b> no rim · Twombly · rule of reason</div>
-        <div class="row"><b>§2 defense:</b> Grinnell · superior product · Yardi competes</div>
-        <div class="row"><b>Framing:</b> civil rule of reason · no per-se collusion</div>
-        <div class="row"><b>Market:</b> low switching costs · entrants displace incumbents</div>
-        <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px solid rgba(201,162,39,.18)"><b>Outcome:</b> consent decree · injunctive only · no fine · no admission</div>
+        <div class="row"><b>§1 defense:</b> no rim · rule of reason</div>
+        <div class="row"><b>§2 defense:</b> Grinnell · superior product</div>
+        <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px solid rgba(201,162,39,.18)"><b>Outcome:</b> consent decree · no fine · no admission</div>
       </div>
     </div>
-    <div class="outcome-banner" data-anim="fade" style="--d:.7s"><span class="ob-t">Outcome —</span><span>consent decree · injunctive only · data ≥ 12 months old · court-appointed monitor · 7-year term · <b style="color:#fff">no fine, no admission of liability</b>.</span></div>
   </section>
 
   <!-- 4.3 thank you -->
